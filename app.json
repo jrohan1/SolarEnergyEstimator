@@ -1,17 +1,17 @@
 {
   "expo": {
-    "name": "Expo Firebase Starter",
-    "slug": "expo-firebase",
+    "name": "Solar Energy Estimator",
+    "slug": "SEE",
     "privacy": "public",
     "sdkVersion": "34.0.0",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.jpg",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo.jpg",
       "resizeMode": "cover",
-      "backgroundColor": "#F57C00"
+      "backgroundColor": "#4160A1"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

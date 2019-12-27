@@ -27,7 +27,14 @@
     "yup": "0.27.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^6.0.0"
+    "babel-preset-expo": "^6.0.0",
+    "css-loader": "^3.4.0",
+    "style-loader": "^1.1.2"
   },
-  "private": true
+  "private": true,
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
+  }
 }

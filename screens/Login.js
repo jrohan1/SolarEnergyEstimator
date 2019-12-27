@@ -83,7 +83,7 @@ class Login extends Component {
                 placeholder='Enter email'
                 autoCapitalize='none'
                 iconName='ios-mail'
-                iconColor='#2C384A'
+                iconColor='#DEE48E'
                 onBlur={handleBlur('email')}
               />
               <ErrorMessage errorValue={touched.email && errors.email} />
@@ -94,11 +94,11 @@ class Login extends Component {
                 placeholder='Enter password'
                 secureTextEntry={passwordVisibility}
                 iconName='ios-lock'
-                iconColor='#2C384A'
+                iconColor='#DEE48E'
                 onBlur={handleBlur('password')}
                 rightIcon={
                   <TouchableOpacity onPress={this.handlePasswordVisibility}>
-                    <Ionicons name={rightIcon} size={28} color='grey' />
+                    <Ionicons name={rightIcon} size={28} color='#DEE48E' />
                   </TouchableOpacity>
                 }
               />
@@ -108,7 +108,7 @@ class Login extends Component {
                   buttonType='outline'
                   onPress={handleSubmit}
                   title='LOGIN'
-                  buttonColor='#039BE5'
+                  buttonColor='#DEE48E'
                   disabled={!isValid || isSubmitting}
                   loading={isSubmitting}
                 />
@@ -121,7 +121,7 @@ class Login extends Component {
           title="Don't have an account? Sign Up"
           onPress={this.goToSignup}
           titleStyle={{
-            color: '#F57C00'
+            color: '#DEE48E'
           }}
           type='clear'
         />
@@ -133,7 +133,7 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#4160A1',
     marginTop: 50
   },
   logoContainer: {
