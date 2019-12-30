@@ -36,6 +36,7 @@ class Initial extends Component {
       ]),
       Font.loadAsync({
         'josefinSans': require('../assets/fonts/JosefinSans-Regular.ttf'),
+        'josefinSans-Bold': require('../assets/fonts/JosefinSans-Bold.ttf'),
       })
     ])
   }

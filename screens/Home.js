@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import { Button } from 'react-native-elements'
 import { withFirebaseHOC } from '../config/Firebase'
 import AppLogo from '../components/AppLogo'
+import MenuButton from '../components/MenuButton'
 
 class Home extends Component {
+  
+  goToSignup = () => this.props.navigation.navigate('Signup')
+  goToLogin = () => this.props.navigation.navigate('Login')
+
   handleSignout = async () => {
     try {
       await this.props.firebase.signOut()
@@ -15,11 +20,21 @@ class Home extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.container}>
+        <MenuButton navigation={this.props.navigation} />
         <AppLogo/>
         <View>
           <Text style={styles.headerStyle}>Calculate your homes solar enegry potential</Text>
         </View>
+        <Button
+          title='Signout'
+          onPress={this.handleSignout}
+          titleStyle={{
+            color: '#F57C00'
+          }}
+          type='clear'
+        />
         <View>
           <Text style={styles.textStyle}>Do you know your roof measurements ?</Text>
         </View>
@@ -36,29 +51,19 @@ class Home extends Component {
           title="Login"
           te
           onPress={this.goToLogin}
-          titleStyle={{
-            fontSize: 20,
-            color: '#DEE48E',
-            borderBottomWidth: 1,
-            borderColor: '#DEE48E',
-            marginLeft: 20
-          }}
+          titleStyle={styles.loginButtonStyle}
           type='clear'
         />
         <Text style={styles.orStyle}>or</Text>
         <Button
           title="Sign up"
           onPress={this.goToSignup}
-          titleStyle={{
-            fontSize: 20,
-            color: '#DEE48E',
-            borderBottomWidth: 1,
-            borderColor: '#DEE48E'
-          }}
+          titleStyle={styles.loginButtonStyle}
           type='clear'
         />
         </View>
-      </View>
+        </View>
+      </ScrollView>  
     )
   }
 }
@@ -107,6 +112,13 @@ const styles = StyleSheet.create({
     marginLeft :10,
     marginRight:10
   },
+  loginButtonStyle: {
+    fontSize: 20,
+    color: '#DEE48E',
+    borderBottomWidth: 1,
+    borderColor: '#DEE48E',
+    marginBottom: 20
+  },
   orStyle: {
     fontSize: 25,
     fontFamily: 'josefinSans',
@@ -116,7 +128,6 @@ const styles = StyleSheet.create({
     marginLeft :10,
     marginRight:10
   }
-
 })
 
 export default withFirebaseHOC(Home)

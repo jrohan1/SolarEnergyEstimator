@@ -17,7 +17,8 @@ const FormInput = ({
       {...rest}
       leftIcon={<Ionicons name={iconName} size={28} color={iconColor} />}
       leftIconContainerStyle={styles.iconStyle}
-      placeholderTextColor='grey'
+      placeholderTextColor='#DEE48E'
+      inputStyle={{color:'#DEE48E'}}
       name={name}
       placeholder={placeholder}
       style={styles.input}
@@ -27,7 +28,7 @@ const FormInput = ({
 
 const styles = StyleSheet.create({
   inputContainer: {
-    margin: 15
+    margin: 5
   },
   iconStyle: {
     marginRight: 10

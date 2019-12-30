@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { StyleSheet, SafeAreaView, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity } from 'react-native'
 import { Button, CheckBox } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import { Formik } from 'formik'
@@ -8,6 +8,7 @@ import FormInput from '../components/FormInput'
 import FormButton from '../components/FormButton'
 import ErrorMessage from '../components/ErrorMessage'
 import { withFirebaseHOC } from '../config/Firebase'
+import MenuButton from '../components/MenuButton'
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -86,6 +87,13 @@ class Signup extends Component {
     } = this.state
     return (
       <SafeAreaView style={styles.container}>
+        <View style={styles.iconContainer}>
+        <MenuButton navigation={this.props.navigation} />
+          <Ionicons name='md-contact' size={80} color='#DEE48E'/>
+        </View>
+        <View>
+          <Text style={styles.textstyle}>Create an account</Text>
+        </View>
         <Formik
           initialValues={{
             name: '',
@@ -116,7 +124,7 @@ class Signup extends Component {
                 onChangeText={handleChange('name')}
                 placeholder='Enter your full name'
                 iconName='md-person'
-                iconColor='#2C384A'
+                iconColor='#DEE48E'
                 onBlur={handleBlur('name')}
               />
               <ErrorMessage errorValue={touched.name && errors.name} />
@@ -127,7 +135,7 @@ class Signup extends Component {
                 placeholder='Enter email'
                 autoCapitalize='none'
                 iconName='ios-mail'
-                iconColor='#2C384A'
+                iconColor='#DEE48E'
                 onBlur={handleBlur('email')}
               />
               <ErrorMessage errorValue={touched.email && errors.email} />
@@ -137,12 +145,12 @@ class Signup extends Component {
                 onChangeText={handleChange('password')}
                 placeholder='Enter password'
                 iconName='ios-lock'
-                iconColor='#2C384A'
+                iconColor='#DEE48E'
                 onBlur={handleBlur('password')}
                 secureTextEntry={passwordVisibility}
                 rightIcon={
                   <TouchableOpacity onPress={this.handlePasswordVisibility}>
-                    <Ionicons name={passwordIcon} size={28} color='grey' />
+                    <Ionicons name={passwordIcon} size={28} color='#DEE48E' />
                   </TouchableOpacity>
                 }
               />
@@ -153,7 +161,7 @@ class Signup extends Component {
                 onChangeText={handleChange('confirmPassword')}
                 placeholder='Confirm password'
                 iconName='ios-lock'
-                iconColor='#2C384A'
+                iconColor='#DEE48E'
                 onBlur={handleBlur('confirmPassword')}
                 secureTextEntry={confirmPasswordVisibility}
                 rightIcon={
@@ -162,7 +170,7 @@ class Signup extends Component {
                     <Ionicons
                       name={confirmPasswordIcon}
                       size={28}
-                      color='grey'
+                      color='#DEE48E'
                     />
                   </TouchableOpacity>
                 }
@@ -178,17 +186,21 @@ class Signup extends Component {
                 title='Agree to terms and conditions'
                 checkedTitle='You agreed to our terms and conditions'
                 checked={values.check}
+                checkedColor='#DEE48E'
+                textStyle={{
+                  fontSize: 18,
+                  color: '#DEE48E',
+                  fontFamily: 'josefinSans',
+                }}
                 onPress={() => setFieldValue('check', !values.check)}
               />
               <View style={styles.buttonContainer}>
-                <FormButton
-                  buttonType='outline'
-                  onPress={handleSubmit}
-                  title='SIGNUP'
-                  buttonColor='#F57C00'
+              <TouchableOpacity 
                   disabled={!isValid || isSubmitting}
                   loading={isSubmitting}
-                />
+                  onPress={handleSubmit}>
+                  <Text style={styles.button}>Sign up</Text>
+                </TouchableOpacity>
               </View>
               <ErrorMessage errorValue={errors.general} />
             </Fragment>
@@ -198,7 +210,8 @@ class Signup extends Component {
           title='Have an account? Login'
           onPress={this.goToLogin}
           titleStyle={{
-            color: '#039BE5'
+            color: '#DEE48E',
+            fontSize: 18
           }}
           type='clear'
         />
@@ -210,19 +223,42 @@ class Signup extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    marginTop: 50
+    backgroundColor: '#4160A1'
   },
-  logoContainer: {
+  textstyle: {
+    fontSize: 18,
+    color: '#DEE48E',
+    alignSelf: 'center',
+    marginBottom: 15,
+    fontSize: 20,
+    fontFamily: 'josefinSans'
+  },
+  iconContainer: {
+    marginTop: 20,
     marginBottom: 15,
     alignItems: 'center'
   },
   buttonContainer: {
     margin: 25
   },
+  button: {
+    backgroundColor: '#DEE48E',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 12,
+    color: '#4160A1',
+    fontSize: 20,
+    fontWeight: 'bold',
+    overflow: 'hidden',
+    padding: 12,
+    textAlign:'center',
+    width:160,
+    borderRadius:10,
+    alignSelf: 'center'
+  },
   checkBoxContainer: {
-    backgroundColor: '#fff',
-    borderColor: '#fff'
+    backgroundColor: '#4160A1',
+    borderColor: '#4160A1'
   }
 })
 
