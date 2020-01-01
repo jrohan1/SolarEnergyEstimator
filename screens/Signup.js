@@ -38,7 +38,7 @@ class Signup extends Component {
   }
 
   goToLogin = () => this.props.navigation.navigate('Login')
-
+  
   handlePasswordVisibility = () => {
     this.setState(prevState => ({
       passwordIcon:
@@ -87,8 +87,8 @@ class Signup extends Component {
     } = this.state
     return (
       <SafeAreaView style={styles.container}>
+        <MenuButton navigation={this.props.navigation} />    
         <View style={styles.iconContainer}>
-        <MenuButton navigation={this.props.navigation} />
           <Ionicons name='md-contact' size={80} color='#DEE48E'/>
         </View>
         <View>
@@ -234,12 +234,12 @@ const styles = StyleSheet.create({
     fontFamily: 'josefinSans'
   },
   iconContainer: {
-    marginTop: 20,
+    marginTop: 50,
     marginBottom: 15,
     alignItems: 'center'
   },
   buttonContainer: {
-    margin: 25
+    margin: 10
   },
   button: {
     backgroundColor: '#DEE48E',
