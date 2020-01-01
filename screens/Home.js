@@ -9,6 +9,7 @@ class Home extends Component {
   
   goToSignup = () => this.props.navigation.navigate('Signup')
   goToLogin = () => this.props.navigation.navigate('Login')
+  goToAreaCalculator = () => this.props.navigation.navigate('AreaCalculator')
 
   handleSignout = async () => {
     try {
@@ -39,7 +40,7 @@ class Home extends Component {
           <Text style={styles.textStyle}>Do you know your roof measurements ?</Text>
         </View>
         <View style={styles.buttonStyle}>
-          <TouchableOpacity onPress={this.handlPress}>
+          <TouchableOpacity onPress={this.goToAreaCalculator}>
             <Text style={styles.button}>Yes</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.handlPress}>

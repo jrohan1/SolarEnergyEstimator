@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
 import { createAppContainer } from 'react-navigation';
-import createDrawerNavigator from 'react-navigation-drawer';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import Home from '../screens/Home';
 import Login from '../screens/Login';
 import Signup from '../screens/Signup';

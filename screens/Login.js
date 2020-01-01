@@ -10,6 +10,7 @@ import ErrorMessage from '../components/ErrorMessage'
 import { withFirebaseHOC } from '../config/Firebase'
 import Expo from 'expo'
 import MenuButton from '../components/MenuButton'
+import SmallLogo from '../components/SmallLogo'
 
 
 const validationSchema = Yup.object().shape({
@@ -30,6 +31,7 @@ class Login extends Component {
   }
 
   goToSignup = () => this.props.navigation.navigate('Signup')
+  goToHome = () => this.props.navigation.navigate('Home')
 
   handlePasswordVisibility = () => {
     this.setState(prevState => ({
@@ -75,8 +77,11 @@ class Login extends Component {
     const { passwordVisibility, rightIcon } = this.state
     return (
       <SafeAreaView style={styles.container}>
-        <HideWithKeyboard style={styles.logoContainer}>
+        <TouchableOpacity onPress={this.goToHome}>
+          <SmallLogo/>
+        </TouchableOpacity>        
         <MenuButton navigation={this.props.navigation} />
+        <HideWithKeyboard style={styles.logoContainer}>
         <Ionicons name='md-contact' size={80} color='#DEE48E' />
         </HideWithKeyboard>
         <Formik
@@ -165,12 +170,12 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#4160A1',
-    paddingTop: 50
+    backgroundColor: '#4160A1'
   },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: 20
+    marginBottom: 20,
+    marginTop: 100
   },
   googleLogInStyle: {
     width: 300, 
