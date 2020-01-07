@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
-import * as Icon from '@expo/vector-icons'
 import { withFirebaseHOC } from '../config/Firebase'
 
 class Initial extends Component {

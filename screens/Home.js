@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import { Button } from 'react-native-elements'
 import { withFirebaseHOC } from '../config/Firebase'
+import { styles } from '../stylesheets/HomeStyles'
 import AppLogo from '../components/AppLogo'
 import MenuButton from '../components/MenuButton'
 
@@ -55,7 +56,7 @@ class Home extends Component {
           titleStyle={styles.loginButtonStyle}
           type='clear'
         />
-        <Text style={styles.orStyle}>or</Text>
+        <Text style={styles.subTextStyle}>or</Text>
         <Button
           title="Sign up"
           onPress={this.goToSignup}
@@ -68,67 +69,5 @@ class Home extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#4160A1',
-    alignItems: 'center'
-  },
-  button: {
-    backgroundColor: '#DEE48E',
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 12,
-    color: '#4160A1',
-    fontSize: 20,
-    fontWeight: 'bold',
-    overflow: 'hidden',
-    padding: 12,
-    textAlign:'center',
-    width:160,
-    borderRadius:10,
-    marginLeft :10,
-    marginRight:10,
-    marginTop :30,
-    marginBottom: 30,
-  },
-  buttonStyle: {
-    flexDirection: 'row',
-  },
-  headerStyle: {
-    fontSize: 25,
-    fontFamily: 'josefinSans',
-    color: '#DEE48E',
-    textAlign:'center',
-    marginLeft :10,
-    marginRight:10,
-    marginBottom: 50
-  }, 
-  textStyle: {
-    fontSize: 20,
-    fontFamily: 'josefinSans',
-    color: '#DEE48E',
-    textAlign:'center',
-    marginLeft :10,
-    marginRight:10
-  },
-  loginButtonStyle: {
-    fontSize: 20,
-    color: '#DEE48E',
-    borderBottomWidth: 1,
-    borderColor: '#DEE48E',
-    marginBottom: 20
-  },
-  orStyle: {
-    fontSize: 25,
-    fontFamily: 'josefinSans',
-    color: '#DEE48E',
-    textAlign:'center',
-    lineHeight: 38,
-    marginLeft :10,
-    marginRight:10
-  }
-})
 
 export default withFirebaseHOC(Home)
