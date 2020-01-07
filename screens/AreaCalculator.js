@@ -8,6 +8,8 @@ import Select from '../components/Select'
 import { Col, Row, Grid } from "react-native-easy-grid"
 
 class AreaCalculator extends Component {
+  goToPitchFinder = () => this.props.navigation.navigate('PitchFinder')
+  
   constructor(props) {
     super(props)
 
@@ -127,11 +129,11 @@ class AreaCalculator extends Component {
               </Row>
             </Col>
           </Grid>
-          <TouchableOpacity onPress={this.resetForm}>
+          <TouchableOpacity onPress={this.handleSubmit}>
               <Text style={styles.nextButton}>Submit</Text>
           </TouchableOpacity> 
           <Text style={styles.subTextStyle}>Need help finding measurements ?</Text>
-          <TouchableOpacity onPress={this.handleSubmit}>
+          <TouchableOpacity onPress={this.goToPitchFinder}>
               <Text style={styles.button}>Pitch Finder</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.resetForm}>
