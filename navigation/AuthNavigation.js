@@ -3,6 +3,7 @@ import Home from '../screens/Home'
 import Login from '../screens/Login'
 import Signup from '../screens/Signup'
 import AreaCalculator from '../screens/AreaCalculator'
+import PitchFinder from '../screens/PitchFinder'
 import DrawerNavigator from '../navigation/DrawerNavigator'
 
 const AuthNavigation = createStackNavigator(
@@ -11,6 +12,7 @@ const AuthNavigation = createStackNavigator(
     Login: { screen: Login},
     Signup: { screen: Signup },
     AreaCalculator: { screen: AreaCalculator},
+    PitchFinder: { screen: PitchFinder },
     Drawer: { screen: DrawerNavigator }
   },
   {
