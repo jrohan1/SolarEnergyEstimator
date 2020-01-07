@@ -10,6 +10,7 @@ import { styles } from '../stylesheets/AreaCalculatorStyles'
 
 class AreaCalculator extends Component {
   goToPitchFinder = () => this.props.navigation.navigate('PitchFinder')
+  goToAdditionalInfo = () => this.props.navigation.navigate('AdditionalInfo')
 
   constructor(props) {
     super(props)
@@ -75,6 +76,7 @@ class AreaCalculator extends Component {
                 <TextInput
                   style={styles.textInput}
                   placeholder='meters'
+                  placeholderTextColor='#DEE48E'
                   keyboardType='numeric'
                   returnKeyType='done'
                   blurOnSubmit
@@ -85,6 +87,7 @@ class AreaCalculator extends Component {
                 <TextInput
                   style={styles.textInput}
                   placeholder='meters'
+                  placeholderTextColor='#DEE48E'
                   keyboardType='numeric'
                   returnKeyType='done'
                   blurOnSubmit
@@ -95,6 +98,7 @@ class AreaCalculator extends Component {
                 <TextInput
                   style={styles.textInput}
                   placeholder='select'
+                  placeholderTextColor='#DEE48E'
                   keyboardType='numeric'
                   returnKeyType='done'
                   blurOnSubmit
@@ -112,6 +116,7 @@ class AreaCalculator extends Component {
                 <TextInput
                   style={styles.textInput}
                   placeholder='degrees'
+                  placeholderTextColor='#DEE48E'
                   keyboardType='numeric'
                   returnKeyType='done'
                   blurOnSubmit
@@ -122,6 +127,7 @@ class AreaCalculator extends Component {
                 <TextInput
                   style={styles.textInput}
                   placeholder='meters'
+                  placeholderTextColor='#DEE48E'
                   keyboardType='numeric'
                   returnKeyType='done'
                   blurOnSubmit
@@ -130,7 +136,7 @@ class AreaCalculator extends Component {
               </Row>
             </Col>
           </Grid>
-          <TouchableOpacity onPress={this.handleSubmit}>
+          <TouchableOpacity onPress={this.goToAdditionalInfo}>
             <Text style={styles.nextButton}>Submit</Text>
           </TouchableOpacity>
           <Text style={styles.subTextStyle}>Need help finding measurements ?</Text>
