@@ -9,6 +9,7 @@ import ErrorMessage from '../components/ErrorMessage'
 import { withFirebaseHOC } from '../config/Firebase'
 import MenuButton from '../components/MenuButton'
 import { styles } from '../stylesheets/SignupStyles'
+import SmallLogo from '../components/SmallLogo'
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -38,6 +39,7 @@ class Signup extends Component {
   }
 
   goToLogin = () => this.props.navigation.navigate('Login')
+  goToHome = () => this.props.navigation.navigate('Home')
 
   handlePasswordVisibility = () => {
     this.setState(prevState => ({
@@ -87,7 +89,10 @@ class Signup extends Component {
     } = this.state
     return (
       <SafeAreaView style={styles.container}>
-        <MenuButton navigation={this.props.navigation} />
+        <TouchableOpacity onPress={this.goToHome}>
+          <SmallLogo/>
+          <MenuButton navigation={this.props.navigation} />
+        </TouchableOpacity>
         <View style={styles.iconContainer}>
           <Ionicons name='md-contact' size={80} color='#DEE48E' />
         </View>

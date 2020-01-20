@@ -11,6 +11,8 @@ import { styles } from '../stylesheets/AreaCalculatorStyles'
 class AreaCalculator extends Component {
   goToPitchFinder = () => this.props.navigation.navigate('PitchFinder')
   goToAdditionalInfo = () => this.props.navigation.navigate('AdditionalInfo')
+  goToMeasurementTool = () => this.props.navigation.navigate('MeasurementTool')
+  goToHome = () => this.props.navigation.navigate('Home')
 
   constructor(props) {
     super(props)
@@ -50,9 +52,11 @@ class AreaCalculator extends Component {
 
     return (
       <View style={styles.container}>
-        <SmallLogo />
-        <MenuButton navigation={this.props.navigation} />
-        <KeyboardAvoidingView behavior="padding" style={styles.grid}>
+        <TouchableOpacity onPress={this.goToHome}>
+          <SmallLogo/>
+          <MenuButton navigation={this.props.navigation} />
+        </TouchableOpacity>
+        <View style={styles.grid}>
           <Grid>
             <Col>
               <Row>
@@ -143,10 +147,10 @@ class AreaCalculator extends Component {
           <TouchableOpacity onPress={this.goToPitchFinder}>
             <Text style={styles.button}>Pitch Finder</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.resetForm}>
+          <TouchableOpacity onPress={this.goToMeasurementTool}>
             <Text style={styles.button}>Measurement Tool</Text>
           </TouchableOpacity>
-        </KeyboardAvoidingView>
+        </View>
       </View>
     )
   }

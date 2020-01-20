@@ -13,10 +13,9 @@ const styles = StyleSheet.create({
   logoStyle: {
     width: 70,
     height: 50,
-    position: 'absolute',
     zIndex: 9,
     top: 40,
-    left: 20 
+    left: 20
   }
 })
 

@@ -29,14 +29,14 @@ class Home extends Component {
         <View>
           <Text style={styles.headerStyle}>Calculate your homes solar enegry potential</Text>
         </View>
-        <Button
+        {/* <Button
           title='Signout'
           onPress={this.handleSignout}
           titleStyle={{
             color: '#F57C00'
           }}
           type='clear'
-        />
+        /> */}
         <View>
           <Text style={styles.textStyle}>Do you know your roof measurements ?</Text>
         </View>

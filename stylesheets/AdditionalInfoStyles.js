@@ -50,7 +50,8 @@ export const styles = StyleSheet.create({
     width: 100,
     borderWidth: 1,
     borderRadius: 3,
-    borderColor: '#DEE48E'
+    borderColor: '#DEE48E',
+    textAlign: 'center',
   },
   dropdownText: {
     fontSize: 18,
@@ -61,7 +62,7 @@ export const styles = StyleSheet.create({
   },
   dropdownStyle: {
     width: 100,
-    height: 105,
+    height: 90,
     borderColor: '#4160A1',
     borderWidth: 2,
     borderRadius: 3,
@@ -76,7 +77,7 @@ export const styles = StyleSheet.create({
   },
   largeDropdown: {
     width: 110,
-    height: 260,
+    height: 210,
     borderColor: '#4160A1',
     borderWidth: 2,
     borderRadius: 3,
