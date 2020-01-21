@@ -29,5 +29,26 @@ export const styles = StyleSheet.create({
     borderWidth: 0.5,
     marginLeft: 5,
     marginRight: 5
+  },
+  button: {
+    backgroundColor: 'white',
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    alignItems: 'center',
+    marginHorizontal: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    marginVertical: 20,
+    position: 'absolute',
+    bottom: 25
+  },
+  textStyle: {
+    fontSize: 18,
+    fontWeight: '500',
+    fontFamily: 'josefinSans',
+    color: '#4160A1',
+    textAlign:'center',
+    margin:10
   }
 })
