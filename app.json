@@ -27,7 +27,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.solarenergyestimator.see",
       "config": {
-        "googleMapsApiKey": "AIzaSyBnBqiJ4bnVMyJEL_UKT5uM7W7Q7yNw6b4"
+        "googleMapsApiKey": "API-key"
       },
       "infoPlist": {
         "NSCameraUsageDescription": "Solar Energy Estimator uses the camera to determine your roof pitch.",
@@ -41,10 +41,10 @@
       "package": "com.solarenergyestimator.see",
       "config": {
         "googleSignIn": {
-          "apiKey": "AIzaSyCiTH3sQWhRNxgpaK0M7746TSMtWmzayng"
+          "apiKey": "API-Key"
         },
         "googleMaps": {
-          "apiKey": "AIzaSyCiTH3sQWhRNxgpaK0M7746TSMtWmzayng"
+          "apiKey": "API-KEY"
         }
       }
     }
