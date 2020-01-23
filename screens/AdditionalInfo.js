@@ -15,6 +15,7 @@ const TIME_OPTION = ['Morning', 'Afternoon', 'Evening', 'Night', 'All Day']
 
 class AdditionalInfo extends Component {
   goToPitchFinder = () => this.props.navigation.navigate('PitchFinder')
+  goToHome = () => this.props.navigation.navigate('Home')
 
   constructor(props) {
     super(props)
@@ -40,8 +41,10 @@ class AdditionalInfo extends Component {
 
     return (
       <View style={styles.container}>
-        <SmallLogo />
-        <MenuButton navigation={this.props.navigation} />
+        <TouchableOpacity onPress={this.goToHome}>
+          <SmallLogo/>
+          <MenuButton navigation={this.props.navigation} />
+        </TouchableOpacity>
         <Grid style={styles.grid}>
           <Col size={2}>
             <Row>

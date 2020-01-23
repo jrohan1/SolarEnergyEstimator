@@ -4,7 +4,11 @@
     "slug": "SEE",
     "privacy": "public",
     "sdkVersion": "34.0.0",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo.jpg",
@@ -16,13 +20,33 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.solarenergyestimator.see",
+      "config": {
+        "googleMapsApiKey": "API-key"
+      },
+      "infoPlist": {
+        "NSCameraUsageDescription": "Solar Energy Estimator uses the camera to determine your roof pitch.",
+        "NSPhotoLibraryUsageDescription": "Solar Energy Estimator would like access to your camera roll.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow Solar Energy Estimator to use your location",
+        "NSLocationAlwaysUsageDescription": "Allow Solar Energy Estimator to use your location",
+        "NSLocationWhenInUseUsageDescription": "Allow Solar Energy Estimator to use your location"
+      }
+    },
+    "android": {
+      "package": "com.solarenergyestimator.see",
+      "config": {
+        "googleSignIn": {
+          "apiKey": "API-Key"
+        },
+        "googleMaps": {
+          "apiKey": "API-KEY"
+        }
+      }
     }
-  },
-  "infoPlist": {
-    "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets.",
-    "NSPhotoLibraryUsageDescription":"Solar Energy Estimator would like access to your camera roll"
   }
 }

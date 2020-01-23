@@ -6,6 +6,7 @@ import AreaCalculator from '../screens/AreaCalculator'
 import PitchFinder from '../screens/PitchFinder'
 import AdditionalInfo from '../screens/AdditionalInfo'
 import DrawerNavigator from '../navigation/DrawerNavigator'
+import MeasurementTool from '../screens/MeasurementTool'
 
 const AuthNavigation = createStackNavigator(
   {
@@ -15,6 +16,7 @@ const AuthNavigation = createStackNavigator(
     AreaCalculator: { screen: AreaCalculator},
     PitchFinder: { screen: PitchFinder },
     AdditionalInfo: { screen: AdditionalInfo },
+    MeasurementTool: { screen: MeasurementTool },
     Drawer: { screen: DrawerNavigator }
   },
   {

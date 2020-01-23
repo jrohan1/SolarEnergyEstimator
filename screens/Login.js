@@ -12,7 +12,7 @@ import Expo from 'expo'
 import MenuButton from '../components/MenuButton'
 import SmallLogo from '../components/SmallLogo'
 import { styles } from '../stylesheets/LoginStyles'
-
+import config from '../config'
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -59,8 +59,8 @@ class Login extends Component {
   signInWithGoogleAsync = async () => {
     try {
       const result = await Expo.Google.logInAsync({
-        //androidClientId: YOUR_CLIENT_ID_HERE,
-        iosClientId: '485925801640-scojein741ij5kd4j4bhvtool6j0sgtq.apps.googleusercontent.com',
+        androidClientId: config.ANDROID_OAUTH_CREDENTIALS,
+        iosClientId: config.IOS_OAUTH_CREDENTIALS,
         scopes: ['profile', 'email'],
       });
   
