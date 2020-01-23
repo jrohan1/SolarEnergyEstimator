@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: 'white',
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
     borderRadius: 20,
     alignItems: 'center',
     marginHorizontal: 10,
@@ -50,5 +50,32 @@ export const styles = StyleSheet.create({
     color: '#4160A1',
     textAlign:'center',
     margin:10
+  },
+  areaTextStyle: {
+    backgroundColor: 'white',
+    width: '30%',
+    borderColor: 'black',
+    fontSize: 20,
+    fontWeight: '500',
+    fontFamily: 'josefinSans',
+    color: '#4160A1',
+    textAlign:'center',
+    marginTop:10,
+    marginLeft:10,
+    padding: 5,
+    borderWidth: 0.5,
+  },
+  dropdownAreaStyle: {
+    backgroundColor: 'white',
+    width: '30%',
+    borderColor: 'black',
+    fontSize: 20,
+    fontWeight: '500',
+    fontFamily: 'josefinSans',
+    color: '#4160A1',
+    textAlign:'center',
+    marginLeft:10,
+    padding: 5,
+    borderWidth: 0.5,
   }
 })

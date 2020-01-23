@@ -44,7 +44,7 @@ class Home extends Component {
           <TouchableOpacity onPress={this.goToAreaCalculator}>
             <Text style={styles.button}>Yes</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.handlPress}>
+          <TouchableOpacity onPress={this.goToAreaCalculator}>
             <Text style={styles.button}>No</Text>
           </TouchableOpacity>
         </View>
