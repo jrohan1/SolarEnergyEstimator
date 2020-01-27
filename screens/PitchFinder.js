@@ -3,7 +3,6 @@ import { withFirebaseHOC } from '../config/Firebase'
 import { Text, View, TouchableOpacity, Platform } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
-import * as ImagePicker from 'expo-image-picker';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { styles } from '../stylesheets/PitchFinderStyles'
 import { Accelerometer } from "expo-sensors";

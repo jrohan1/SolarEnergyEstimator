@@ -1,0 +1,60 @@
+import { StyleSheet } from 'react-native'
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#4160A1',
+  },
+  questionStyle: {
+    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 30,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  textStyle: {
+    fontSize: 25,
+    fontFamily: 'josefinSans',
+    color: '#DEE48E',
+    textAlign:'center',
+    marginLeft :10,
+    marginRight:10,
+  },
+  buttonStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  button: {
+    backgroundColor: '#DEE48E',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 12,
+    color: '#4160A1',
+    fontSize: 20,
+    fontWeight: 'bold',
+    overflow: 'hidden',
+    padding: 12,
+    textAlign:'center',
+    borderRadius:10,
+    marginLeft :10,
+    marginRight:10,
+    marginBottom :30,
+    alignSelf: 'center'
+  },
+  nextButton: {
+    backgroundColor: '#DEE48E',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 12,
+    color: '#4160A1',
+    fontSize: 20,
+    fontWeight: 'bold',
+    overflow: 'hidden',
+    padding: 12,
+    textAlign:'center',
+    borderRadius:10,
+    marginLeft :30,
+    marginRight:30,
+    marginBottom :30,
+  },
+})
