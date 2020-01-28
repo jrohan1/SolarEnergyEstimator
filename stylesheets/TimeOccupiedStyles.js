@@ -9,7 +9,6 @@ export const customStyles = StyleSheet.create({
     marginTop: -10
   },
   button: {
-    width: 80,
-    marginBottom: 30
+    width: 150
   }
 })

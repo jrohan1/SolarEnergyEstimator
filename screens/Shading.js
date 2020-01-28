@@ -10,8 +10,8 @@ class Shading extends Component {
   constructor(props) {
     super(props);
     this.state = {
-     shading: '',
-     value: 0
+      shading: '',
+      value: 0
     };
   }
   goToEnergyUsage = () => this.props.navigation.navigate('EnergyUsage')
@@ -24,21 +24,22 @@ class Shading extends Component {
           <MenuButton navigation={this.props.navigation} />
         </TouchableOpacity>
         <ScrollView>
-          <CastingShade/>
+          <CastingShade />
           <View style={styles.questionStyle}>
             <Text style={styles.textStyle}>Is the selected area under any shade ?</Text>
+            <Text style={styles.answerTextStyle}>{this.state.shading}</Text>
           </View>
           <View style={styles.buttonStyle}>
-            <TouchableOpacity onPress={() => this.setState({shading: 'None', value: 1})}>
+            <TouchableOpacity onPress={() => this.setState({ shading: 'None', value: 1 })}>
               <Text style={styles.button}>None</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.setState({shading: 'A little', value: 2})}>
+            <TouchableOpacity onPress={() => this.setState({ shading: 'A little', value: 2 })}>
               <Text style={styles.button}>A little</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.setState({shading: 'Some', value: 3})}>
+            <TouchableOpacity onPress={() => this.setState({ shading: 'Some', value: 3 })}>
               <Text style={styles.button}>Some</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.setState({shading: 'A lot', value: 4})}>
+            <TouchableOpacity onPress={() => this.setState({ shading: 'A lot', value: 4 })}>
               <Text style={styles.button}>A lot</Text>
             </TouchableOpacity>
           </View>

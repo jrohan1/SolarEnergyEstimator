@@ -7,8 +7,8 @@ export const styles = StyleSheet.create({
   },
   questionStyle: {
     justifyContent: 'center',
-    marginTop: 40,
-    marginBottom: 30,
+    marginTop: 30,
+    marginBottom: 20,
     marginLeft: 10,
     marginRight: 10,
   },
@@ -16,6 +16,14 @@ export const styles = StyleSheet.create({
     fontSize: 25,
     fontFamily: 'josefinSans',
     color: '#DEE48E',
+    textAlign:'center',
+    marginLeft :10,
+    marginRight:10,
+  },
+  answerTextStyle: {
+    fontSize: 30,
+    fontFamily: 'josefinSans',
+    color: 'white',
     textAlign:'center',
     marginLeft :10,
     marginRight:10,
@@ -55,7 +63,7 @@ export const styles = StyleSheet.create({
     borderRadius:10,
     marginLeft :10,
     marginRight:10,
-    marginBottom :30,
+    marginBottom :20,
     alignSelf: 'center'
   },
   nextButton: {
@@ -73,26 +81,5 @@ export const styles = StyleSheet.create({
     marginLeft :30,
     marginRight:30,
     marginBottom :30,
-  },
-  buttonContainerStyle: {
-    height: 50,
-    backgroundColor: '#DEE48E',
-    marginTop: 0,
-    borderRadius: 20,
-    borderColor: 'white'
-  },
-  selectedButtonStyle: {
-    backgroundColor: 'grey',
-  },
-  groupButtonText: {
-    color: '#4160A1',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  groupButton: {
-    marginLeft: 20,
-    marginRight: 20,
-    marginBottom: 30,
-    marginTop: 30,    
   }
 })

@@ -1,32 +1,21 @@
-import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, TouchableHighlight, ScrollView } from 'react-native'
-import SmallLogo from '../components/SmallLogo'
-import { withFirebaseHOC } from '../config/Firebase'
-import { styles } from '../stylesheets/MainStyles'
-import MenuButton from '../components/MenuButton'
-import Compass from '../components/Compass'
+import React, { Component } from 'react';
+import { Text, View, TouchableOpacity, TouchableHighlight, ScrollView } from 'react-native';
+import SmallLogo from '../components/SmallLogo';
+import { withFirebaseHOC } from '../config/Firebase';
+import { styles } from '../stylesheets/MainStyles';
+import { customStyles } from '../stylesheets/OrientationStyle';
+import MenuButton from '../components/MenuButton';
+import Compass from '../components/Compass';
 
 class Orientation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: false,
       orientation: '',
       value: 0
     };
   }
   goToShading = () => this.props.navigation.navigate('Shading');
-
-  setSelected() {
-    this.setState(prevState => ({
-      selected: !prevState.selected
-    }));
-  }
-
-  changeColor() {
-    console.log(this.state.selected)
-    return this.state.selected ? styles.pressed : styles.button;
-  }
 
   render() {
     return (
@@ -39,24 +28,25 @@ class Orientation extends Component {
           <Compass />
           <View style={styles.questionStyle}>
             <Text style={styles.textStyle}>Which direction will the solar panels face ?</Text>
+            <Text style={styles.answerTextStyle}>{this.state.orientation}</Text>
           </View>
           <View style={styles.buttonStyle}>
-            <TouchableOpacity onPress={() => this.setState({orientation: 'south', value: 1})}>
-              <Text style={styles.button}>S</Text>
+            <TouchableOpacity onPress={() => this.setState({orientation: 'South', value: 1})}>
+              <Text style={[styles.button, customStyles.button]}>S</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.setState({orientation: 'southWest', value: 2})}>
-              <Text style={styles.button}>S/W</Text>
+            <TouchableOpacity onPress={() => this.setState({orientation: 'SouthWest', value: 2})}>
+              <Text style={[styles.button, customStyles.button]}>S/W</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.setState({orientation:'southEast', value: 3})}>
-              <Text style={styles.button}>S/E</Text>
+            <TouchableOpacity onPress={() => this.setState({orientation:'SouthEast', value: 3})}>
+              <Text style={[styles.button, customStyles.button]}>S/E</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.buttonStyle}>
-            <TouchableOpacity onPress={() => this.setState({orientation:'east', value: 4})}>
-              <Text style={styles.button}>E</Text>
+          <TouchableOpacity onPress={() => this.setState({orientation:'East', value: 4})}>
+              <Text style={[styles.button, customStyles.button]}>E</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.setState({orientation:'west', value: 5})}>
-              <Text style={styles.button}>W</Text>
+            <TouchableOpacity onPress={() => this.setState({orientation:'West', value: 5})}>
+              <Text style={[styles.button, customStyles.button]}>W</Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity onPress={this.goToShading}>

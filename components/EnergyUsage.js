@@ -5,7 +5,7 @@ const EnergyUsage = () => (
   <Image
     source={require('../assets/houseWork.png')}
     style={{ alignSelf: 'center',
-      marginTop: 70
+      marginTop: 50
     }}
   />
 )
