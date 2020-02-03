@@ -7,7 +7,7 @@ import AppLogo from '../components/AppLogo'
 import MenuButton from '../components/MenuButton'
 
 class Home extends Component {
-  
+
   goToSignup = () => this.props.navigation.navigate('Signup')
   goToLogin = () => this.props.navigation.navigate('Login')
   goToAreaCalculator = () => this.props.navigation.navigate('AreaCalculator')
@@ -23,14 +23,14 @@ class Home extends Component {
   }
   render() {
     return (
-      <ScrollView>
-        <View style={styles.container}>
-        <MenuButton navigation={this.props.navigation} />
-        <AppLogo/>
-        <View>
-          <Text style={styles.headerStyle}>Calculate your homes solar enegry potential</Text>
-        </View>
-        {/* <Button
+      <View style={styles.container}>
+        
+          <MenuButton navigation={this.props.navigation} />
+          <AppLogo />
+          <View>
+            <Text style={styles.headerStyle}>Calculate your homes solar enegry potential</Text>
+          </View>
+          {/* <Button
           title='Signout'
           onPress={this.handleSignout}
           titleStyle={{
@@ -38,35 +38,35 @@ class Home extends Component {
           }}
           type='clear'
         /> */}
-        <View>
-          <Text style={styles.textStyle}>Do you know your roof measurements ?</Text>
-        </View>
-        <View style={styles.buttonStyle}>
-          <TouchableOpacity onPress={this.goToAreaCalculator}>
-            <Text style={styles.button}>Yes</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.goToGetStarted}>
-            <Text style={styles.button}>No</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.buttonStyle}>
-        <Button
-          title="Login"
-          te
-          onPress={this.goToLogin}
-          titleStyle={styles.loginButtonStyle}
-          type='clear'
-        />
-        <Text style={styles.subTextStyle}>or</Text>
-        <Button
-          title="Sign up"
-          onPress={this.goToSignup}
-          titleStyle={styles.loginButtonStyle}
-          type='clear'
-        />
-        </View>
-        </View>
-      </ScrollView>  
+          <View>
+            <Text style={styles.textStyle}>Do you know your roof measurements ?</Text>
+          </View>
+          <View style={styles.buttonStyle}>
+            <TouchableOpacity onPress={this.goToAreaCalculator}>
+              <Text style={styles.button}>Yes</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.goToGetStarted}>
+              <Text style={styles.button}>No</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.buttonStyle}>
+            <Button
+              title="Login"
+              te
+              onPress={this.goToLogin}
+              titleStyle={styles.loginButtonStyle}
+              type='clear'
+            />
+            <Text style={styles.subTextStyle}>or</Text>
+            <Button
+              title="Sign up"
+              onPress={this.goToSignup}
+              titleStyle={styles.loginButtonStyle}
+              type='clear'
+            />
+          </View>
+       
+      </View>
     )
   }
 }

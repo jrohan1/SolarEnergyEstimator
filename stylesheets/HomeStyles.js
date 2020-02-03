@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
   },
   buttonStyle: {
     flexDirection: 'row',
+    alignSelf: 'center'
   },
   headerStyle: {
     fontSize: 25,
