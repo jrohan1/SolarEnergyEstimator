@@ -50,7 +50,8 @@ class MeasurementTool extends Component {
     );
   }
 
-  goToAreaCalculator = () => this.props.navigation.navigate('AreaCalculator')
+  goToAreaCalculator = () => this.props.navigation.navigate('AreaCalculator');
+  goToOrientation = () => this.props.navigation.navigate('Orientation');
 
   async onChangeDestination(destination) {
     this.setState({ destination });
@@ -373,7 +374,7 @@ class MeasurementTool extends Component {
               <Text style={styles.textStyle}>Finished</Text>
             </TouchableOpacity>
           )}
-          {this.state.editing === null && !this.state.initialScreen && !this.state.canEdit && (
+          {this.state.editing === null && !this.state.initialScreen && !this.state.canEdit && !this.state.areaTotal && (
             <TouchableOpacity
               onPress={() => this.calculateArea()}
               style={styles.button}
@@ -389,8 +390,16 @@ class MeasurementTool extends Component {
               <Text style={styles.textStyle}>Delete</Text>
             </TouchableOpacity>
           )}
+          {this.state.areaTotal &&  (
+            <TouchableOpacity
+              onPress={this.goToOrientation}
+              style={styles.button}
+            >
+              <Text style={styles.textStyle}>Next Step</Text>
+            </TouchableOpacity>
+          )}
         </View>
-        {this.state.editing === null && !this.state.initialScreen && !this.state.canEdit && this.state.areaTotal && (
+        {this.state.areaTotal && (
           <Text style={styles.areaTextStyle}>Total Area:</Text>
         )}
         {allAreas}

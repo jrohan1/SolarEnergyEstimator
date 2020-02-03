@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
   },
   iconContainer: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     margin: 30
   },
   iconStyle: {
@@ -28,12 +28,16 @@ export const styles = StyleSheet.create({
     transform: [{ rotate: '90deg' }]
   },
   closeIcon: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 80
   },
   cameraIcon: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 60
+  },
+  deleteIcon: {  
+    fontSize: 60,
+    backgroundColor: 'red'
   },
   lineStyle: {
     alignSelf: 'center',
