@@ -6,16 +6,24 @@ import { styles } from '../stylesheets/MainStyles';
 import { customStyles } from '../stylesheets/OrientationStyle';
 import MenuButton from '../components/MenuButton';
 import Compass from '../components/Compass';
+import helperFunctions from '../sharedFunctions';
 
 class Orientation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      orientation: '',
-      value: 0
+      orientation: ''
     };
   }
   goToShading = () => this.props.navigation.navigate('Shading');
+
+  saveState = (value) => {
+    this.setState({
+      orientation: value
+    }, () => {
+      helperFunctions.saveData('orientation', value);
+    });    
+  }
 
   render() {
     return (
@@ -31,21 +39,21 @@ class Orientation extends Component {
             <Text style={styles.answerTextStyle}>{this.state.orientation}</Text>
           </View>
           <View style={styles.buttonStyle}>
-            <TouchableOpacity onPress={() => this.setState({orientation: 'South', value: 1})}>
+            <TouchableOpacity onPress={() => this.saveState('South')}>
               <Text style={[styles.button, customStyles.button]}>S</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.setState({orientation: 'SouthWest', value: 2})}>
+            <TouchableOpacity onPress={() => this.saveState('SouthWest')}>
               <Text style={[styles.button, customStyles.button]}>S/W</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.setState({orientation:'SouthEast', value: 3})}>
+            <TouchableOpacity onPress={() => this.saveState('SouthEast')}>
               <Text style={[styles.button, customStyles.button]}>S/E</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.buttonStyle}>
-          <TouchableOpacity onPress={() => this.setState({orientation:'East', value: 4})}>
+          <TouchableOpacity onPress={() => this.saveState('East')}>
               <Text style={[styles.button, customStyles.button]}>E</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.setState({orientation:'West', value: 5})}>
+            <TouchableOpacity onPress={() => this.saveState('West')}>
               <Text style={[styles.button, customStyles.button]}>W</Text>
             </TouchableOpacity>
           </View>

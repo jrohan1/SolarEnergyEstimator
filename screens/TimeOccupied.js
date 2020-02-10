@@ -6,17 +6,25 @@ import { styles } from '../stylesheets/MainStyles';
 import { customStyles } from '../stylesheets/TimeOccupiedStyles';
 import MenuButton from '../components/MenuButton';
 import EnergyUse from '../components/EnergyUsage';
+import helperFunctions from '../sharedFunctions';
 
 class TimeOccupied extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: '',
-      value: 0
+      time: ''
     };
   }
 
-  goToTimeOccupied = () => this.props.navigation.navigate('TimeOccupied')
+  goToReport = () => this.props.navigation.navigate('Report')
+
+  saveState = (value) => {
+    this.setState({
+      time: value
+    }, () => {
+      helperFunctions.saveData('timeOccupied', value);
+    });    
+  }
 
   render() {
     return (
@@ -32,22 +40,22 @@ class TimeOccupied extends Component {
             <Text style={styles.answerTextStyle}>{this.state.time}</Text>
           </View>
           <View style={styles.buttonStyle}>
-            <TouchableOpacity onPress={() => this.setState({ time: 'Morning', value: 1 })}>
+            <TouchableOpacity onPress={() => this.saveState('Morning')}>
               <Text style={[styles.button, customStyles.button]}>Morning</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.setState({ time: 'Afternoon', value: 2 })}>
+            <TouchableOpacity onPress={() => this.saveState('Afternoon')}>
               <Text style={[styles.button, customStyles.button]}>Afternoon</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.buttonStyle}>
-            <TouchableOpacity onPress={() => this.setState({ time: 'Evening', value: 3 })}>
+            <TouchableOpacity onPress={() => this.saveState('Evening')}>
               <Text style={[styles.button, customStyles.button]}>Evening</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.setState({ time: 'All Day', value: 4 })}>
+            <TouchableOpacity onPress={() => this.saveState('All Day')}>
               <Text style={[styles.button, customStyles.button]}>All Day</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={this.goToTimeOccupied}>
+          <TouchableOpacity onPress={this.goToReport}>
             <Text style={styles.nextButton}>Next Step</Text>
           </TouchableOpacity>
         </ScrollView>

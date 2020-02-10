@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withFirebaseHOC } from '../config/Firebase'
-import { Text, View, TextInput, Dimensions, Keyboard, TouchableHighlight, TouchableOpacity, PermissionsAndroid } from "react-native";
+import { AsyncStorage, Text, View, TextInput, Dimensions, Keyboard, TouchableHighlight, TouchableOpacity, PermissionsAndroid } from "react-native";
 import MapView, { Marker, Polygon, ProviderPropType } from 'react-native-maps';
 import { styles } from '../stylesheets/MeasurementToolStyles';
 import config from '../config';
@@ -37,7 +37,7 @@ class MeasurementTool extends Component {
     );
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
@@ -51,9 +51,9 @@ class MeasurementTool extends Component {
   }
 
   goToAreaCalculator = () => this.props.navigation.navigate('AreaCalculator');
-  goToOrientation = () => this.props.navigation.navigate('Orientation');
+  goToPitchFinder = () => this.props.navigation.navigate('PitchFinder');
 
-  async onChangeDestination(destination) {
+  onChangeDestination = async (destination) => {
     this.setState({ destination });
     const apiUrl = `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${config.GOOGLE_PLACES_API_KEY}&input=${destination}&${this.state.latitude}, ${this.state.longitude}&radius=2000`;
     try {
@@ -67,7 +67,7 @@ class MeasurementTool extends Component {
     }
   }
 
-  selectedPrediction(prediction) {
+  selectedPrediction = (prediction) => {
     Keyboard.dismiss();
     this.setState({
       predictions: [],
@@ -77,13 +77,13 @@ class MeasurementTool extends Component {
     this.handleSubmit(this.state.destination);
   }
 
-  handleSubmit(textInput) {
+  handleSubmit = (textInput) => {
     axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.destination.split(' ').join('+')}+ireland&key=${config.GOOGLE_PLACES_API_KEY}`)
       .then(response => this.updateLocationCoordinates(response))
       .catch(error => console.log("Failjax: ", error))
   }
 
-  updateLocationCoordinates(response) {
+  updateLocationCoordinates = (response) => {
     var info = response.data.results[0].geometry.location
     this.setState({
       latitude: info.lat,
@@ -93,14 +93,14 @@ class MeasurementTool extends Component {
     })
   }
 
-  createPolygon() {
+  createPolygon = () => {
     this.setState({
       initialScreen: false,
       canEdit: true
     })
   }
 
-  finishEditingPolygon() {
+  finishEditingPolygon = () => {
     const { polygons, editing } = this.state;
     this.setState({
       polygons: [...polygons, editing],
@@ -110,7 +110,7 @@ class MeasurementTool extends Component {
     });
   }
 
-  markAnotherArea() {
+  markAnotherArea = () => {
     const { polygons, editing } = this.state;
     this.setState({
       polygons: [...polygons, editing],
@@ -120,7 +120,7 @@ class MeasurementTool extends Component {
     });
   }
 
-  deletePolygon() {
+  deletePolygon = () => {
     this.setState({
       polygons: [],
       areas: [],
@@ -128,7 +128,7 @@ class MeasurementTool extends Component {
     })
   }
 
-  async calculateArea() {
+  calculateArea = async() => {
     const polygonArray = this.state.polygons.map(polygon => {
       return polygon.coordinates
     })
@@ -181,34 +181,43 @@ class MeasurementTool extends Component {
         newArea: areaCalc,
         areaTotal: true
       });
-
-      this.addAreaToArray()
+      this.addAreaToArray();
     }
   }
 
-  addAreaToArray() {
+  addAreaToArray = () => {
     this.setState(state => {
       const areas = state.areas.concat(state.newArea);
       return {
         areas,
         newArea: ''
       };
-    });
+    }, () => {
+      this.saveData('areas', this.state.areas);
+    });    
   }
 
-  calculateAreaInSquareMeters(x1, x2, y1, y2) {
+  saveData = async (key, value) => {
+    try{
+      await AsyncStorage.setItem(key, JSON.stringify(value))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  calculateAreaInSquareMeters = (x1, x2, y1, y2) => {
     return (y1 * x2 - x1 * y2) / 2;
   }
 
-  calculateYSegment(latitudeRef, latitude, circumference) {
+  calculateYSegment = (latitudeRef, latitude, circumference) => {
     return (latitude - latitudeRef) * circumference / 360.0;
   }
 
-  calculateXSegment(longitudeRef, longitude, latitude, circumference) {
+  calculateXSegment = (longitudeRef, longitude, latitude, circumference) => {
     return (longitude - longitudeRef) * circumference * Math.cos((latitude * (Math.PI / 180))) / 360.0;
   }
 
-  onPress(e) {
+  onPress = (e) => {
     const { editing, creatingPolygon } = this.state;
     if (!editing) {
       this.setState({
@@ -242,7 +251,7 @@ class MeasurementTool extends Component {
     }
   }
 
-  changeCoordinate(e, index) {
+  changeCoordinate = (e, index) => {
     let newCoord = e.nativeEvent.coordinate;
     let newEditing = Object.assign({}, this.state.editing);
     let newCoordinates = Object.assign({}, newEditing.coordinates);
@@ -392,7 +401,7 @@ class MeasurementTool extends Component {
           )}
           {this.state.areaTotal &&  (
             <TouchableOpacity
-              onPress={this.goToOrientation}
+              onPress={this.goToPitchFinder}
               style={styles.button}
             >
               <Text style={styles.textStyle}>Next Step</Text>

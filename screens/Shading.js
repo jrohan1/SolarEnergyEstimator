@@ -1,20 +1,29 @@
-import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native'
-import SmallLogo from '../components/SmallLogo'
-import { withFirebaseHOC } from '../config/Firebase'
-import { styles } from '../stylesheets/MainStyles'
-import MenuButton from '../components/MenuButton'
-import CastingShade from '../components/CastingShade'
+import React, { Component } from 'react';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import SmallLogo from '../components/SmallLogo';
+import { withFirebaseHOC } from '../config/Firebase';
+import { styles } from '../stylesheets/MainStyles';
+import MenuButton from '../components/MenuButton';
+import CastingShade from '../components/CastingShade';
+import helperFunctions from '../sharedFunctions';
 
 class Shading extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shading: '',
-      value: 0
+      shading: ''
     };
   }
+
   goToEnergyUsage = () => this.props.navigation.navigate('EnergyUsage')
+
+  saveState = (value) => {
+    this.setState({
+      shading: value
+    }, () => {
+      helperFunctions.saveData('shading', value);
+    });    
+  }
 
   render() {
     return (
@@ -30,16 +39,16 @@ class Shading extends Component {
             <Text style={styles.answerTextStyle}>{this.state.shading}</Text>
           </View>
           <View style={styles.buttonStyle}>
-            <TouchableOpacity onPress={() => this.setState({ shading: 'None', value: 1 })}>
+            <TouchableOpacity onPress={() => this.saveState('None')}>
               <Text style={styles.button}>None</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.setState({ shading: 'A little', value: 2 })}>
+            <TouchableOpacity onPress={() => this.saveState('A litte')}>
               <Text style={styles.button}>A little</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.setState({ shading: 'Some', value: 3 })}>
+            <TouchableOpacity onPress={() => this.saveState('Some')}>
               <Text style={styles.button}>Some</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.setState({ shading: 'A lot', value: 4 })}>
+            <TouchableOpacity onPress={() => this.saveState('A lot')}>
               <Text style={styles.button}>A lot</Text>
             </TouchableOpacity>
           </View>

@@ -6,6 +6,7 @@ import * as Permissions from 'expo-permissions';
 import { FontAwesome, Ionicons, AntDesign } from '@expo/vector-icons';
 import { styles } from '../stylesheets/PitchFinderStyles'
 import { Accelerometer } from "expo-sensors";
+import helperFunctions from '../sharedFunctions';
 
 Accelerometer.setUpdateInterval(200)
 
@@ -16,18 +17,18 @@ class PitchFinder extends Component {
       hasPermission: null,
       type: Camera.Constants.Type.back,
       accelerometerData: { x: 0, y: 0, z: 0 },
-      pitch: 0,
+      pitch: '',
       selected: false
     };
   }
 
-  async componentWillUnmount() {
+  componentWillUnmount = async () => {
     if (this.subscribeToAccelerometer) {
       this.unsubscribeFromAccelerometer();
     }
   }
 
-  async componentDidMount() {
+  componentDidMount = async () => {
     this.getPermissionAsync();
     this.subscribeToAccelerometer();
   }
@@ -37,7 +38,7 @@ class PitchFinder extends Component {
     this.setState({ hasPermission: status === 'granted' });
   }
 
-  subscribeToAccelerometer = () => {
+  subscribeToAccelerometer = async () => {
     this.accelerometerSubscription = Accelerometer.addListener(accelerometerData => this.setState({ accelerometerData })
     );
   };
@@ -47,20 +48,22 @@ class PitchFinder extends Component {
     this.accelerometerSubscription = null;
   };
 
-  goToAreaCalculator = () => this.props.navigation.navigate('AreaCalculator')
+  goToOrientation = () => this.props.navigation.navigate('Orientation')
 
-  setPitch(newPitch) {
+  deletePitch = () => {
     this.setState({
-      pitch: newPitch,
-      selected: true
+      pitch: 0,
+      selected: false
     })
   }
 
-  deletePitch() {
+  saveState = (value) => {
     this.setState({
-      selected: false
-    })
-    console.log(this.state.selected)
+      pitch: value,
+      selected: true
+    }, () => {
+      helperFunctions.saveData('pitch', value);
+    });    
   }
 
   render() {
@@ -89,7 +92,7 @@ class PitchFinder extends Component {
             <View style={styles.iconContainer}>
               <TouchableOpacity
                 style={styles.iconStyle}
-                onPress={this.goToAreaCalculator} >
+                onPress={this.goToOrientation} >
                 <Ionicons
                   name="ios-close"
                   style={styles.closeIcon}
@@ -99,7 +102,7 @@ class PitchFinder extends Component {
               {!this.state.selected && (
                 <TouchableOpacity
                   style={styles.iconStyle}
-                  onPress={() => this.setPitch(pitch)} >
+                  onPress={() => this.saveState(pitch)} >
                   <FontAwesome
                     name="save"
                     style={styles.cameraIcon}

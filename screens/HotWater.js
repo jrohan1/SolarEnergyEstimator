@@ -6,17 +6,25 @@ import { styles } from '../stylesheets/MainStyles';
 import { customStyles } from '../stylesheets/HotWaterStyles';
 import MenuButton from '../components/MenuButton';
 import BathPic from '../components/Bath';
+import helperFunctions from '../sharedFunctions';
 
 class HotWater extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      yesNo: '',
-      value: 0
+      yesNo: ''
     };
   }
 
   goToTimeOccupied = () => this.props.navigation.navigate('TimeOccupied')
+
+  saveState = (value) => {
+    this.setState({
+      yesNo: value
+    }, () => {
+      helperFunctions.saveData('hotWater', value);
+    });    
+  }
 
   render() {
     return (
@@ -31,10 +39,10 @@ class HotWater extends Component {
           <Text style={styles.answerTextStyle}>{this.state.yesNo}</Text>
         </View>
         <View style={styles.buttonStyle}>
-          <TouchableOpacity onPress={() => this.setState({ yesNo: 'Yes', value: 1 })}>
+          <TouchableOpacity onPress={() => this.saveState('Yes')}>
             <Text style={[styles.button, customStyles.button]}>Yes</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.setState({ yesNo: 'No', value: 2 })}>
+          <TouchableOpacity onPress={() => this.saveState('No')}>
             <Text style={[styles.button, customStyles.button]}>No</Text>
           </TouchableOpacity>
         </View>
