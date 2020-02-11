@@ -36,7 +36,7 @@ const AuthNavigation = createStackNavigator(
     Drawer: { screen: DrawerNavigator }
   },
   {
-    initialRouteName: 'Report',
+    initialRouteName: 'Home',
     headerMode: 'none'
   }
 )

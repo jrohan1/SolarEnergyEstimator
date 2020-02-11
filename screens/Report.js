@@ -46,8 +46,8 @@ class Report extends Component {
 
     const allAreas = this.state.area.map(
       (areas, index) => (
-        <Row key={areas}>
-          <Text key={areas} style={customStyles.answerStyle}>({index + 1}) {areas}m2 </Text>
+        <Row key={index}>
+          <Text key={index} style={customStyles.answerStyle}>({index + 1}) {areas}m2 </Text>
         </Row>
       )
     );
@@ -61,9 +61,8 @@ class Report extends Component {
 
     const numPanels = calculateNumPanels.map(
       (panels, index) => (
-        console.log(panels),
-        <Row key={panels}>
-          <Text key={panels} style={customStyles.answerStyle}>Area {index + 1}: {panels} panel/s</Text>
+        <Row key={index}>
+          <Text key={index} style={customStyles.answerStyle}>Area {index + 1}: {panels} panel/s</Text>
         </Row>
       )
     );
@@ -72,13 +71,18 @@ class Report extends Component {
 
     const energyPerArea = energyEstimation.map(
       (energy, index) => (
-        console.log(energy),
-        <Row key={energy}>
-          <Text key={energy} style={customStyles.answerStyle}>Area {index + 1}: {energy} kw</Text>
+        <Row key={index}>
+          <Text key={index} style={customStyles.answerStyle}>Area {index + 1}: {energy.toFixed(2)} kw/hrs</Text>
         </Row>
       )
-    )
-    //console.log(energyEstimation)
+    );
+
+    const totalEnergy = energyEstimation.reduce(
+      (a, b) => a + b, 0
+    );
+
+    const percentageOfUsage = (totalEnergy/this.state.energyUsage)*100;
+
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -88,7 +92,7 @@ class Report extends Component {
           </TouchableOpacity>
           <View style={customStyles.container}>
             <Text style={customStyles.headerStyle}>The information you provided:</Text>
-            <Grid>
+            <Grid style={customStyles.gridStyle}>
               <Col>
                 <Row>
                   <Text style={customStyles.textStyle}>Area/s: </Text>
@@ -98,7 +102,7 @@ class Report extends Component {
                 {allAreas}
               </Col>
             </Grid>
-            <Grid>
+            <Grid style={customStyles.gridStyle}>
               <Col>
                 <Row style={customStyles.rowStyle}>
                   <Text style={customStyles.textStyle}>Pitch: </Text>
@@ -147,7 +151,7 @@ class Report extends Component {
               </Col>
             </Grid>
             <Text style={customStyles.subHeaderStyle}>Results: </Text>
-            <Grid>
+            <Grid style={customStyles.gridStyle}>
               <Col>
                 <Row>
                   <Text style={customStyles.textStyle}>Number of panels per area: </Text>
@@ -157,14 +161,32 @@ class Report extends Component {
                 {numPanels}
               </Col>
             </Grid>
-            <Grid>
+            <Grid style={customStyles.gridStyle}>
               <Col>
                 <Row>
-                  <Text style={customStyles.textStyle}>Total energy produced: </Text>
+                  <Text style={customStyles.textStyle}>Energy production for each set of panels: </Text>
                 </Row>
               </Col>
               <Col>
                 {energyPerArea}
+              </Col>
+            </Grid>
+            <Grid style={customStyles.gridStyle}>
+              <Col>
+                <Row>
+                  <Text style={customStyles.textStyle}>Total potential energy production: </Text>
+                </Row>
+                <Row>
+                  <Text style={customStyles.textStyle}>Percentage of energy usage: </Text>
+                </Row>
+              </Col>
+              <Col>
+                <Row>
+                  <Text style={customStyles.answerStyle}>{totalEnergy.toFixed(2)} kw/hrs</Text>
+                </Row>
+                <Row>
+                  <Text style={customStyles.answerStyle}>{percentageOfUsage.toFixed(2)} %</Text>
+                </Row>
               </Col>
             </Grid>
           </View>

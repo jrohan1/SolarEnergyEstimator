@@ -45,13 +45,14 @@ const helperFunctions = {
     let H = radiation * orientationValue;
     let E = [];
     const r = .18;
+    const panelArea = 1.7922;
 
     const numPanels = A.map(      
       areas => {
-        E = areas * r * H * PR;
+        E = areas*panelArea * r * H * PR;
         return E;
       }
-    )  
+    );
     return numPanels;
   },
 
@@ -71,6 +72,7 @@ const helperFunctions = {
     else value = 0;
 
     const performanceRatio = inverterLosses * temperatureLosses * dcCableLosses * acCableLosses * weakIrradiation * dustSnowLosses * value;
+
     return performanceRatio;
   },
   radiation: (state) => {

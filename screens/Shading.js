@@ -42,7 +42,7 @@ class Shading extends Component {
             <TouchableOpacity onPress={() => this.saveState('None')}>
               <Text style={styles.button}>None</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.saveState('A litte')}>
+            <TouchableOpacity onPress={() => this.saveState('A little')}>
               <Text style={styles.button}>A little</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.saveState('Some')}>

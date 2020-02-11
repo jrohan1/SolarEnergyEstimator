@@ -4,9 +4,6 @@ export const customStyles = StyleSheet.create({
   container: {
     marginBottom: 20
   },
-  myStyle: {
-    flexDirection: 'row'
-  },
   headerStyle: {
     fontSize: 27,
     fontFamily: 'josefinSans',
@@ -44,5 +41,8 @@ export const customStyles = StyleSheet.create({
   },
   rowStyle: {
     height: 40
+  },
+  gridStyle: {
+    marginBottom: 10
   }
 })
