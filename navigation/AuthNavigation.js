@@ -1,19 +1,20 @@
-import { createStackNavigator } from 'react-navigation-stack'
-import Home from '../screens/Home'
-import Login from '../screens/Login'
-import Signup from '../screens/Signup'
-import AreaCalculator from '../screens/AreaCalculator'
-import PitchFinder from '../screens/PitchFinder'
-import AdditionalInfo from '../screens/AdditionalInfo'
-import DrawerNavigator from '../navigation/DrawerNavigator'
-import MeasurementTool from '../screens/MeasurementTool'
-import GetStarted from '../screens/GetStarted'
-import Orientation from '../screens/Orientation'
-import Shading from '../screens/Shading'
-import EnergyUsage from '../screens/EnergyUsage'
-import ElectricCar from '../screens/ElectricCar'
-import HotWater from '../screens/HotWater'
-import TimeOccupied from '../screens/TimeOccupied'
+import { createStackNavigator } from 'react-navigation-stack';
+import Home from '../screens/Home';
+import Login from '../screens/Login';
+import Signup from '../screens/Signup';
+import AreaCalculator from '../screens/AreaCalculator';
+import PitchFinder from '../screens/PitchFinder';
+import AdditionalInfo from '../screens/AdditionalInfo';
+import DrawerNavigator from '../navigation/DrawerNavigator';
+import MeasurementTool from '../screens/MeasurementTool';
+import GetStarted from '../screens/GetStarted';
+import Orientation from '../screens/Orientation';
+import Shading from '../screens/Shading';
+import EnergyUsage from '../screens/EnergyUsage';
+import ElectricCar from '../screens/ElectricCar';
+import HotWater from '../screens/HotWater';
+import TimeOccupied from '../screens/TimeOccupied';
+import Report from '../screens/Report';
 
 const AuthNavigation = createStackNavigator(
   {
@@ -31,6 +32,7 @@ const AuthNavigation = createStackNavigator(
     ElectricCar: { screen: ElectricCar },
     HotWater: { screen: HotWater },
     TimeOccupied: { screen: TimeOccupied },
+    Report: { screen: Report },
     Drawer: { screen: DrawerNavigator }
   },
   {

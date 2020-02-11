@@ -1,29 +1,37 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
+
 import SmallLogo from '../components/SmallLogo';
 import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/MainStyles';
 import { customStyles } from '../stylesheets/ElecricCarStyles';
 import MenuButton from '../components/MenuButton';
 import ElectricCarPic from '../components/ElectricCar';
-import { ButtonGroup } from 'react-native-elements';
+import helperFunctions from '../sharedFunctions';
 
 class ElectricCar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      yesNo: '',
-      value: 0
+      yesNo: ''
     };
   }
 
   goToHotWater = () => this.props.navigation.navigate('HotWater')
+  
+  saveState = (value) => {
+    this.setState({
+      yesNo: value
+    }, () => {
+      helperFunctions.saveData('useElectricCar', value);
+    });    
+  }
 
   render() {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this.goToHome}>
-          <SmallLogo />
+          <SmallLogo/>
           <MenuButton navigation={this.props.navigation} />
         </TouchableOpacity>
         <ElectricCarPic />
@@ -32,10 +40,10 @@ class ElectricCar extends Component {
           <Text style={styles.answerTextStyle}>{this.state.yesNo}</Text>
         </View>
         <View style={styles.buttonStyle}>
-          <TouchableOpacity onPress={() => this.setState({ yesNo: 'Yes', value: 1 })}>
+          <TouchableOpacity onPress={()=> this.saveState('Yes')}>
             <Text style={[styles.button, customStyles.button]}>Yes</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.setState({ yesNo: 'No', value: 2 })}>
+          <TouchableOpacity onPress={()=> this.saveState('No')}>
             <Text style={[styles.button, customStyles.button]}>No</Text>
           </TouchableOpacity>
         </View>

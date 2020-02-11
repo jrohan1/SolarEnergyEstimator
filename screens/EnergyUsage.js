@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native'
-import SmallLogo from '../components/SmallLogo'
-import { withFirebaseHOC } from '../config/Firebase'
-import { styles } from '../stylesheets/MainStyles'
-import MenuButton from '../components/MenuButton'
-import Lightbulb from '../components/Lightbulb'
+import React, { Component } from 'react';
+import { Text, View, TouchableOpacity, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
+import SmallLogo from '../components/SmallLogo';
+import { withFirebaseHOC } from '../config/Firebase';
+import { styles } from '../stylesheets/MainStyles';
+import MenuButton from '../components/MenuButton';
+import Lightbulb from '../components/Lightbulb';
+import helperFunctions from '../sharedFunctions';
 
 class EnergyUsage extends Component {
   constructor(props) {
@@ -15,10 +16,17 @@ class EnergyUsage extends Component {
   }
   goToElectricCar = () => this.props.navigation.navigate('ElectricCar')
 
+  saveState = (value) => {
+    this.setState({
+      energyConsumption: value
+    }, () => {
+      helperFunctions.saveData('energyUsage', value);
+    });    
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        
+      <View style={styles.container}>        
           <KeyboardAvoidingView style={styles.container} behavior="padding">
           <ScrollView>
             <TouchableOpacity onPress={this.goToHome}>
@@ -37,7 +45,7 @@ class EnergyUsage extends Component {
                 keyboardType='numeric'
                 returnKeyType='done'
                 blurOnSubmit
-                onChangeText={(energyConsumption) => this.setState({energyConsumption})}
+                onChangeText={(energyConsumption) => this.saveState(energyConsumption)}
                 value={this.state.energyConsumption ? `${this.state.energyConsumption}`: null}
               />
             </View>
@@ -45,9 +53,7 @@ class EnergyUsage extends Component {
               <Text style={styles.nextButton}>Next Step</Text>
             </TouchableOpacity>
             </ScrollView>
-
-          </KeyboardAvoidingView>
-        
+          </KeyboardAvoidingView>        
       </View>
     )
   }
