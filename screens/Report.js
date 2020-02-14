@@ -19,12 +19,11 @@ class Report extends Component {
       hotWater: '',
       energyUsage: '',
       electricCar: '',
-      timeOccupied: '',
-      numPanels: []
+      timeOccupied: ''
     };
   }
 
-  goToHotWater = () => this.props.navigation.navigate('HotWater')
+  goToContactUs = () => this.props.navigation.navigate('ContactUs')
 
   componentWillMount = () => {
     this.importData();
@@ -190,7 +189,7 @@ class Report extends Component {
               </Col>
             </Grid>
           </View>
-          <TouchableOpacity onPress={this.addAreaToArray}>
+          <TouchableOpacity onPress={this.goToContactUs}>
             <Text style={styles.nextButton}>Next Step</Text>
           </TouchableOpacity>
         </ScrollView>
