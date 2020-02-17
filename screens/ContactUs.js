@@ -7,11 +7,11 @@ import { styles } from '../stylesheets/MainStyles';
 import { customStyles } from '../stylesheets/ContactUsStyles';
 import ContactUsBanner from '../components/ContactUs';
 import MenuButton from '../components/MenuButton';
-import { Text, Icon, Card, CardItem, Item, Body, Right, Left } from 'native-base'
-import { ScrollView } from 'react-native-gesture-handler';
+import { Text, Icon, Card, CardItem, Item, Body, Right, Left } from 'native-base';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FormInput from '../components/FormInput';
+import { CONTACT_US, USER_INFO } from 'react-native-dotenv';
 import ErrorMessage from '../components/ErrorMessage';
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
@@ -72,7 +72,7 @@ class ContactUs extends Component {
     });
 
     if (this.state.email != null) {
-      fetch('https://solar-energy-estimator.firebaseio.com/contacts.json', {
+      fetch(CONTACT_US, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -120,7 +120,7 @@ class ContactUs extends Component {
 
   shareInfo = (name, mobile, email, area, pitch, orientation, shading, hotWater, energyUsage, electricCar, timeOccupied) => {
     if (this.state.name != null) {
-      fetch('https://solar-energy-estimator.firebaseio.com/contacts_info.json', {
+      fetch(USER_INFO, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
