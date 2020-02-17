@@ -69,9 +69,8 @@ class PitchFinder extends Component {
   render() {
     const xValue = this.state.accelerometerData.x
     const yValue = this.state.accelerometerData.y
-    const pitch = Math.abs((Math.atan2((-xValue), Math.sqrt(yValue * yValue)) * 57.3) - 90)
-    
-
+    let pitch = Math.abs((Math.atan2((-xValue), Math.sqrt(yValue * yValue)) * 57.3) - 90);
+    pitch = pitch.toFixed(0);
     const { hasPermission } = this.state
     if (hasPermission === null) {
       return <View />;
@@ -83,10 +82,10 @@ class PitchFinder extends Component {
           <Camera style={{ flex: 1 }} type={this.state.cameraType} ref={ref => { this.camera = ref }}>
             <View style={styles.outputTextBox}>
               {!this.state.selected && (
-                <Text style={styles.outputText}>{pitch.toFixed(0)}</Text>
+                <Text style={styles.outputText}>{pitch}</Text>
               )}
               {this.state.selected && (
-                <Text style={styles.outputText}>{this.state.pitch.toFixed(0)}</Text>
+                <Text style={styles.outputText}>{this.state.pitch}</Text>
               )}
             </View>
             <View style={styles.iconContainer}>

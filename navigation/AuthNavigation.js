@@ -15,6 +15,7 @@ import ElectricCar from '../screens/ElectricCar';
 import HotWater from '../screens/HotWater';
 import TimeOccupied from '../screens/TimeOccupied';
 import Report from '../screens/Report';
+import ContactUs from '../screens/ContactUs';
 
 const AuthNavigation = createStackNavigator(
   {
@@ -33,6 +34,7 @@ const AuthNavigation = createStackNavigator(
     HotWater: { screen: HotWater },
     TimeOccupied: { screen: TimeOccupied },
     Report: { screen: Report },
+    ContactUs: { screen: ContactUs },
     Drawer: { screen: DrawerNavigator }
   },
   {

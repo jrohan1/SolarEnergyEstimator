@@ -64,12 +64,12 @@ const helperFunctions = {
     const weakIrradiation = .97;
     const dustSnowLosses = .98;
     const shading = state;
-    let value = 0;
+    let value = 1;
 
     if (shading === 'A lot') value = .6;
     else if (shading === 'Some') value = .8;
     else if (shading === 'A little') value = .9;
-    else value = 0;
+    else value = 1;
 
     const performanceRatio = inverterLosses * temperatureLosses * dcCableLosses * acCableLosses * weakIrradiation * dustSnowLosses * value;
 
@@ -96,7 +96,7 @@ const helperFunctions = {
     let value = 0;
 
     if (orientation === 'South') value = 1;
-    else if (orientation === 'S/W' || orientation === 'S/E') value = .95;
+    else if (orientation === 'SouthWest' || orientation === 'SouthEast') value = .95;
     else if (orientation === 'West' || orientation === 'East') value = .8
 
     return value;

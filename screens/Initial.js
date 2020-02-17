@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
+import * as Icon from '@expo/vector-icons'
 import { withFirebaseHOC } from '../config/Firebase'
 
 class Initial extends Component {
@@ -33,9 +34,11 @@ class Initial extends Component {
       Asset.loadAsync([
         require('../assets/logo.jpg')
       ]),
-      Font.loadAsync({
+      await Font.loadAsync({
+        ...Icon.Ionicons.font,
         'josefinSans': require('../assets/fonts/JosefinSans-Regular.ttf'),
         'josefinSans-Bold': require('../assets/fonts/JosefinSans-Bold.ttf'),
+        'Roboto_medium': require('../assets/fonts/Roboto-Medium.ttf'),
       })
     ])
   }
