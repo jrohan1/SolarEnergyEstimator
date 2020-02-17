@@ -10,7 +10,7 @@ class Home extends Component {
 
   goToSignup = () => this.props.navigation.navigate('Signup')
   goToLogin = () => this.props.navigation.navigate('Login')
-  goToAreaCalculator = () => this.props.navigation.navigate('AreaCalculator')
+  goToInputMeasurements = () => this.props.navigation.navigate('InputMeasurements')
   goToGetStarted = () => this.props.navigation.navigate('GetStarted')
 
   handleSignout = async () => {
@@ -23,8 +23,7 @@ class Home extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        
+      <View style={styles.container}>        
           <MenuButton navigation={this.props.navigation} />
           <AppLogo />
           <View>
@@ -42,7 +41,7 @@ class Home extends Component {
             <Text style={styles.textStyle}>Do you know your roof measurements ?</Text>
           </View>
           <View style={styles.buttonStyle}>
-            <TouchableOpacity onPress={this.goToAreaCalculator}>
+            <TouchableOpacity onPress={this.goToInputMeasurements}>
               <Text style={styles.button}>Yes</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.goToGetStarted}>

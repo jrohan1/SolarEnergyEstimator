@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
     borderColor: '#DEE48E',
     marginLeft: 30,
     marginRight: 30,
-    marginBottom: 30,
+    marginBottom: 20,
     backgroundColor: 'white',
     height: 50,
     justifyContent: 'center'
@@ -81,5 +81,11 @@ export const styles = StyleSheet.create({
     marginLeft :30,
     marginRight:30,
     marginBottom :30,
+  },
+  checkMarkStyle: {
+    fontSize: 50,
+    color: '#4CAF50',
+    alignSelf: 'center',
+    marginBottom: 10
   }
 })
