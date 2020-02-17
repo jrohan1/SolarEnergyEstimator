@@ -2,7 +2,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Home from '../screens/Home';
 import Login from '../screens/Login';
 import Signup from '../screens/Signup';
-import AreaCalculator from '../screens/AreaCalculator';
+import InputMeasurements from '../screens/InputMeasurements';
 import PitchFinder from '../screens/PitchFinder';
 import AdditionalInfo from '../screens/AdditionalInfo';
 import DrawerNavigator from '../navigation/DrawerNavigator';
@@ -22,7 +22,7 @@ const AuthNavigation = createStackNavigator(
     Home: { screen: Home },
     Login: { screen: Login},
     Signup: { screen: Signup },
-    AreaCalculator: { screen: AreaCalculator},
+    InputMeasurements: { screen: InputMeasurements},
     PitchFinder: { screen: PitchFinder },
     AdditionalInfo: { screen: AdditionalInfo },
     MeasurementTool: { screen: MeasurementTool },

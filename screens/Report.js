@@ -13,7 +13,7 @@ class Report extends Component {
     super(props);
     this.state = {
       area: [],
-      pitch: '',
+      pitch: [],
       orientation: '',
       shading: '',
       hotWater: '',
@@ -31,7 +31,7 @@ class Report extends Component {
 
   importData = () => {
     AsyncStorage.getItem('areas').then(value => this.setState({ area: JSON.parse(value) }));
-    AsyncStorage.getItem('pitch').then(value => this.setState({ pitch: value }));
+    AsyncStorage.getItem('pitch').then(value => this.setState({ pitch: JSON.parse(value) }));
     AsyncStorage.getItem('orientation').then(value => this.setState({ orientation: value }));
     AsyncStorage.getItem('shading').then(value => this.setState({ shading: value }));
     AsyncStorage.getItem('energyUsage').then(value => this.setState({ energyUsage: value }));
@@ -46,10 +46,18 @@ class Report extends Component {
     const allAreas = this.state.area.map(
       (areas, index) => (
         <Row key={index}>
-          <Text key={index} style={customStyles.answerStyle}>({index + 1}) {areas}m2 </Text>
+          <Text key={index} style={customStyles.answerStyle}>({index + 1}) {areas} m2 </Text>
         </Row>
       )
     );
+
+    const allPitches = this.state.pitch.map(
+      (pitches, index) => (
+        <Row key={index}>
+          <Text key={index} style={customStyles.answerStyle}>({index + 1}) {pitches} degrees </Text>
+        </Row>
+      )
+    )
 
     const calculateNumPanels = this.state.area.map(
       areas => {
@@ -103,9 +111,16 @@ class Report extends Component {
             </Grid>
             <Grid style={customStyles.gridStyle}>
               <Col>
-                <Row style={customStyles.rowStyle}>
+              <Row>
                   <Text style={customStyles.textStyle}>Pitch: </Text>
                 </Row>
+              </Col>
+              <Col>
+                {allPitches}
+              </Col>
+            </Grid>
+            <Grid style={customStyles.gridStyle}>
+              <Col>
                 <Row>
                   <Text style={customStyles.textStyle}>Orientation: </Text>
                 </Row>
@@ -126,9 +141,6 @@ class Report extends Component {
                 </Row>
               </Col>
               <Col>
-                <Row style={customStyles.rowStyle}>
-                  <Text style={customStyles.answerStyle}>{this.state.pitch} degrees </Text>
-                </Row>
                 <Row style={customStyles.rowStyle}>
                   <Text style={customStyles.answerStyle}>{this.state.orientation}</Text>
                 </Row>
