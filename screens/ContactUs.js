@@ -44,7 +44,7 @@ class ContactUs extends Component {
       hotWater: '',
       energyUsage: '',
       electricCar: '',
-      timeOccupied: ''
+      timeOccupied: '',
     };
   }
 
