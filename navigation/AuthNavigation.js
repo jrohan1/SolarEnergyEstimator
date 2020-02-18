@@ -4,6 +4,8 @@ import Login from '../screens/Login';
 import Signup from '../screens/Signup';
 import InputMeasurements from '../screens/InputMeasurements';
 import PitchFinder from '../screens/PitchFinder';
+import PitchMenu from '../screens/PitchMenu';
+import ManualPitch from '../screens/ManualPitch';
 import AdditionalInfo from '../screens/AdditionalInfo';
 import DrawerNavigator from '../navigation/DrawerNavigator';
 import MeasurementTool from '../screens/MeasurementTool';
@@ -24,6 +26,8 @@ const AuthNavigation = createStackNavigator(
     Signup: { screen: Signup },
     InputMeasurements: { screen: InputMeasurements},
     PitchFinder: { screen: PitchFinder },
+    PitchMenu: {screen: PitchMenu },
+    ManualPitch: { screen: ManualPitch },
     AdditionalInfo: { screen: AdditionalInfo },
     MeasurementTool: { screen: MeasurementTool },
     GetStarted: { screen: GetStarted },

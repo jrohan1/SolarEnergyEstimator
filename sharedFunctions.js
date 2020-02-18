@@ -10,6 +10,14 @@ const helperFunctions = {
     }
   },
 
+  saveArrayData: async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, JSON.stringify(value))
+    } catch (error) {
+      console.error(error)
+    }
+  },
+
   /*
     formula to calculate solar energy output of a pv panel
     E = A * r * H * PR
@@ -42,18 +50,24 @@ const helperFunctions = {
     let PR = helperFunctions.performanceRatio(shading);
     let radiation = helperFunctions.radiation(pitch);
     let orientationValue = helperFunctions.orientation(orientation);
-    let H = radiation * orientationValue;
     let E = [];
     const r = .18;
     const panelArea = 1.7922;
 
-    const numPanels = A.map(      
-      areas => {
-        E = areas*panelArea * r * H * PR;
+    let H = radiation.map(
+      (radiation, index) => {
+        return orientationValue[index] * radiation;
+      }
+    );
+
+    const energy = A.map(
+      (areas, index) => {
+        E = areas * panelArea * r * H[index] * PR;
         return E;
       }
     );
-    return numPanels;
+     
+    return energy;
   },
 
   performanceRatio: (state) => {
@@ -75,31 +89,53 @@ const helperFunctions = {
 
     return performanceRatio;
   },
-  radiation: (state) => {
-    let radiation = 0;
-    const tilt = parseInt(state);
 
-    if (tilt === 0) radiation = 934.25
-    else if (tilt > 0 && tilt <= 15) radiation = 1022.13
-    else if (tilt > 15 && tilt <= 25) radiation = 1057.87
-    else if (tilt > 25 && tilt <= 35) radiation = 1073.56
-    else if (tilt > 35 && tilt <= 45) radiation = 1068.32
-    else if (tilt > 45 && tilt <= 55) radiation = 1041.57
-    else if (tilt > 55 && tilt <= 65) radiation = 993.31
-    else if (tilt > 65 && tilt <= 80) radiation = 883.49
-    else if (tilt > 80 && tilt <= 90) radiation = 790.69
+  radiation: (state) => {
+    let value = 0;
+    const radiation = state.map(
+      (tilt, index) => {
+        if (tilt === 0) {
+          return value = 934.25
+        } else if (tilt > 0 && tilt <= 15) {
+          return value = 1022.13
+        } else if (tilt > 15 && tilt <= 25) {
+          return value = 1057.87
+        } else if (tilt > 25 && tilt <= 35) {
+          return value = 1073.56
+        } else if (tilt > 35 && tilt <= 45) {
+          return value = 1068.32
+        } else if (tilt > 45 && tilt <= 55) {
+          return value = 1041.57
+        } else if (tilt > 55 && tilt <= 65) {
+          return value = 993.31
+        } else if (tilt > 65 && tilt <= 80) {
+          return value = 883.49
+        } else if (tilt > 80 && tilt <= 90) {
+          return value = 790.69
+        }
+      }
+    );
 
     return radiation;
   },
+
   orientation: (state) => {
-    const orientation = state;
     let value = 0;
 
-    if (orientation === 'South') value = 1;
-    else if (orientation === 'SouthWest' || orientation === 'SouthEast') value = .95;
-    else if (orientation === 'West' || orientation === 'East') value = .8
+    const orientation = state.map(
+      (orientations, index) => {
 
-    return value;
+        if (orientations === 'South') {
+          return value = 1;
+        } else if (orientations === 'SouthWest' || orientations === 'SouthEast') {
+          return value = .95;
+        } else if (orientations === 'West' || orientations === 'East') {
+          return value = .8
+        }
+      }
+    );
+
+    return orientation;
   }
 }
 
