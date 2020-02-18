@@ -52,7 +52,7 @@ class MeasurementTool extends Component {
   }
 
   goToAreaCalculator = () => this.props.navigation.navigate('AreaCalculator');
-  goToPitchFinder = () => this.props.navigation.navigate('PitchFinder');
+  goToPitchMenu = () => this.props.navigation.navigate('PitchMenu');
 
   onChangeDestination = async (destination) => {
     this.setState({ destination });
@@ -394,7 +394,7 @@ class MeasurementTool extends Component {
           )}
           {this.state.areaTotal &&  (
             <TouchableOpacity
-              onPress={this.goToPitchFinder}
+              onPress={this.goToPitchMenu}
               style={styles.button}
             >
               <Text style={styles.textStyle}>Next Step</Text>

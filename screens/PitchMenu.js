@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { AsyncStorage, Button, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { AsyncStorage, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { withFirebaseHOC } from '../config/Firebase';
-import { Icon } from 'native-base';
 import SmallLogo from '../components/SmallLogo';
 import MenuButton from '../components/MenuButton';
 import { styles } from '../stylesheets/MainStyles';
@@ -10,7 +9,7 @@ import helperFunctions from '../sharedFunctions';
 
 class PitchMenu extends Component {
   goToPitchFinder = () => this.props.navigation.navigate('PitchFinder');
-  goToOrientation = () => this.props.navigation.navigate('Orientation');
+  goToManualPitch = () => this.props.navigation.navigate('ManualPitch');
   goToHome = () => this.props.navigation.navigate('Home');
 
   constructor(props) {
@@ -34,27 +33,6 @@ class PitchMenu extends Component {
   }
 
   render() {
-    const pitches = this.state.area.map(
-      (areas, index) => (
-        <View key={index} style={styles.textInput}>
-          <TextInput
-            key={index}
-            style={styles.inputStyle}
-            placeholder='degrees'
-            placeholderTextColor='#4160A1'
-            keyboardType='numeric'
-            returnKeyType='done'
-            blurOnSubmit
-            onChangeText={(pitch) => {
-              let pitches = this.state.pitches;
-              pitches[index] = pitch;
-              this.setState({ pitches })
-            }}
-            value={this.state.pitches[index] ? `${this.state.pitches[index]}` : null}
-          />
-        </View>
-      )
-    )
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -63,28 +41,21 @@ class PitchMenu extends Component {
             <MenuButton navigation={this.props.navigation} />
           </TouchableOpacity>
           <View style={styles.questionStyle}>
-            <Text style={styles.textStyle}>Please enter the pitch of the roof for each area that you have marked.</Text>
+            <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>To accurately calculate the potential energy output of your solar panels we need to know the tilt of the panels.</Text>
+            <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>This will be determined by the pitch of your roof.</Text>
+            <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>If you know the pitch please click Enter Pitch.</Text>
+            <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>Enter the pitch for each area that you have marked.</Text>
           </View>
-          {pitches}
-          {this.state.submitted && (
-            <View>
-              <Icon active type="FontAwesome" name="check" style={styles.checkMarkStyle} />
-            </View>
-          )}
-          <TouchableOpacity onPress={() => { this.setState({ submitted: true }); this.submitInput() }}>
-            <Text style={styles.nextButton}>Submit</Text>
+          <TouchableOpacity onPress={this.goToManualPitch}>
+            <Text style={styles.nextButton}>Enter Pitch</Text>
           </TouchableOpacity>
           <View style={[styles.questionStyle, pitchMenuStyles.spacingStyle]}>
-            <Text style={styles.textStyle}>If you do not know the pitch please use our Pitch Finder then enter the values on this page.</Text>
+            <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>If you do not know the pitch please use our Pitch Finder.</Text>
+            <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>When you exit the Pitch Finder you can enter the values on the next screen.</Text>
           </View>
           <TouchableOpacity onPress={this.goToPitchFinder}>
             <Text style={styles.nextButton}>Find Pitch</Text>
           </TouchableOpacity>
-          {this.state.submitted && (
-            <TouchableOpacity onPress={this.goToOrientation}>
-            <Text style={styles.nextButton}>Next Step</Text>
-          </TouchableOpacity>
-          )}
         </ScrollView>
       </View>
     )

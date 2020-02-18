@@ -50,7 +50,7 @@ class PitchFinder extends Component {
     this.accelerometerSubscription = null;
   };
 
-  goToPitchMenu = () => this.props.navigation.navigate('PitchMenu');
+  goToManualPitch = () => this.props.navigation.navigate('ManualPitch');
 
   setPitch = (newPitch) => {
     this.setState({
@@ -91,7 +91,7 @@ class PitchFinder extends Component {
             <View style={styles.iconContainer}>
               <TouchableOpacity
                 style={styles.iconStyle}
-                onPress={this.goToPitchMenu} >
+                onPress={this.goToManualPitch} >
                 <Ionicons
                   name="ios-close"
                   style={styles.closeIcon}
