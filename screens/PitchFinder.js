@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { withFirebaseHOC } from '../config/Firebase'
-import { Text, View, TouchableOpacity, Platform } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import { FontAwesome, Ionicons, AntDesign } from '@expo/vector-icons';
 import { styles } from '../stylesheets/PitchFinderStyles'
 import { Accelerometer } from "expo-sensors";
-import helperFunctions from '../sharedFunctions';
 
 Accelerometer.setUpdateInterval(200)
 
 class PitchFinder extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -23,12 +23,14 @@ class PitchFinder extends Component {
   }
 
   componentWillUnmount = async () => {
+    this._isMounted = false;
     if (this.subscribeToAccelerometer) {
-      this.unsubscribeFromAccelerometer();
+      await this.unsubscribeFromAccelerometer();
     }
   }
 
   componentDidMount = async () => {
+    this._isMounted = true;
     this.getPermissionAsync();
     this.subscribeToAccelerometer();
   }
@@ -43,12 +45,19 @@ class PitchFinder extends Component {
     );
   };
 
-  unsubscribeFromAccelerometer = () => {
+  unsubscribeFromAccelerometer = async () => {
     this.accelerometerSubscription && this.acceleroMeterSubscription.remove();
     this.accelerometerSubscription = null;
   };
 
-  goToOrientation = () => this.props.navigation.navigate('Orientation')
+  goToPitchMenu = () => this.props.navigation.navigate('PitchMenu');
+
+  setPitch = (newPitch) => {
+    this.setState({
+      pitch: newPitch,
+      selected: true
+    })
+  }
 
   deletePitch = () => {
     this.setState({
@@ -57,21 +66,13 @@ class PitchFinder extends Component {
     })
   }
 
-  saveState = (value) => {
-    this.setState({
-      pitch: value,
-      selected: true
-    }, () => {
-      helperFunctions.saveData('pitch', value);
-    });    
-  }
-
   render() {
     const xValue = this.state.accelerometerData.x
     const yValue = this.state.accelerometerData.y
     let pitch = Math.abs((Math.atan2((-xValue), Math.sqrt(yValue * yValue)) * 57.3) - 90);
     pitch = pitch.toFixed(0);
-    const { hasPermission } = this.state
+    const { hasPermission } = this.state;
+
     if (hasPermission === null) {
       return <View />;
     } else if (hasPermission === false) {
@@ -81,33 +82,23 @@ class PitchFinder extends Component {
         <View style={{ flex: 1 }}>
           <Camera style={{ flex: 1 }} type={this.state.cameraType} ref={ref => { this.camera = ref }}>
             <View style={styles.outputTextBox}>
-              {!this.state.selected && (
-                <Text style={styles.outputText}>{pitch}</Text>
-              )}
-              {this.state.selected && (
+              {this.state.selected ?
                 <Text style={styles.outputText}>{this.state.pitch}</Text>
-              )}
+                :
+                <Text style={styles.outputText}>{pitch}</Text>
+              }
             </View>
             <View style={styles.iconContainer}>
               <TouchableOpacity
                 style={styles.iconStyle}
-                onPress={this.goToOrientation} >
+                onPress={this.goToPitchMenu} >
                 <Ionicons
                   name="ios-close"
                   style={styles.closeIcon}
                 />
               </TouchableOpacity>
               <View style={styles.lineStyle} />
-              {!this.state.selected && (
-                <TouchableOpacity
-                  style={styles.iconStyle}
-                  onPress={() => this.saveState(pitch)} >
-                  <FontAwesome
-                    name="save"
-                    style={styles.cameraIcon}
-                  />
-                </TouchableOpacity>)}
-              {this.state.selected && (
+              {this.state.selected ?
                 <TouchableOpacity
                   style={styles.iconStyle}
                   onPress={() => this.deletePitch()}>
@@ -116,7 +107,16 @@ class PitchFinder extends Component {
                     style={styles.deleteIcon}
                   />
                 </TouchableOpacity>
-              )}
+                :
+                <TouchableOpacity
+                  style={styles.iconStyle}
+                  onPress={() => this.setPitch(pitch)} >
+                  <FontAwesome
+                    name="save"
+                    style={styles.cameraIcon}
+                  />
+                </TouchableOpacity>
+              }
             </View>
           </Camera>
         </View>
