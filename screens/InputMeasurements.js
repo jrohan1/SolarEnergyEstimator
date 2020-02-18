@@ -5,6 +5,7 @@ import { Icon } from 'native-base';
 import SmallLogo from '../components/SmallLogo';
 import MenuButton from '../components/MenuButton';
 import { styles } from '../stylesheets/MainStyles';
+import helperFunctions from '../sharedFunctions';
 
 class InputMeasurements extends Component {
   goToOrientation = () => this.props.navigation.navigate('Orientation');
@@ -20,16 +21,8 @@ class InputMeasurements extends Component {
   }
 
   submitInput = () => {
-    this.saveData('areas', this.state.areas);
-    this.saveData('pitch', this.state.pitches);
-  }
-
-  saveData = async (key, value) => {
-    try {
-      await AsyncStorage.setItem(key, JSON.stringify(value))
-    } catch (error) {
-      console.error(error)
-    }
+    helperFunctions.saveArrayData('areas', this.state.areas);
+    helperFunctions.saveArrayData('pitch', this.state.pitches);
   }
 
   render() {

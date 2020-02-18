@@ -6,7 +6,8 @@ import { styles } from '../stylesheets/MeasurementToolStyles';
 import config from '../config';
 import _ from 'lodash';
 import axios from 'axios';
-import { Ionicons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons';
+import helperFunctions from '../sharedFunctions';
 
 const { height, width } = Dimensions.get('window');
 const LATITUDE_DELTA = 0.0007;
@@ -193,16 +194,8 @@ class MeasurementTool extends Component {
         newArea: ''
       };
     }, () => {
-      this.saveData('areas', this.state.areas);
+      helperFunctions.saveArrayData('areas', this.state.areas);
     });    
-  }
-
-  saveData = async (key, value) => {
-    try{
-      await AsyncStorage.setItem(key, JSON.stringify(value))
-    } catch (error) {
-      console.error(error)
-    }
   }
 
   calculateAreaInSquareMeters = (x1, x2, y1, y2) => {

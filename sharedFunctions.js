@@ -9,6 +9,14 @@ const helperFunctions = {
       console.error(error)
     }
   },
+  
+  saveArrayData: async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, JSON.stringify(value))
+    } catch (error) {
+      console.error(error)
+    }
+  },
 
   /*
     formula to calculate solar energy output of a pv panel

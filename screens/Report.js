@@ -14,7 +14,7 @@ class Report extends Component {
     this.state = {
       area: [],
       pitch: [],
-      orientation: '',
+      orientation: [],
       shading: '',
       hotWater: '',
       energyUsage: '',
@@ -32,7 +32,7 @@ class Report extends Component {
   importData = () => {
     AsyncStorage.getItem('areas').then(value => this.setState({ area: JSON.parse(value) }));
     AsyncStorage.getItem('pitch').then(value => this.setState({ pitch: JSON.parse(value) }));
-    AsyncStorage.getItem('orientation').then(value => this.setState({ orientation: value }));
+    AsyncStorage.getItem('orientation').then(value => this.setState({ orientation: JSON.parse(value) }));
     AsyncStorage.getItem('shading').then(value => this.setState({ shading: value }));
     AsyncStorage.getItem('energyUsage').then(value => this.setState({ energyUsage: value }));
     AsyncStorage.getItem('useElectricCar').then(value => this.setState({ electricCar: value }));
@@ -59,6 +59,14 @@ class Report extends Component {
       )
     )
 
+    const allOrientations = this.state.orientation.map(
+      (orientations, index) => ( 
+        <Row key={index}>
+          <Text key={index} style={customStyles.answerStyle}>({index + 1}) {orientations} </Text>       
+        </Row> 
+      )
+    );
+
     const calculateNumPanels = this.state.area.map(
       areas => {
         const panels = (areas / panelArea).toFixed();
@@ -79,7 +87,7 @@ class Report extends Component {
     const energyPerArea = energyEstimation.map(
       (energy, index) => (
         <Row key={index}>
-          <Text key={index} style={customStyles.answerStyle}>Area {index + 1}: {energy.toFixed(2)} kw/hrs</Text>
+          <Text key={index} style={customStyles.answerStyle}>Area {index + 1}: {energy.toFixed(0)} kw/hrs</Text>
         </Row>
       )
     );
@@ -121,9 +129,16 @@ class Report extends Component {
             </Grid>
             <Grid style={customStyles.gridStyle}>
               <Col>
-                <Row>
+              <Row>
                   <Text style={customStyles.textStyle}>Orientation: </Text>
                 </Row>
+              </Col>
+              <Col>
+                {allOrientations}
+              </Col>
+            </Grid>
+            <Grid style={customStyles.gridStyle}>
+              <Col>
                 <Row style={customStyles.rowStyle}>
                   <Text style={customStyles.textStyle}>Shading: </Text>
                 </Row>
@@ -141,9 +156,6 @@ class Report extends Component {
                 </Row>
               </Col>
               <Col>
-                <Row style={customStyles.rowStyle}>
-                  <Text style={customStyles.answerStyle}>{this.state.orientation}</Text>
-                </Row>
                 <Row style={customStyles.rowStyle}>
                   <Text style={customStyles.answerStyle}>{this.state.shading}</Text>
                 </Row>
@@ -174,7 +186,7 @@ class Report extends Component {
             </Grid>
             <Grid style={customStyles.gridStyle}>
               <Col>
-                <Row>
+                <Row style={{ height: 100 }}>
                   <Text style={customStyles.textStyle}>Energy production for each set of panels: </Text>
                 </Row>
               </Col>
