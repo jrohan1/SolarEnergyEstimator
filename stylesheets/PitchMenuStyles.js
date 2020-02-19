@@ -1,10 +1,14 @@
 import { StyleSheet } from 'react-native'
 
 export const pitchMenuStyles = StyleSheet.create({
-  spacingStyle: {
-    marginTop: 0
+  cardStyle: {
+    marginTop: 20,
+    marginLeft: 25,
+    marginRight: 25,
+    marginBottom: 30
   },
   textStyle: {
-    textAlign: 'left'
+    textAlign: 'left',
+    color: 'navy'
   }
 })

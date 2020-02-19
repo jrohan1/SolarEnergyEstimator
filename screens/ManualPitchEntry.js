@@ -7,7 +7,7 @@ import MenuButton from '../components/MenuButton';
 import { styles } from '../stylesheets/MainStyles';
 import helperFunctions from '../sharedFunctions';
 
-class ManualPitch extends Component {
+class ManualPitchEntry extends Component {
   goToPitchFinder = () => this.props.navigation.navigate('PitchFinder');
   goToOrientation = () => this.props.navigation.navigate('Orientation');
   goToHome = () => this.props.navigation.navigate('Home');
@@ -84,4 +84,4 @@ class ManualPitch extends Component {
   }
 }
 
-export default withFirebaseHOC(ManualPitch)
+export default withFirebaseHOC(ManualPitchEntry)
