@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AsyncStorage, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { withFirebaseHOC } from '../config/Firebase';
 import { Icon } from 'native-base';
 import SmallLogo from '../components/SmallLogo';
@@ -16,8 +16,54 @@ class InputMeasurements extends Component {
     this.state = {
       areas: [],
       pitches: [],
-      additionalArea: false
+      textInputArea: [],
+      textInputPitch: []
     }
+  }
+
+  addAreaTextInput = (index) => {
+    let textInputArea = this.state.textInputArea;
+    textInputArea.push(
+      <View key={index} style={styles.textInput}>
+        <TextInput key={index}
+          style={styles.inputStyle}
+          placeholder='m2'
+          placeholderTextColor='#4160A1'
+          keyboardType='numeric'
+          returnKeyType='done'
+          blurOnSubmit
+          onChangeText={(area) => {
+            let areas = this.state.areas;
+            areas[0] = area;
+            this.setState({ areas })
+          }}
+          value={this.state.areas[0] ? `${this.state.areas[0]}` : null}
+        /></View>);
+
+    this.setState({ textInputArea })
+  }
+
+  addPitchTextInput = (index) => {
+    let textInputPitch = this.state.textInputPitch;
+    textInputPitch.push(
+      <View key={index} style={styles.textInput}>
+        <TextInput
+          style={styles.inputStyle}
+          placeholder='degrees'
+          placeholderTextColor='#4160A1'
+          keyboardType='numeric'
+          returnKeyType='done'
+          blurOnSubmit
+          onChangeText={(pitch) => {
+            let pitches = this.state.pitches;
+            pitches[0] = pitch;
+            this.setState({ pitches })
+          }}
+          value={this.state.pitches[0] ? `${this.state.pitches[0]}` : null}
+        />
+      </View>);
+
+    this.setState({ textInputPitch })
   }
 
   submitInput = () => {
@@ -52,24 +98,9 @@ class InputMeasurements extends Component {
               value={this.state.areas[0] ? `${this.state.areas[0]}` : null}
             />
           </View>
-          {this.state.additionalArea && (
-            <View style={styles.textInput}>
-              < TextInput
-                style={styles.inputStyle}
-                placeholder='Second Area m2'
-                placeholderTextColor='#4160A1'
-                keyboardType='numeric'
-                returnKeyType='done'
-                blurOnSubmit
-                onChangeText={(area) => {
-                  let areas = this.state.areas;
-                  areas[1] = area;
-                  this.setState({ areas })
-                }}
-                value={this.state.areas[1] ? `${this.state.areas[1]}` : null}
-              />
-            </View>
-          )}
+          {this.state.textInputArea.map((value, index) => {
+            return value
+          })}
           <View style={styles.questionStyle}>
             <Text style={styles.textStyle}>Please enter pitch in degrees</Text>
           </View>
@@ -89,35 +120,18 @@ class InputMeasurements extends Component {
               value={this.state.pitches[0] ? `${this.state.pitches[0]}` : null}
             />
           </View>
-          {this.state.additionalArea && (
-            <View style={styles.textInput}>
-              < TextInput
-                style={styles.inputStyle}
-                placeholder='Second pitch in degrees'
-                placeholderTextColor='#4160A1'
-                keyboardType='numeric'
-                returnKeyType='done'
-                blurOnSubmit
-                onChangeText={(pitch) => {
-                  let pitches = this.state.pitches;
-                  pitches[1] = pitch;
-                  this.setState({ pitches })
-                }}
-                value={this.state.pitches[1] ? `${this.state.pitches[1]}` : null}
-              />
-            </View>
-          )}
+          {this.state.textInputPitch.map((value, index) => {
+            return value
+          })}
           {this.state.submitted && (
             <View>
-          <Icon active type="FontAwesome" name="check" style={styles.checkMarkStyle} />
-          </View>
-          )}          
-          {!this.state.additionalArea && (
-            <TouchableOpacity onPress={() => this.setState({ additionalArea: true })}>
-              <Text style={styles.nextButton}>Add additional area and pitch</Text>
-            </TouchableOpacity>
+              <Icon active type="FontAwesome" name="check" style={styles.checkMarkStyle} />
+            </View>
           )}
-          <TouchableOpacity onPress={() => {this.setState({submitted: true}); this.submitInput()}}>
+          <TouchableOpacity onPress={() => { this.addAreaTextInput(this.state.textInputArea.length); this.addPitchTextInput(this.state.textInputPitch.length)}}>
+            <Text style={styles.nextButton}>Add additional area and pitch</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { this.setState({ submitted: true }); this.submitInput() }}>
             <Text style={styles.nextButton}>Submit</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.goToOrientation}>
