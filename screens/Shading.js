@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import SmallLogo from '../components/SmallLogo';
+import ErrorMessage from '../components/ErrorMessage';
 import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/MainStyles';
 import MenuButton from '../components/MenuButton';
@@ -23,6 +24,16 @@ class Shading extends Component {
     }, () => {
       helperFunctions.saveData('shading', value);
     });    
+  };
+
+  checkForEntry = () => {
+    if (this.state.shading === '') {
+      this.setState({
+        showError: true
+      });
+    } else {
+      this.goToEnergyUsage();
+    }
   }
 
   render() {
@@ -52,7 +63,10 @@ class Shading extends Component {
               <Text style={styles.button}>A lot</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={this.goToEnergyUsage}>
+          {this.state.showError && (
+            <ErrorMessage errorValue={'*Please select an option'} />
+          )}
+          <TouchableOpacity onPress={() => this.checkForEntry()}>
             <Text style={styles.nextButton}>Next Step</Text>
           </TouchableOpacity>
         </ScrollView>
