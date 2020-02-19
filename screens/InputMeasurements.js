@@ -21,6 +21,11 @@ class InputMeasurements extends Component {
     }
   }
 
+  componentWillMount = () => {
+    this.addAreaTextInput(this.state.textInputArea.length);
+    this.addPitchTextInput(this.state.textInputPitch.length);
+  }
+
   addAreaTextInput = (index) => {
     let textInputArea = this.state.textInputArea;
     textInputArea.push(
@@ -34,12 +39,11 @@ class InputMeasurements extends Component {
           blurOnSubmit
           onChangeText={(area) => {
             let areas = this.state.areas;
-            areas[0] = area;
+            areas[index] = area;
             this.setState({ areas })
           }}
-          value={this.state.areas[0] ? `${this.state.areas[0]}` : null}
+          value={this.state.areas[index] ? `${this.state.areas[index]}` : null}
         /></View>);
-
     this.setState({ textInputArea })
   }
 
@@ -56,13 +60,12 @@ class InputMeasurements extends Component {
           blurOnSubmit
           onChangeText={(pitch) => {
             let pitches = this.state.pitches;
-            pitches[0] = pitch;
+            pitches[index] = pitch;
             this.setState({ pitches })
           }}
-          value={this.state.pitches[0] ? `${this.state.pitches[0]}` : null}
+          value={this.state.pitches[index] ? `${this.state.pitches[index]}` : null}
         />
       </View>);
-
     this.setState({ textInputPitch })
   }
 
@@ -82,43 +85,11 @@ class InputMeasurements extends Component {
           <View style={styles.questionStyle}>
             <Text style={styles.textStyle}>Please enter area in m2</Text>
           </View>
-          <View style={styles.textInput}>
-            <TextInput
-              style={styles.inputStyle}
-              placeholder='m2'
-              placeholderTextColor='#4160A1'
-              keyboardType='numeric'
-              returnKeyType='done'
-              blurOnSubmit
-              onChangeText={(area) => {
-                let areas = this.state.areas;
-                areas[0] = area;
-                this.setState({ areas })
-              }}
-              value={this.state.areas[0] ? `${this.state.areas[0]}` : null}
-            />
-          </View>
           {this.state.textInputArea.map((value, index) => {
             return value
           })}
           <View style={styles.questionStyle}>
             <Text style={styles.textStyle}>Please enter pitch in degrees</Text>
-          </View>
-          <View style={styles.textInput}>
-            <TextInput
-              style={styles.inputStyle}
-              placeholder='degrees'
-              placeholderTextColor='#4160A1'
-              keyboardType='numeric'
-              returnKeyType='done'
-              blurOnSubmit
-              onChangeText={(pitch) => {
-                let pitches = this.state.pitches;
-                pitches[0] = pitch;
-                this.setState({ pitches })
-              }}
-              value={this.state.pitches[0] ? `${this.state.pitches[0]}` : null}
-            />
           </View>
           {this.state.textInputPitch.map((value, index) => {
             return value

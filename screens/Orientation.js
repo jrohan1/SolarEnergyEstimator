@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AsyncStorage, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Icon } from 'native-base';
 import SmallLogo from '../components/SmallLogo';
+import ErrorMessage from '../components/ErrorMessage';
 import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/MainStyles';
 import { customStyles } from '../stylesheets/OrientationStyle';
@@ -16,6 +17,7 @@ class Orientation extends Component {
       area: [],
       orientation: '',
       orientations: [],
+      addOrientation: true
     };
   }
   goToShading = () => this.props.navigation.navigate('Shading');
@@ -30,7 +32,9 @@ class Orientation extends Component {
 
   saveState = (value) => {
     this.setState({
-      orientation: value
+      orientation: value,
+      selected: true,
+      showError: false
     });
   }
 
@@ -42,23 +46,48 @@ class Orientation extends Component {
     }
   }
 
+  addOrientation = () => {
+    if (this.state.area.length === this.state.orientations.length) {
+      this.setState({
+        addOrientation: false,
+        showSubmit: true
+      })
+    }
+  }
+
+  isSubmitted = () => {
+    if (this.state.addOrientation === false) {
+      this.setState({
+        isSubmitted: true
+      }, () => {
+        this.addOrientationToArray()
+      })
+    }
+  }
+
   addOrientationToArray = () => {
-    this.setState(state => {
-      const orientations = state.orientations.concat(state.orientation);
-      return {
-        orientations,
-        orientation: '',
-        secondOrientation: true
-      };
-    }, () => {
-      helperFunctions.saveArrayData('orientation', this.state.orientations);
-    });
+    if (this.state.orientation !== '') {
+      this.setState(state => {
+        const orientations = state.orientations.concat(state.orientation);
+        return {
+          orientations,
+          orientation: '',
+          secondOrientation: true
+        };
+      }, () => {
+        helperFunctions.saveArrayData('orientation', this.state.orientations);
+        this.addOrientation();
+      });
+    }
+    this.setState({
+      showError: true
+    })
   }
 
   render() {
     const allOrientations = this.state.orientations.map(
       (orientations, index) => (
-        <Text key={index} style={styles.answerTextStyle}>{orientations} </Text>
+        <Text key={index} style={styles.answerTextStyle}>Area {index + 1}: {orientations} </Text>
       )
     )
     return (
@@ -71,11 +100,17 @@ class Orientation extends Component {
           <Compass />
           <View style={styles.questionStyle}>
             <Text style={styles.textStyle}>Which direction will the solar panels face ?</Text>
-            {!this.state.isSubmitted ?
-              <Text style={styles.answerTextStyle}>{this.state.orientation}</Text>
-              :
+            {this.state.selected && !this.state.showSubmit && (
+              <Text style={styles.answerTextStyle}>Selected: {this.state.orientation}</Text>
+            )}
+            {!this.state.isSubmitted && (
               allOrientations
-            }
+            )}
+            {this.state.isSubmitted && (
+            <View>
+              <Icon active type="FontAwesome" name="check" style={styles.checkMarkStyle} />
+            </View>
+          )}
           </View>
           <View style={styles.buttonStyle}>
             <TouchableOpacity onPress={() => { this.saveState('South'); this.checkForMultipleAreas() }}>
@@ -96,18 +131,16 @@ class Orientation extends Component {
               <Text style={[styles.button, customStyles.button]}>W</Text>
             </TouchableOpacity>
           </View>
-          {this.state.isSubmitted && (
-            <View>
-              <Icon active type="FontAwesome" name="check" style={styles.checkMarkStyle} />
-            </View>
+          {this.state.showError && !this.state.showSubmit && (
+            <ErrorMessage errorValue={'*Please add orientation for each area measured'} />
           )}
-          {this.state.multipleAreas && !this.state.secondOrientation && (
+          {this.state.multipleAreas && this.state.addOrientation && (
             <TouchableOpacity onPress={() => this.addOrientationToArray()}>
-              <Text style={styles.nextButton}>Add orienatation of second area</Text>
+              <Text style={styles.nextButton}>Add orienatation</Text>
             </TouchableOpacity>
           )}
-          {!this.state.isSubmitted && (
-            <TouchableOpacity onPress={() => { this.setState({ isSubmitted: true }); this.addOrientationToArray() }}>
+          {this.state.showSubmit && !this.state.isSubmitted && (
+            <TouchableOpacity onPress={() => this.isSubmitted()}>
               <Text style={styles.nextButton}>Submit</Text>
             </TouchableOpacity>
           )}
