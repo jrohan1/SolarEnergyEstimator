@@ -3,6 +3,7 @@ import { Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-nativ
 import { withFirebaseHOC } from '../config/Firebase';
 import { Icon } from 'native-base';
 import SmallLogo from '../components/SmallLogo';
+import ErrorMessage from '../components/ErrorMessage';
 import MenuButton from '../components/MenuButton';
 import { styles } from '../stylesheets/MainStyles';
 import helperFunctions from '../sharedFunctions';
@@ -66,12 +67,34 @@ class InputMeasurements extends Component {
           value={this.state.pitches[index] ? `${this.state.pitches[index]}` : null}
         />
       </View>);
-    this.setState({ textInputPitch })
+    this.setState({ 
+      textInputPitch,
+      showError: false
+    })
   }
 
   submitInput = () => {
-    helperFunctions.saveArrayData('areas', this.state.areas);
-    helperFunctions.saveArrayData('pitch', this.state.pitches);
+    if (this.state.areas.length === 0 || this.state.pitches.length === 0) {
+      this.setState({
+        showError: true
+      });
+    } else if (this.state.areas.length < this.state.pitches.length) {
+      this.setState({
+        showAreaError: true
+      });
+    } else if (this.state.areas.length > this.state.pitches.length) {
+      this.setState({
+        showPitchError: true
+      });
+    } else {
+      this.setState({
+        isSubmitted: true
+      }, () => {
+        helperFunctions.saveArrayData('areas', this.state.areas);
+        helperFunctions.saveArrayData('pitch', this.state.pitches);
+      }
+      );
+    }
   }
 
   render() {
@@ -85,29 +108,43 @@ class InputMeasurements extends Component {
           <View style={styles.questionStyle}>
             <Text style={styles.textStyle}>Please enter area in m2</Text>
           </View>
+          {this.state.showAreaError && !this.state.isSubmitted && (
+            <ErrorMessage errorValue={'*Please input an area for every pitch'} />
+          )}
           {this.state.textInputArea.map((value, index) => {
             return value
           })}
           <View style={styles.questionStyle}>
             <Text style={styles.textStyle}>Please enter pitch in degrees</Text>
           </View>
+          {this.state.showPitchError && !this.state.isSubmitted && (
+            <ErrorMessage errorValue={'*Please input a pitch for every area'} />
+          )}
           {this.state.textInputPitch.map((value, index) => {
             return value
           })}
-          {this.state.submitted && (
+          {this.state.isSubmitted && (
             <View>
               <Icon active type="FontAwesome" name="check" style={styles.checkMarkStyle} />
             </View>
           )}
-          <TouchableOpacity onPress={() => { this.addAreaTextInput(this.state.textInputArea.length); this.addPitchTextInput(this.state.textInputPitch.length)}}>
-            <Text style={styles.nextButton}>Add additional area and pitch</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => { this.setState({ submitted: true }); this.submitInput() }}>
-            <Text style={styles.nextButton}>Submit</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.goToOrientation}>
-            <Text style={styles.nextButton}>Next Step</Text>
-          </TouchableOpacity>
+          {this.state.showError && !this.state.isSubmitted && (
+            <ErrorMessage errorValue={'*Please input a value for area and pitch'} />
+          )}
+          {!this.state.isSubmitted && (
+            <TouchableOpacity onPress={() => { this.addAreaTextInput(this.state.textInputArea.length); this.addPitchTextInput(this.state.textInputPitch.length) }}>
+              <Text style={styles.nextButton}>Add additional area and pitch</Text>
+            </TouchableOpacity>
+          )}
+          {!this.state.isSubmitted ?
+            <TouchableOpacity onPress={() => this.submitInput()}>
+              <Text style={styles.nextButton}>Submit</Text>
+            </TouchableOpacity>
+            :
+            <TouchableOpacity onPress={this.goToOrientation}>
+              <Text style={styles.nextButton}>Next Step</Text>
+            </TouchableOpacity>
+          }
         </ScrollView>
       </View>
     )
