@@ -20,6 +20,14 @@ export const styles = StyleSheet.create({
     marginLeft :10,
     marginRight:10,
   },
+  subTextStyle: {
+    fontSize: 20,
+    fontFamily: 'josefinSans',
+    color: '#DEE48E',
+    textAlign:'center',
+    marginLeft :10,
+    marginRight:10
+  },
   answerTextStyle: {
     fontSize: 30,
     fontFamily: 'josefinSans',
