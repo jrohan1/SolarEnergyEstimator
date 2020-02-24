@@ -44,7 +44,8 @@ class ContactUs extends Component {
       energyUsage: '',
       electricCar: '',
       timeOccupied: '',
-      date: ''
+      date: '',
+      address: ''
     };
   }
 
@@ -74,7 +75,8 @@ class ContactUs extends Component {
     AsyncStorage.getItem('energyUsage').then(value => this.setState({ energyUsage: value }));
     AsyncStorage.getItem('useElectricCar').then(value => this.setState({ electricCar: value }));
     AsyncStorage.getItem('hotWater').then(value => this.setState({ hotWater: value }));
-    AsyncStorage.getItem('timeOccupied').then(value => this.setState({ timeOccupied: value }));
+    AsyncStorage.getItem('shading').then(value => this.setState({ shading: value }));
+    AsyncStorage.getItem('address').then(value => this.setState({ address: value }));
   }
 
   postMsg = (values, actions) => {
@@ -133,7 +135,7 @@ class ContactUs extends Component {
     actions.setSubmitting(false);
   };
 
-  shareInfo = (name, mobile, email, area, pitch, orientation, shading, hotWater, energyUsage, electricCar, timeOccupied, date) => {
+  shareInfo = (name, mobile, email, area, pitch, orientation, shading, hotWater, energyUsage, electricCar, timeOccupied, date, address) => {
     if (this.state.name != null) {
       fetch(USER_INFO, {
         method: 'POST',
@@ -153,7 +155,8 @@ class ContactUs extends Component {
           "energyUsage": energyUsage,
           "electricCar": electricCar,
           "timeOccupied": timeOccupied,
-          "date": date
+          "date": date,
+          "address": address
         }),
       })
     }
@@ -213,7 +216,8 @@ class ContactUs extends Component {
                       this.state.energyUsage,
                       this.state.electricCar,
                       this.state.timeOccupied,
-                      this.state.date
+                      this.state.date,
+                      this.state.address
                     ); this.togglePostCard()
                   }}>
                     <Icon active type="FontAwesome" name="share" style={customStyles.shareButtonStyle} />

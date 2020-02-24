@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { withFirebaseHOC } from '../config/Firebase'
-import { AsyncStorage, Text, View, TextInput, Dimensions, Keyboard, TouchableHighlight, TouchableOpacity, PermissionsAndroid } from "react-native";
+import { Text, View, TextInput, Dimensions, Keyboard, TouchableHighlight, TouchableOpacity } from "react-native";
+import { Icon, Card, CardItem, Body, Right, Left } from 'native-base';
 import MapView, { Marker, Polygon, ProviderPropType } from 'react-native-maps';
 import { styles } from '../stylesheets/MeasurementToolStyles';
 import config from '../config';
 import _ from 'lodash';
 import axios from 'axios';
-import { Ionicons } from '@expo/vector-icons';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 import helperFunctions from '../sharedFunctions';
 
 const { height, width } = Dimensions.get('window');
-const LATITUDE_DELTA = 0.0007;
+const INITIAL_LATITUDE_DELTA = 5.5;
+const INITIAL_LONGITUDE_DELTA = INITIAL_LATITUDE_DELTA * (width / height);
+const LATITUDE_DELTA = 0.00007;
 const LONGITUDE_DELTA = LATITUDE_DELTA * (width / height);
 let id = 0;
 
@@ -19,18 +22,20 @@ class MeasurementTool extends Component {
     super(props);
     this.state = {
       error: "",
-      latitude: 0,
-      longitude: 0,
+      latitude: 53.2734,
+      longitude: -7.77832031,
+      latitudeDelta: INITIAL_LATITUDE_DELTA,
+      longitudeDelta: INITIAL_LONGITUDE_DELTA,
       destination: '',
       predictions: [],
       polygons: [],
       editing: null,
       canEdit: false,
       creatingPolygon: false,
-      initialScreen: true,
       areaTotal: false,
       newArea: '',
-      areas: []
+      areas: [],
+      showCard: true,
     };
     this.onChangeDestinationDebounced = _.debounce(
       this.onChangeDestination,
@@ -38,20 +43,7 @@ class MeasurementTool extends Component {
     );
   };
 
-  componentDidMount = () => {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        });
-      },
-      error => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, maximumAge: 2000, timeout: 20000 }
-    );
-  }
-
-  goToAreaCalculator = () => this.props.navigation.navigate('AreaCalculator');
+  goToGetStarted = () => this.props.navigation.navigate('GetStarted');
   goToPitchMenu = () => this.props.navigation.navigate('PitchMenu');
 
   onChangeDestination = async (destination) => {
@@ -89,15 +81,8 @@ class MeasurementTool extends Component {
     this.setState({
       latitude: info.lat,
       longitude: info.lng,
-      latitudeDelta: LONGITUDE_DELTA,
-      longitudeDelta: LATITUDE_DELTA
-    })
-  }
-
-  createPolygon = () => {
-    this.setState({
-      initialScreen: false,
-      canEdit: true
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA
     })
   }
 
@@ -125,11 +110,12 @@ class MeasurementTool extends Component {
     this.setState({
       polygons: [],
       areas: [],
-      canEdit: true
+      canEdit: true,
+      editing: null
     })
   }
 
-  calculateArea = async() => {
+  calculateArea = async () => {
     const polygonArray = this.state.polygons.map(polygon => {
       return polygon.coordinates
     })
@@ -195,7 +181,8 @@ class MeasurementTool extends Component {
       };
     }, () => {
       helperFunctions.saveArrayData('areas', this.state.areas);
-    });    
+      helperFunctions.saveData('address', this.state.destination);
+    });
   }
 
   calculateAreaInSquareMeters = (x1, x2, y1, y2) => {
@@ -257,6 +244,13 @@ class MeasurementTool extends Component {
     this.setState({
       editing: newEditing
     })
+  };
+
+  togglePostCard = () => {
+    this.setState({
+      showCard: false,
+      canEdit: true
+    });
   }
 
   render() {
@@ -288,79 +282,111 @@ class MeasurementTool extends Component {
 
     return (
       <View style={styles.container}>
-        <MapView
-          style={styles.map}
-          region={{
-            latitude: this.state.latitude,
-            longitude: this.state.longitude,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA
-          }}
-          mapType='satellite'
-          onPress={e => this.onPress(e)}
-          {...mapOptions}
-        >
-          {this.state.polygons.map(polygon => (
-            <Polygon
-              key={polygon.id}
-              coordinates={polygon.coordinates}
-              holes={polygon.holes}
-              strokeColor="#F00"
-              fillColor="rgba(255,0,0,0.5)"
-              strokeWidth={2}
-            />
-          ))}
-          {this.state.editing && !this.state.initialScreen && (
-            <Polygon
-              key={this.state.editing.coordinates}
-              coordinates={this.state.editing.coordinates}
-              holes={this.state.editing.holes}
-              strokeColor="#000"
-              fillColor="rgba(255,0,0,0.5)"
-              strokeWidth={2}
-            />
-          )}
-          {this.state.editing && this.state.editing.coordinates && !this.state.initialScreen &&
-            (this.state.editing.coordinates.map((coordinate, index) => (
-              <Marker
-                key={index}
-                coordinate={coordinate}
-                anchor={{ x: 0.5, y: 0.5 }}
-                onDragEnd={(e) => this.changeCoordinate(e, index)}
-                image={require('../assets/mapPointer.png')}
-                draggable
+        {this.state.showCard ?
+          <Card style={styles.cardStyle}>
+            <View>
+              <CardItem>
+                <Left></Left>
+                <Body></Body>
+                <Right>
+                  <TouchableOpacity success onPress={() => this.togglePostCard()}>
+                    <Icon active type="FontAwesome" name="close" style={styles.closeButtonStyle} />
+                  </TouchableOpacity>
+                </Right>
+              </CardItem>
+              <CardItem header>
+                <Text style={styles.cardTextStyle}>Use Google Maps to find your house.</Text>
+              </CardItem>
+              <CardItem>
+                <Text style={styles.cardTextStyle}>By default the aspect facing you will be South.</Text>
+              </CardItem>
+              <CardItem>
+                <Text style={styles.cardTextStyle}>Tap on screen to place first marker.</Text>
+              </CardItem>
+              <CardItem>
+                <Text style={styles.cardTextStyle}>Move clockwise, tapping the screen to add next marker.</Text>
+              </CardItem>
+              <CardItem>
+                <Text style={styles.cardTextStyle}>Do not mark area that contains obstacles (velux windows, chimney, vents).</Text>
+              </CardItem>
+              <CardItem>
+                <Text style={styles.cardTextStyle}>Delete will remove all markers.</Text>
+              </CardItem>
+              <CardItem>
+                <Text style={styles.cardTextStyle}>To measure for more than one set of panels click 'Mark another area'.</Text>
+              </CardItem>
+            </View>
+          </Card>
+          :
+          <MapView
+            style={styles.map}
+            region={{
+              latitude: this.state.latitude,
+              longitude: this.state.longitude,
+              latitudeDelta: this.state.latitudeDelta,
+              longitudeDelta: this.state.longitudeDelta
+            }}
+            mapType='satellite'
+            onPress={e => this.onPress(e)}
+            {...mapOptions}
+          >
+            {this.state.polygons.map(polygon => (
+              <Polygon
+                key={polygon.id}
+                coordinates={polygon.coordinates}
+                holes={polygon.holes}
+                strokeColor="#F00"
+                fillColor="rgba(255,0,0,0.5)"
+                strokeWidth={2}
               />
-
-            )))}
-        </MapView>
-        <TextInput
-          placeholder="Please enter Eircode here"
-          style={styles.textInput}
-          placeholderTextColor='#4160A1'
-          value={this.state.destination}
-          onChangeText={destination => {
-            this.setState({ destination });
-            this.onChangeDestinationDebounced(destination);
-          }}
-          value={this.state.destination}
-        />
+            ))}
+            {this.state.editing && (
+              <Polygon
+                key={this.state.editing.coordinates}
+                coordinates={this.state.editing.coordinates}
+                holes={this.state.editing.holes}
+                strokeColor="#000"
+                fillColor="rgba(255,0,0,0.5)"
+                strokeWidth={2}
+              />
+            )}
+            {this.state.editing && this.state.editing.coordinates &&
+              (this.state.editing.coordinates.map((coordinate, index) => (
+                <Marker
+                  key={index}
+                  coordinate={coordinate}
+                  anchor={{ x: 0.5, y: 0.5 }}
+                  onDragEnd={(e) => this.changeCoordinate(e, index)}
+                  image={require('../assets/mapPointer.png')}
+                  draggable
+                />
+              )))}
+          </MapView>
+        }
+        {!this.state.showCard && (
+          <TextInput
+            placeholder="Please enter Eircode here"
+            style={styles.textInput}
+            placeholderTextColor='#4160A1'
+            value={this.state.destination}
+            onChangeText={destination => {
+              this.setState({ destination });
+              this.onChangeDestinationDebounced(destination);
+            }}
+            value={this.state.destination}
+          />
+        )}
         {predictions}
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={this.goToAreaCalculator}
+          {!this.state.showCard && (
+            <TouchableOpacity
+            onPress={this.goToGetStarted}
             style={styles.button}
           >
             <Ionicons name='md-arrow-round-back' size={40} color={'#4160A1'} />
           </TouchableOpacity>
-          {this.state.initialScreen && (
-            <TouchableOpacity
-              onPress={() => this.createPolygon()}
-              style={styles.button}
-            >
-              <Text style={styles.textStyle}>Click to Start marking area</Text>
-            </TouchableOpacity>
           )}
-          {this.state.editing && !this.state.initialScreen && this.state.canEdit && (
+          {this.state.editing && this.state.canEdit && (
             <TouchableOpacity
               onPress={() => this.markAnotherArea()}
               style={styles.button}
@@ -368,7 +394,7 @@ class MeasurementTool extends Component {
               <Text style={styles.textStyle}>Mark another area</Text>
             </TouchableOpacity>
           )}
-          {this.state.editing && !this.state.initialScreen && this.state.canEdit && (
+          {this.state.editing && this.state.canEdit && (
             <TouchableOpacity
               onPress={() => this.finishEditingPolygon()}
               style={styles.button}
@@ -376,7 +402,7 @@ class MeasurementTool extends Component {
               <Text style={styles.textStyle}>Finished</Text>
             </TouchableOpacity>
           )}
-          {this.state.editing === null && !this.state.initialScreen && !this.state.canEdit && !this.state.areaTotal && (
+          {this.state.editing === null && !this.state.canEdit && !this.state.areaTotal && !this.state.showCard && (
             <TouchableOpacity
               onPress={() => this.calculateArea()}
               style={styles.button}
@@ -384,20 +410,22 @@ class MeasurementTool extends Component {
               <Text style={styles.textStyle}>Calculate Area</Text>
             </TouchableOpacity>
           )}
-          {this.state.editing === null && !this.state.initialScreen && !this.state.canEdit && (
-            <TouchableOpacity
-              onPress={() => this.deletePolygon()}
-              style={styles.button}
-            >
-              <Text style={styles.textStyle}>Delete</Text>
-            </TouchableOpacity>
-          )}
-          {this.state.areaTotal &&  (
+          {this.state.areaTotal && (
             <TouchableOpacity
               onPress={this.goToPitchMenu}
               style={styles.button}
             >
               <Text style={styles.textStyle}>Next Step</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+        <View style={styles.deleteButton}>
+        {!this.state.areaTotal && !this.state.showCard && (
+            <TouchableOpacity
+              onPress={() => this.deletePolygon()}
+              style={styles.button}
+            >
+              <AntDesign name='delete' size={40} color={'#4160A1'} />
             </TouchableOpacity>
           )}
         </View>

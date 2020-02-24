@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
   container: {
-    ...StyleSheet.absoluteFillObject
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: '#4160A1',
   },
   map: {
     ...StyleSheet.absoluteFillObject
@@ -43,6 +44,11 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 25
   },
+  deleteButton: {
+    marginVertical: 20,
+    position: 'absolute',
+    bottom: 80
+  },
   textStyle: {
     fontSize: 18,
     fontWeight: '500',
@@ -77,5 +83,23 @@ export const styles = StyleSheet.create({
     marginLeft:10,
     padding: 5,
     borderWidth: 0.5,
-  }
+  },  
+  cardStyle: {
+    marginTop: 80,
+    marginLeft: 25,
+    marginRight: 25,
+    marginBottom: 30
+  },
+  closeButtonStyle: {
+    fontSize: 25,
+    color: 'black',
+    marginLeft: 10,
+    color: 'navy'
+  },
+  cardTextStyle: {
+    flex: 1,
+    fontSize: 18,
+    fontFamily: 'josefinSans',
+    color: 'navy',
+  },
 })

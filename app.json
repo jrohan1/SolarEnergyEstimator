@@ -30,11 +30,7 @@
         "googleMapsApiKey": "API-key"
       },
       "infoPlist": {
-        "NSCameraUsageDescription": "Solar Energy Estimator uses the camera to determine your roof pitch.",
-        "NSPhotoLibraryUsageDescription": "Solar Energy Estimator would like access to your camera roll.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow Solar Energy Estimator to use your location",
-        "NSLocationAlwaysUsageDescription": "Allow Solar Energy Estimator to use your location",
-        "NSLocationWhenInUseUsageDescription": "Allow Solar Energy Estimator to use your location"
+        "NSCameraUsageDescription": "Solar Energy Estimator uses the camera to determine your roof pitch."
       }
     },
     "android": {
