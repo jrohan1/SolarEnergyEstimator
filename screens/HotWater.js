@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import SmallLogo from '../components/SmallLogo';
+import ErrorMessage from '../components/ErrorMessage';
 import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/MainStyles';
 import { customStyles } from '../stylesheets/HotWaterStyles';
@@ -12,18 +13,28 @@ class HotWater extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      yesNo: ''
+      hotWater: ''
     };
   }
 
-  goToTimeOccupied = () => this.props.navigation.navigate('TimeOccupied')
+  goToTimeOccupied = () => this.props.navigation.navigate('TimeOccupied');
 
   saveState = (value) => {
     this.setState({
-      yesNo: value
+      hotWater: value
     }, () => {
       helperFunctions.saveData('hotWater', value);
     });    
+  }
+
+  checkForEntry = () => {
+    if (this.state.hotWater === '') {
+      this.setState({
+        showError: true
+      });
+    } else {
+      this.goToTimeOccupied();
+    }
   }
 
   render() {
@@ -36,7 +47,7 @@ class HotWater extends Component {
         <BathPic />
         <View style={customStyles.questionStyle}>
           <Text style={styles.textStyle}>Do you want to heat domestic hot water ?</Text>
-          <Text style={styles.answerTextStyle}>{this.state.yesNo}</Text>
+          <Text style={styles.answerTextStyle}>{this.state.hotWater}</Text>
         </View>
         <View style={styles.buttonStyle}>
           <TouchableOpacity onPress={() => this.saveState('Yes')}>
@@ -46,7 +57,10 @@ class HotWater extends Component {
             <Text style={[styles.button, customStyles.button]}>No</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={this.goToTimeOccupied}>
+        {this.state.showError && (
+            <ErrorMessage errorValue={'*Please select an option'} />
+          )}
+        <TouchableOpacity onPress={() => this.checkForEntry()}>
           <Text style={styles.nextButton}>Next Step</Text>
         </TouchableOpacity>
       </View>

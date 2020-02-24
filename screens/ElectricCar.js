@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-
+import ErrorMessage from '../components/ErrorMessage';
 import SmallLogo from '../components/SmallLogo';
 import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/MainStyles';
@@ -13,7 +13,7 @@ class ElectricCar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      yesNo: ''
+      useElectricCar: ''
     };
   }
 
@@ -21,10 +21,20 @@ class ElectricCar extends Component {
   
   saveState = (value) => {
     this.setState({
-      yesNo: value
+      useElectricCar: value
     }, () => {
       helperFunctions.saveData('useElectricCar', value);
     });    
+  }
+
+  checkForEntry = () => {
+    if (this.state.useElectricCar === '') {
+      this.setState({
+        showError: true
+      });
+    } else {
+      this.goToHotWater();
+    }
   }
 
   render() {
@@ -37,7 +47,7 @@ class ElectricCar extends Component {
         <ElectricCarPic />
         <View style={styles.questionStyle}>
           <Text style={styles.textStyle}>Do you have / plan to have an electric car ?</Text>
-          <Text style={styles.answerTextStyle}>{this.state.yesNo}</Text>
+          <Text style={styles.answerTextStyle}>{this.state.useElectricCar}</Text>
         </View>
         <View style={styles.buttonStyle}>
           <TouchableOpacity onPress={()=> this.saveState('Yes')}>
@@ -47,7 +57,10 @@ class ElectricCar extends Component {
             <Text style={[styles.button, customStyles.button]}>No</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={this.goToHotWater}>
+        {this.state.showError && (
+            <ErrorMessage errorValue={'*Please select an option'} />
+          )}
+        <TouchableOpacity onPress={() => this.checkForEntry()}>
           <Text style={styles.nextButton}>Next Step</Text>
         </TouchableOpacity>
       </View>
