@@ -57,7 +57,10 @@ class PitchMenu extends Component {
           <Card style={pitchMenuStyles.cardStyle}>
           <View style={[styles.questionStyle, pitchMenuStyles.spacingStyle]}>
             <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>If you do not know the pitch please use our Pitch Finder.</Text>
-            <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>When you exit the Pitch Finder you can enter the pitch values on the next screen.</Text>
+            <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>To get the most accurate measurement, stand directly opposite the central apex of your roof.</Text>
+            <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>Tilt phone horizontally to match the pitch.</Text>
+            <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>Click on the save button to hold the angle on screen</Text>
+            <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>When you exit the Pitch Finder you can enter the angle on the next screen.</Text>
           </View>
           <TouchableOpacity onPress={this.goToPitchFinder}>
             <Text style={styles.nextButton}>Find Pitch</Text>

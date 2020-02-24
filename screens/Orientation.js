@@ -42,6 +42,10 @@ class Orientation extends Component {
       this.setState({
         multipleAreas: true
       })
+    } else {
+      this.setState({
+        showSubmit: true
+      })
     }
   }
 
@@ -55,13 +59,13 @@ class Orientation extends Component {
   }
 
   isSubmitted = () => {
-    if (this.state.addOrientation === false) {
+   
       this.setState({
         isSubmitted: true
       }, () => {
         this.addOrientationToArray()
       })
-    }
+  
   }
 
   addOrientationToArray = () => {
@@ -71,7 +75,6 @@ class Orientation extends Component {
         return {
           orientations,
           orientation: '',
-          secondOrientation: true
         };
       }, () => {
         helperFunctions.saveArrayData('orientation', this.state.orientations);
@@ -96,7 +99,7 @@ class Orientation extends Component {
           <Compass />
           <View style={styles.questionStyle}>
             <Text style={styles.textStyle}>Which direction will the solar panels face ?</Text>
-            {this.state.selected && !this.state.showSubmit && (
+            {this.state.selected && (
               <Text style={styles.answerTextStyle}>Selected: {this.state.orientation}</Text>
             )}
             {!this.state.isSubmitted && (

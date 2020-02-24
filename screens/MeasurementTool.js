@@ -13,7 +13,7 @@ import helperFunctions from '../sharedFunctions';
 const { height, width } = Dimensions.get('window');
 const INITIAL_LATITUDE_DELTA = 5.5;
 const INITIAL_LONGITUDE_DELTA = INITIAL_LATITUDE_DELTA * (width / height);
-const LATITUDE_DELTA = 0.00007;
+const LATITUDE_DELTA = 0.0005;
 const LONGITUDE_DELTA = LATITUDE_DELTA * (width / height);
 let id = 0;
 
@@ -305,6 +305,9 @@ class MeasurementTool extends Component {
               </CardItem>
               <CardItem>
                 <Text style={styles.cardTextStyle}>Move clockwise, tapping the screen to add next marker.</Text>
+              </CardItem>
+              <CardItem>
+                <Text style={styles.cardTextStyle}>Press and hold marker to move it.</Text>
               </CardItem>
               <CardItem>
                 <Text style={styles.cardTextStyle}>Do not mark area that contains obstacles (velux windows, chimney, vents).</Text>

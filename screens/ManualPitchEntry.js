@@ -69,9 +69,11 @@ class ManualPitchEntry extends Component {
               </View>
             )}
           </View>
-          <TouchableOpacity onPress={() => { this.setState({ submitted: true }); this.submitInput() }}>
+          {!this.state.submitted && (
+            <TouchableOpacity onPress={() => { this.setState({ submitted: true }); this.submitInput() }}>
             <Text style={styles.nextButton}>Submit</Text>
           </TouchableOpacity>
+          )}
           {this.state.submitted && (
             <TouchableOpacity onPress={this.goToOrientation}>
               <Text style={styles.nextButton}>Next Step</Text>
