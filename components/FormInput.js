@@ -8,6 +8,7 @@ const FormInput = ({
   iconColor,
   returnKeyType,
   keyboardType,
+  autoCompleteType,
   name,
   placeholder,
   ...rest
@@ -21,6 +22,8 @@ const FormInput = ({
       inputStyle={{color:'#DEE48E'}}
       name={name}
       placeholder={placeholder}
+      keyboardType={keyboardType}
+      autoCompleteType={autoCompleteType}
       style={styles.input}
     />
   </View>

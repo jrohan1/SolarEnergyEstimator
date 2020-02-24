@@ -38,24 +38,39 @@ class ContactUs extends Component {
       mobile: null,
       email: null,
       area: [],
-      pitch: '',
-      orientation: '',
+      pitch: [],
+      orientation: [],
       shading: '',
       hotWater: '',
       energyUsage: '',
       electricCar: '',
-      timeOccupied: ''
+      timeOccupied: '',
+      date: ''
     };
   }
 
   componentWillMount = () => {
     this.importData();
   }
+  componentDidMount() {
+    var that = this;
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    var hours = new Date().getHours(); //Current Hours
+    var min = new Date().getMinutes(); //Current Minutes
+    var sec = new Date().getSeconds(); //Current Seconds
+    that.setState({
+      //Setting the value of the date time
+      date:
+        date + '/' + month + '/' + year + ' ' + hours + ':' + min + ':' + sec,
+    });
+  }
 
   importData = () => {
     AsyncStorage.getItem('areas').then(value => this.setState({ area: JSON.parse(value) }));
-    AsyncStorage.getItem('pitch').then(value => this.setState({ pitch: value }));
-    AsyncStorage.getItem('orientation').then(value => this.setState({ orientation: value }));
+    AsyncStorage.getItem('pitch').then(value => this.setState({ pitch: JSON.parse(value) }));
+    AsyncStorage.getItem('orientation').then(value => this.setState({ orientation: JSON.parse(value) }));
     AsyncStorage.getItem('shading').then(value => this.setState({ shading: value }));
     AsyncStorage.getItem('energyUsage').then(value => this.setState({ energyUsage: value }));
     AsyncStorage.getItem('useElectricCar').then(value => this.setState({ electricCar: value }));
@@ -82,6 +97,7 @@ class ContactUs extends Component {
           "name": name,
           "mobile": mobile,
           "email": email,
+          "date" : this.state.date
         }),
       })
         .then((response) => response.json())
@@ -118,7 +134,7 @@ class ContactUs extends Component {
     actions.setSubmitting(false);
   };
 
-  shareInfo = (name, mobile, email, area, pitch, orientation, shading, hotWater, energyUsage, electricCar, timeOccupied) => {
+  shareInfo = (name, mobile, email, area, pitch, orientation, shading, hotWater, energyUsage, electricCar, timeOccupied, date) => {
     if (this.state.name != null) {
       fetch(USER_INFO, {
         method: 'POST',
@@ -137,7 +153,8 @@ class ContactUs extends Component {
           "hotWater": hotWater,
           "energyUsage": energyUsage,
           "electricCar": electricCar,
-          "timeOccupied": timeOccupied
+          "timeOccupied": timeOccupied,
+          "date": date
         }),
       })
     }
@@ -160,11 +177,11 @@ class ContactUs extends Component {
           <MenuButton navigation={this.props.navigation} />
         </TouchableOpacity>
         <HideWithKeyboard>
-          <ContactUsBanner />
-        </HideWithKeyboard>
+          <ContactUsBanner />        
         <View style={styles.questionStyle}>
           <Text style={styles.textStyle}>Please enter your contact details</Text>
         </View>
+        </HideWithKeyboard>
         {this.state.isSubmited ?
           <Card style={customStyles.cardStyle}>
             <View>
@@ -199,7 +216,8 @@ class ContactUs extends Component {
                       this.state.hotWater,
                       this.state.energyUsage,
                       this.state.electricCar,
-                      this.state.timeOccupied
+                      this.state.timeOccupied,
+                      this.state.date
                     ); this.togglePostCard()
                   }}>
                     <Icon active type="FontAwesome" name="share" style={customStyles.shareButtonStyle} />
@@ -235,6 +253,7 @@ class ContactUs extends Component {
                     value={this.state.name}
                     onChangeText={handleChange('name')}
                     placeholder='Enter your full name'
+                    autoCompleteType='off'
                     iconName='md-person'
                     iconColor='#DEE48E'
                     onBlur={handleBlur('name')}
@@ -245,6 +264,8 @@ class ContactUs extends Component {
                     value={this.state.mobile}
                     onChangeText={handleChange('mobile')}
                     placeholder='Enter phone number'
+                    keyboardType='phone-pad'
+                    autoCompleteType='off'
                     iconName='ios-phone-portrait'
                     iconColor='#DEE48E'
                     onBlur={handleBlur('mobile')}
@@ -256,6 +277,8 @@ class ContactUs extends Component {
                     onChangeText={handleChange('email')}
                     placeholder='Enter email'
                     autoCapitalize='none'
+                    autoCompleteType='off'
+                    keyboardType='email-address'
                     iconName='ios-mail'
                     iconColor='#DEE48E'
                     onBlur={handleBlur('email')}
