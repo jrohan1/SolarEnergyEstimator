@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native'
-import { Button } from 'react-native-elements'
-import { withFirebaseHOC } from '../config/Firebase'
-import { styles } from '../stylesheets/HomeStyles'
-import AppLogo from '../components/AppLogo'
+import React, { Component } from 'react';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Button } from 'react-native-elements';
+import { withFirebaseHOC } from '../config/Firebase';
+import { homeStyles } from '../stylesheets/HomeStyles';
+import { styles } from '../stylesheets/MainStyles';
+import AppLogo from '../components/AppLogo';
 import MenuButton from '../components/MenuButton'
+import DrawerTrigger from '../components/DrawerTrigger';
 
 class Home extends Component {
 
@@ -23,48 +25,25 @@ class Home extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>        
-          <MenuButton navigation={this.props.navigation} />
-          <AppLogo />
-          <View>
-            <Text style={styles.headerStyle}>Calculate your homes solar enegry potential</Text>
-          </View>
-          {/* <Button
-          title='Signout'
-          onPress={this.handleSignout}
-          titleStyle={{
-            color: '#F57C00'
-          }}
-          type='clear'
-        /> */}
-          <View>
-            <Text style={styles.textStyle}>Do you know your roof measurements ?</Text>
-          </View>
-          <View style={styles.buttonStyle}>
-            <TouchableOpacity onPress={this.goToInputMeasurements}>
-              <Text style={styles.button}>Yes</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.goToGetStarted}>
-              <Text style={styles.button}>No</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.buttonStyle}>
-            <Button
-              title="Login"
-              te
-              onPress={this.goToLogin}
-              titleStyle={styles.loginButtonStyle}
-              type='clear'
-            />
-            <Text style={styles.subTextStyle}>or</Text>
-            <Button
-              title="Sign up"
-              onPress={this.goToSignup}
-              titleStyle={styles.loginButtonStyle}
-              type='clear'
-            />
-          </View>
-       
+      <View style={styles.container}>
+        <View style={{flexDirection: 'row-reverse'}}>
+        <DrawerTrigger/>
+        </View>        
+        <AppLogo />
+        <View>
+          <Text style={homeStyles.headerStyle}>Calculate your homes solar enegry potential</Text>
+        </View>
+        <View>
+          <Text style={styles.subTextStyle}>Do you know the size of the area where you wish to install solar panels ?</Text>
+        </View>
+        <View style={styles.buttonStyle}>
+          <TouchableOpacity onPress={this.goToInputMeasurements}>
+            <Text style={homeStyles.button}>Yes</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.goToGetStarted}>
+            <Text style={homeStyles.button}>No</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }

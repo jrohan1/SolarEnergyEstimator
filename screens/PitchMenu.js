@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { AsyncStorage, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Card } from 'native-base';
+import Header from '../components/Header';
 import { withFirebaseHOC } from '../config/Firebase';
-import SmallLogo from '../components/SmallLogo';
-import MenuButton from '../components/MenuButton';
 import { styles } from '../stylesheets/MainStyles';
 import { pitchMenuStyles } from '../stylesheets/PitchMenuStyles';
 import helperFunctions from '../sharedFunctions';
@@ -37,16 +36,19 @@ class PitchMenu extends Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-          <TouchableOpacity style={{ marginBottom: 50 }} onPress={this.goToHome}>
-            <SmallLogo />
-            <MenuButton navigation={this.props.navigation} />
-          </TouchableOpacity>
+          <Header/>
+          <View style={{marginTop: 30}}>
           <Card style={pitchMenuStyles.cardStyle}>
           <View style={styles.questionStyle}>
             <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>To accurately calculate the potential energy output of your solar panels we need to know the tilt of the panels.</Text>
+          </View>
+          </Card>
+          </View>
+          <Card style={pitchMenuStyles.cardStyle}>
+          <View style={styles.questionStyle}>
             <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>This will be determined by the pitch of your roof.</Text>
             <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>If you know the pitch please click Enter Pitch.</Text>
-            <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>*Enter the pitch for each area that you have marked.</Text>
+            <Text style={[styles.subTextStyle, pitchMenuStyles.textStyle]}>*Enter the pitch for each area that you have marked.</Text>
           </View>
           <TouchableOpacity onPress={this.goToManualPitchEntry}>
             <Text style={styles.nextButton}>Enter Pitch</Text>

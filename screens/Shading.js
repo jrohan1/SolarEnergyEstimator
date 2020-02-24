@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import SmallLogo from '../components/SmallLogo';
 import ErrorMessage from '../components/ErrorMessage';
 import { withFirebaseHOC } from '../config/Firebase';
+import Header from '../components/Header';
 import { styles } from '../stylesheets/MainStyles';
-import MenuButton from '../components/MenuButton';
 import CastingShade from '../components/CastingShade';
 import helperFunctions from '../sharedFunctions';
 
@@ -39,10 +38,7 @@ class Shading extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={this.goToHome}>
-          <SmallLogo />
-          <MenuButton navigation={this.props.navigation} />
-        </TouchableOpacity>
+        <Header/>
         <ScrollView>
           <CastingShade />
           <View style={styles.questionStyle}>

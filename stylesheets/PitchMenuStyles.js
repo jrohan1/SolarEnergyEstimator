@@ -9,6 +9,7 @@ export const pitchMenuStyles = StyleSheet.create({
   },
   textStyle: {
     textAlign: 'left',
-    color: 'navy'
+    color: 'navy',
+    marginBottom: 10
   }
 })

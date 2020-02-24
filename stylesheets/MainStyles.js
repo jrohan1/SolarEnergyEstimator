@@ -26,7 +26,8 @@ export const styles = StyleSheet.create({
     color: '#DEE48E',
     textAlign:'center',
     marginLeft :10,
-    marginRight:10
+    marginRight:10,
+    marginTop: 10
   },
   answerTextStyle: {
     fontSize: 30,

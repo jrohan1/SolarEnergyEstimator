@@ -1,35 +1,35 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
-import { createAppContainer } from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import Home from '../screens/Home';
-import Login from '../screens/Login';
-import Signup from '../screens/Signup';
-
-import MenuDrawer from '../components/MenuDrawer';
-
-const WIDTH = Dimensions.get('window').width;
-
-const DrawerConfig = {
-	drawerWidth: WIDTH*0.83,
-	contentComponent: ({ navigation }) => {
-		return(<MenuDrawer navigation={navigation} />)
-	}
-}
+import InputMeasurements from '../screens/InputMeasurements';
+import PitchFinder from '../screens/PitchFinder';
+import ManualPitchEntry from '../screens/ManualPitchEntry';
+import MeasurementTool from '../screens/MeasurementTool';
+import Orientation from '../screens/Orientation';
+import Shading from '../screens/Shading';
+import EnergyUsage from '../screens/EnergyUsage';
+import ElectricCar from '../screens/ElectricCar';
+import HotWater from '../screens/HotWater';
+import TimeOccupied from '../screens/TimeOccupied';
+import Report from '../screens/Report';
+import ContactUs from '../screens/ContactUs';
 
 const DrawerNavigator =  createDrawerNavigator(
 	{
-		Home: {
-			screen: Home
-		},
-		Login: {
-			screen: Login
-		},
-		Signup: {
-			screen: Signup
-		}
-	},
-	DrawerConfig
+    'Home': Home,
+    'Input Measurements': InputMeasurements,
+    'Area Measurement Tool': MeasurementTool,
+    'Pitch Finder': PitchFinder,
+    'Input Pitch': ManualPitchEntry,
+    'Orientation': Orientation,
+    'Shading': Shading,
+    'Electric Car': ElectricCar,
+    'Energy Usage': EnergyUsage,
+    'Hot Water': HotWater,
+    'Time Occupied': TimeOccupied,
+    'Report': Report,
+    'Contact Us': ContactUs
+	}
 );
 
-export default createAppContainer(DrawerNavigator);
+export default DrawerNavigator;

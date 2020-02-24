@@ -6,8 +6,6 @@ import InputMeasurements from '../screens/InputMeasurements';
 import PitchFinder from '../screens/PitchFinder';
 import PitchMenu from '../screens/PitchMenu';
 import ManualPitchEntry from '../screens/ManualPitchEntry';
-import AdditionalInfo from '../screens/AdditionalInfo';
-import DrawerNavigator from '../navigation/DrawerNavigator';
 import MeasurementTool from '../screens/MeasurementTool';
 import GetStarted from '../screens/GetStarted';
 import Orientation from '../screens/Orientation';
@@ -28,7 +26,6 @@ const AuthNavigation = createStackNavigator(
     PitchFinder: { screen: PitchFinder },
     PitchMenu: {screen: PitchMenu },
     ManualPitchEntry: { screen: ManualPitchEntry },
-    AdditionalInfo: { screen: AdditionalInfo },
     MeasurementTool: { screen: MeasurementTool },
     GetStarted: { screen: GetStarted },
     Orientation: { screen: Orientation },
@@ -38,8 +35,7 @@ const AuthNavigation = createStackNavigator(
     HotWater: { screen: HotWater },
     TimeOccupied: { screen: TimeOccupied },
     Report: { screen: Report },
-    ContactUs: { screen: ContactUs },
-    Drawer: { screen: DrawerNavigator }
+    ContactUs: { screen: ContactUs }
   },
   {
     initialRouteName: 'Home',

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import ErrorMessage from '../components/ErrorMessage';
-import SmallLogo from '../components/SmallLogo';
 import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/MainStyles';
 import { customStyles } from '../stylesheets/ElecricCarStyles';
-import MenuButton from '../components/MenuButton';
+import Header from '../components/Header';
 import ElectricCarPic from '../components/ElectricCar';
 import helperFunctions from '../sharedFunctions';
 
@@ -40,10 +39,7 @@ class ElectricCar extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={this.goToHome}>
-          <SmallLogo/>
-          <MenuButton navigation={this.props.navigation} />
-        </TouchableOpacity>
+        <Header/>
         <ElectricCarPic />
         <View style={styles.questionStyle}>
           <Text style={styles.textStyle}>Do you have / plan to have an electric car ?</Text>

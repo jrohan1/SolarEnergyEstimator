@@ -1,13 +1,22 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import { Image } from 'react-native-elements'
+import { withNavigation } from 'react-navigation';
 
-const SmallLogo = () => (
-  <Image
-    source={require('../assets/textLessLogo.jpg')}
-    style={styles.logoStyle}
-  />
-)
+class SmallLogo extends React.Component {
+  goToHome = () => this.props.navigation.navigate('Home');
+
+  render() {
+    return (
+      <TouchableOpacity onPress={this.goToHome}>
+        <Image
+          source={require('../assets/textLessLogo.jpg')}
+          style={styles.logoStyle}
+        />
+      </TouchableOpacity>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   logoStyle: {
@@ -19,4 +28,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default SmallLogo
+export default withNavigation(SmallLogo)

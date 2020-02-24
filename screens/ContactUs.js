@@ -1,18 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import { AsyncStorage, View, TouchableOpacity, Alert } from 'react-native';
 import { HideWithKeyboard } from 'react-native-hide-with-keyboard';
-import SmallLogo from '../components/SmallLogo';
 import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/MainStyles';
 import { customStyles } from '../stylesheets/ContactUsStyles';
 import ContactUsBanner from '../components/ContactUs';
-import MenuButton from '../components/MenuButton';
-import { Text, Icon, Card, CardItem, Item, Body, Right, Left } from 'native-base';
+import { Text, Icon, Card, CardItem, Body, Right, Left } from 'native-base';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FormInput from '../components/FormInput';
 import { CONTACT_US, USER_INFO } from 'react-native-dotenv';
 import ErrorMessage from '../components/ErrorMessage';
+import Header from '../components/Header';
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
@@ -172,10 +171,7 @@ class ContactUs extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={{ marginBottom: 60 }} onPress={this.goToHome}>
-          <SmallLogo />
-          <MenuButton navigation={this.props.navigation} />
-        </TouchableOpacity>
+        <Header/>
         <HideWithKeyboard>
           <ContactUsBanner />        
         <View style={styles.questionStyle}>

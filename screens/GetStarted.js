@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
-import SmallLogo from '../components/SmallLogo'
-import { withFirebaseHOC } from '../config/Firebase'
-import { styles } from '../stylesheets/GetStartedStyles'
-import MenuButton from '../components/MenuButton'
+import React, { Component } from 'react';
+import { Text, View, TouchableOpacity } from 'react-native';
+import Header from '../components/Header';
+import { withFirebaseHOC } from '../config/Firebase';
+import { styles } from '../stylesheets/GetStartedStyles';
 
 class GetStarted extends Component {
 
@@ -12,10 +11,7 @@ class GetStarted extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={this.goToHome}>
-          <SmallLogo />
-          <MenuButton navigation={this.props.navigation} />
-        </TouchableOpacity>
+        <Header/>
         <View style={styles.infoMessageStyle}>
           <Text style={styles.textStyle}>To help you to calculate your homes energy potential we are providing you with some easy to use tools.</Text>
           <Text style={styles.headerStyle}>First Step:</Text>

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
-import SmallLogo from '../components/SmallLogo';
+import Header from '../components/Header';
 import ErrorMessage from '../components/ErrorMessage';
 import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/MainStyles';
-import MenuButton from '../components/MenuButton';
 import Lightbulb from '../components/Lightbulb';
 import helperFunctions from '../sharedFunctions';
 
@@ -41,10 +40,7 @@ class EnergyUsage extends Component {
       <View style={styles.container}>
         <KeyboardAvoidingView style={styles.container} behavior="padding">
           <ScrollView>
-            <TouchableOpacity onPress={this.goToHome}>
-              <SmallLogo />
-              <MenuButton navigation={this.props.navigation} />
-            </TouchableOpacity>
+            <Header/>
             <Lightbulb />
             <View style={styles.questionStyle}>
               <Text style={styles.textStyle}>What is your annual energy consumption ?</Text>

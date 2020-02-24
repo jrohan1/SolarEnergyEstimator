@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { AsyncStorage, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Icon } from 'native-base';
-import SmallLogo from '../components/SmallLogo';
 import ErrorMessage from '../components/ErrorMessage';
 import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/MainStyles';
 import { customStyles } from '../stylesheets/OrientationStyle';
-import MenuButton from '../components/MenuButton';
+import Header from '../components/Header';
 import Compass from '../components/Compass';
 import helperFunctions from '../sharedFunctions';
 
@@ -92,10 +91,7 @@ class Orientation extends Component {
     )
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={this.goToHome}>
-          <SmallLogo />
-          <MenuButton navigation={this.props.navigation} />
-        </TouchableOpacity>
+        <Header/>
         <ScrollView>
           <Compass />
           <View style={styles.questionStyle}>

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { AsyncStorage, Button, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { withFirebaseHOC } from '../config/Firebase';
 import { Icon } from 'native-base';
-import SmallLogo from '../components/SmallLogo';
-import MenuButton from '../components/MenuButton';
+import Header from '../components/Header';
 import { styles } from '../stylesheets/MainStyles';
 import helperFunctions from '../sharedFunctions';
 
@@ -57,26 +56,26 @@ class ManualPitchEntry extends Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-          <TouchableOpacity style={{ marginBottom: 25 }} onPress={this.goToHome}>
-            <SmallLogo />
-            <MenuButton navigation={this.props.navigation} />
-          </TouchableOpacity>
-          <View style={styles.questionStyle}>
-            <Text style={styles.textStyle}>Please enter the pitch of the roof for each area that you have marked.</Text>
-          </View>
-          {pitches}
-          {this.state.submitted && (
-            <View>
-              <Icon active type="FontAwesome" name="check" style={styles.checkMarkStyle} />
+          <Header />
+          <View style={{marginTop: 30, marginBottom: 30}}>
+            <View style={styles.questionStyle}>
+              <Text style={styles.textStyle}>Please enter the pitch of the roof for each area that you have marked.</Text>
+              <Text style={styles.subTextStyle}>*Typically between 30 to 40 degrees</Text>
             </View>
-          )}
+            {pitches}
+            {this.state.submitted && (
+              <View>
+                <Icon active type="FontAwesome" name="check" style={styles.checkMarkStyle} />
+              </View>
+            )}
+          </View>
           <TouchableOpacity onPress={() => { this.setState({ submitted: true }); this.submitInput() }}>
             <Text style={styles.nextButton}>Submit</Text>
           </TouchableOpacity>
           {this.state.submitted && (
             <TouchableOpacity onPress={this.goToOrientation}>
-            <Text style={styles.nextButton}>Next Step</Text>
-          </TouchableOpacity>
+              <Text style={styles.nextButton}>Next Step</Text>
+            </TouchableOpacity>
           )}
         </ScrollView>
       </View>

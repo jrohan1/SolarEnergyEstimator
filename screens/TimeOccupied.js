@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import SmallLogo from '../components/SmallLogo';
 import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/MainStyles';
 import { customStyles } from '../stylesheets/TimeOccupiedStyles';
-import MenuButton from '../components/MenuButton';
+import Header from '../components/Header';
 import EnergyUse from '../components/EnergyUsage';
 import helperFunctions from '../sharedFunctions';
 
@@ -29,10 +28,7 @@ class TimeOccupied extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={this.goToHome}>
-          <SmallLogo />
-          <MenuButton navigation={this.props.navigation} />
-        </TouchableOpacity>
+        <Header/>
         <ScrollView>
           <EnergyUse />
           <View style={customStyles.questionStyle}>

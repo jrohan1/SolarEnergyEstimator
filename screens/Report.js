@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { AsyncStorage, Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import SmallLogo from '../components/SmallLogo';
+import Header from '../components/Header';
 import { withFirebaseHOC } from '../config/Firebase';
 import { Col, Row, Grid } from "react-native-easy-grid"
 import { styles } from '../stylesheets/MainStyles';
 import { customStyles } from '../stylesheets/ReportStyles';
-import MenuButton from '../components/MenuButton';
 import helperFunctions from '../sharedFunctions';
 
 class Report extends Component {
@@ -101,10 +100,7 @@ class Report extends Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-          <TouchableOpacity onPress={this.goToHome}>
-            <SmallLogo />
-            <MenuButton navigation={this.props.navigation} />
-          </TouchableOpacity>
+          <Header/>
           <View style={customStyles.container}>
             <Text style={customStyles.headerStyle}>The information you provided:</Text>
             <Grid style={customStyles.gridStyle}>

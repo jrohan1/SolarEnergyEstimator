@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { withFirebaseHOC } from '../config/Firebase';
 import { Icon } from 'native-base';
-import SmallLogo from '../components/SmallLogo';
+import Header from '../components/Header';
 import ErrorMessage from '../components/ErrorMessage';
-import MenuButton from '../components/MenuButton';
 import { styles } from '../stylesheets/MainStyles';
 import helperFunctions from '../sharedFunctions';
 
@@ -67,7 +66,7 @@ class InputMeasurements extends Component {
           value={this.state.pitches[index] ? `${this.state.pitches[index]}` : null}
         />
       </View>);
-    this.setState({ 
+    this.setState({
       textInputPitch,
       showError: false
     })
@@ -101,21 +100,22 @@ class InputMeasurements extends Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-          <TouchableOpacity style={{ marginBottom: 15 }} onPress={this.goToHome}>
-            <SmallLogo />
-            <MenuButton navigation={this.props.navigation} />
-          </TouchableOpacity>
-          <View style={styles.questionStyle}>
-            <Text style={styles.textStyle}>Please enter area in m2</Text>
+          <Header />
+          <View style={{marginTop: 30}}>
+            <View style={styles.questionStyle}>
+              <Text style={styles.textStyle}>Please enter area in m2</Text>
+            </View>
+            {this.state.showAreaError && !this.state.isSubmitted && (
+              <ErrorMessage errorValue={'*Please input an area for every pitch'} />
+            )}
+            {this.state.textInputArea.map((value, index) => {
+              return value
+            })}
+
           </View>
-          {this.state.showAreaError && !this.state.isSubmitted && (
-            <ErrorMessage errorValue={'*Please input an area for every pitch'} />
-          )}
-          {this.state.textInputArea.map((value, index) => {
-            return value
-          })}
           <View style={styles.questionStyle}>
             <Text style={styles.textStyle}>Please enter pitch in degrees</Text>
+            <Text style={styles.subTextStyle}>*Typically between 30 to 40 degrees</Text>
           </View>
           {this.state.showPitchError && !this.state.isSubmitted && (
             <ErrorMessage errorValue={'*Please input a pitch for every area'} />
