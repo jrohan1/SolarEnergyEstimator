@@ -48,6 +48,7 @@ class PitchMenu extends Component {
           <View style={styles.questionStyle}>
             <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>This will be determined by the pitch of your roof.</Text>
             <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>If you know the pitch please click Enter Pitch.</Text>
+            <Text style={[styles.subTextStyle, pitchMenuStyles.textStyle]}>*Typically between 30 to 40 degrees</Text>
             <Text style={[styles.subTextStyle, pitchMenuStyles.textStyle]}>*Enter the pitch for each area that you have marked.</Text>
           </View>
           <TouchableOpacity onPress={this.goToManualPitchEntry}>

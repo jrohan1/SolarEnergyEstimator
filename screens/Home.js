@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { withFirebaseHOC } from '../config/Firebase';
 import { homeStyles } from '../stylesheets/HomeStyles';
 import { styles } from '../stylesheets/MainStyles';
 import AppLogo from '../components/AppLogo';
-import MenuButton from '../components/MenuButton'
 import DrawerTrigger from '../components/DrawerTrigger';
 
 class Home extends Component {
@@ -31,17 +29,17 @@ class Home extends Component {
         </View>        
         <AppLogo />
         <View>
-          <Text style={homeStyles.headerStyle}>Calculate your homes solar enegry potential</Text>
+          <Text style={[styles.textStyle, homeStyles.headerStyle]}>Calculate your homes solar enegry potential</Text>
         </View>
         <View>
           <Text style={styles.subTextStyle}>Do you know the size of the area where you wish to install solar panels ?</Text>
         </View>
         <View style={styles.buttonStyle}>
           <TouchableOpacity onPress={this.goToInputMeasurements}>
-            <Text style={homeStyles.button}>Yes</Text>
+            <Text style={[styles.button, homeStyles.button]}>Yes</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.goToGetStarted}>
-            <Text style={homeStyles.button}>No</Text>
+            <Text style={[styles.button, homeStyles.button]}>No</Text>
           </TouchableOpacity>
         </View>
       </View>
