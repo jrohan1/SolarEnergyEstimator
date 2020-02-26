@@ -201,10 +201,10 @@ class Report extends Component {
               </Col>
               <Col>
                 <Row>
-                  <Text style={customStyles.answerStyle}>{totalEnergy.toFixed(2)} kw/hrs</Text>
+                  <Text style={customStyles.answerStyle}>{totalEnergy.toFixed()} kw/hrs</Text>
                 </Row>
                 <Row>
-                  <Text style={customStyles.answerStyle}>{percentageOfUsage.toFixed(2)} %</Text>
+                  <Text style={customStyles.answerStyle}>{percentageOfUsage.toFixed()} %</Text>
                 </Row>
               </Col>
             </Grid>
