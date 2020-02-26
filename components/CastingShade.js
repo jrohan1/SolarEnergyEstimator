@@ -7,7 +7,7 @@ const CastingShade = () => (
     style={{ alignSelf: 'center',
       width: 300,
       height: 250,
-      marginTop: 60
+      marginTop: 20
     }}
   />
 )

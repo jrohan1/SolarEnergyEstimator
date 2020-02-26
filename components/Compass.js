@@ -6,8 +6,7 @@ const Compass = () => (
     source={require('../assets/compass.png')}
     style={{ alignSelf: 'center',
       width: 200,
-      height: 200,
-      marginTop: 60
+      height: 200
     }}
   />
 )

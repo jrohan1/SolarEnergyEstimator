@@ -6,7 +6,7 @@ const BathPic = () => (
     source={require('../assets/bath.png')}
     style={{ 
       alignSelf: 'center',
-      marginTop: 70
+      marginTop: 20
     }}
   />
 )

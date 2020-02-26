@@ -6,8 +6,7 @@ const Lightbulb = () => (
     source={require('../assets/lightbulb.png')}
     style={{ alignSelf: 'center',
       width: 300,
-      height: 250,
-      marginTop: 70
+      height: 250
     }}
   />
 )

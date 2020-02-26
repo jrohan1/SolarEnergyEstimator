@@ -7,7 +7,7 @@ const ElectricCarPic = () => (
     style={{ alignSelf: 'center',
       width: 350,
       height: 200,
-      marginTop: 70
+      marginTop: 20
     }}
   />
 )
