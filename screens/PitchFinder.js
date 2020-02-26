@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { withFirebaseHOC } from '../config/Firebase'
-import { Text, View, TouchableOpacity } from 'react-native';
+import { AsyncStorage, Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import { FontAwesome, Ionicons, AntDesign } from '@expo/vector-icons';
-import { styles } from '../stylesheets/PitchFinderStyles'
+import { Icon, Card, CardItem, Body, Right, Left } from 'native-base';
+import { customStyles } from '../stylesheets/PitchFinderStyles';
+import { styles } from '../stylesheets/MainStyles';
 import { Accelerometer } from "expo-sensors";
+import helperFunctions from '../sharedFunctions';
 
 Accelerometer.setUpdateInterval(200)
 
@@ -18,7 +21,9 @@ class PitchFinder extends Component {
       type: Camera.Constants.Type.back,
       accelerometerData: { x: 0, y: 0, z: 0 },
       pitch: '',
-      selected: false
+      selected: false,
+      area: [],
+      pitches: []
     };
   }
 
@@ -27,6 +32,13 @@ class PitchFinder extends Component {
     if (this.subscribeToAccelerometer) {
       await this.unsubscribeFromAccelerometer();
     }
+  }
+  componentWillMount = () => {
+    this.importData();
+  }
+
+  importData = () => {
+    AsyncStorage.getItem('areas').then(value => this.setState({ area: JSON.parse(value) }));
   }
 
   componentDidMount = async () => {
@@ -46,22 +58,67 @@ class PitchFinder extends Component {
   };
 
   unsubscribeFromAccelerometer = async () => {
-    this.accelerometerSubscription && this.acceleroMeterSubscription.remove();
+    this.accelerometerSubscription.remove();
     this.accelerometerSubscription = null;
   };
 
-  goToManualPitchEntry = () => this.props.navigation.navigate('ManualPitchEntry');
+  goToOrientation = () => this.props.navigation.navigate('Orientation');
 
   setPitch = (newPitch) => {
     this.setState({
       pitch: newPitch,
       selected: true
+    }, () => {
+      this.addpitchToArray();
     })
   }
 
   deletePitch = () => {
     this.setState({
       pitch: 0,
+      selected: false
+    })
+  }
+
+  checkForMultipleAreas = () => {
+    if (this.state.area.length > 1) {
+      this.setState({
+        multipleAreas: true
+      })
+    }
+    if (this.state.area.length === this.state.pitches.length) {
+      this.goToOrientation();
+    }
+  }
+
+  addpitchToArray = () => {
+    if (this.state.pitch !== '') {
+      this.setState(state => {
+        const pitches = state.pitches.concat(state.pitch);
+        return {
+          pitches
+        };
+      }, () => {
+        helperFunctions.saveArrayData('pitch', this.state.pitches);
+      });
+    }
+  }
+
+  repeatPitchValue = () => {
+    const area = this.state.area.map(
+      (areas,index) => {
+        let pitches = this.state.pitches;
+        pitches[index] = this.state.pitch;
+        this.setState({ pitches })
+      }
+    )
+    helperFunctions.saveArrayData('pitch', this.state.pitches);
+    this.goToOrientation();
+  }
+
+  togglePostCard = () => {
+    this.setState({
+      multipleAreas: false,
       selected: false
     })
   }
@@ -79,46 +136,81 @@ class PitchFinder extends Component {
       return <Text>No access to camera</Text>;
     } else {
       return (
-        <View style={{ flex: 1 }}>
+        <View style={customStyles.container}>
           <Camera style={{ flex: 1 }} type={this.state.cameraType} ref={ref => { this.camera = ref }}>
-            <View style={styles.outputTextBox}>
+            <View style={customStyles.outputTextBox}>
               {this.state.selected ?
-                <Text style={styles.outputText}>{this.state.pitch}</Text>
+                <Text style={customStyles.outputText}>{this.state.pitch}</Text>
                 :
-                <Text style={styles.outputText}>{pitch}</Text>
+                <Text style={customStyles.outputText}>{pitch}</Text>
               }
             </View>
-            <View style={styles.iconContainer}>
+            <View style={customStyles.iconContainer}>
               <TouchableOpacity
-                style={styles.iconStyle}
-                onPress={this.goToManualPitchEntry} >
+                style={customStyles.iconStyle}
+                onPress={() => this.checkForMultipleAreas()} >
                 <Ionicons
                   name="ios-close"
-                  style={styles.closeIcon}
+                  style={customStyles.closeIcon}
                 />
               </TouchableOpacity>
-              <View style={styles.lineStyle} />
+              <View style={customStyles.lineStyle} />
               {this.state.selected ?
                 <TouchableOpacity
-                  style={styles.iconStyle}
+                  style={customStyles.iconStyle}
                   onPress={() => this.deletePitch()}>
                   <AntDesign
                     name="delete"
-                    style={styles.deleteIcon}
+                    style={customStyles.deleteIcon}
                   />
                 </TouchableOpacity>
                 :
                 <TouchableOpacity
-                  style={styles.iconStyle}
+                  style={customStyles.iconStyle}
                   onPress={() => this.setPitch(pitch)} >
                   <FontAwesome
                     name="save"
-                    style={styles.cameraIcon}
+                    style={customStyles.cameraIcon}
                   />
                 </TouchableOpacity>
               }
             </View>
           </Camera>
+          {this.state.multipleAreas && (
+            <View style={customStyles.container}>
+              <Card style={styles.cardStyle}>
+                <View>
+                  <CardItem>
+                    <Left></Left>
+                    <Body></Body>
+                    <Right>
+                      <TouchableOpacity success onPress={() => this.togglePostCard()}>
+                        <Icon active type="FontAwesome" name="close" style={styles.closeButtonStyle} />
+                      </TouchableOpacity>
+                    </Right>
+                  </CardItem>
+                  <CardItem header>
+                    <Text style={styles.cardTextStyle}>You have marked more than one area to fit solar panels.</Text>
+                  </CardItem>
+                  <CardItem>
+                    <Text style={styles.cardTextStyle}>Do you want to use the same pitch value for all areas?</Text>
+                  </CardItem>
+                  <CardItem>
+                    <Left>
+                      <TouchableOpacity success onPress={() => this.repeatPitchValue()}>
+                        <Text style={[styles.button, customStyles.button]}>Yes</Text>
+                      </TouchableOpacity>
+                    </Left>
+                    <Right>
+                      <TouchableOpacity success onPress={() => this.togglePostCard()}>
+                        <Text style={[styles.button, customStyles.button]}>No</Text>
+                      </TouchableOpacity>
+                    </Right>
+                  </CardItem>
+                </View>
+              </Card>
+            </View>
+          )}
         </View>
       );
     }

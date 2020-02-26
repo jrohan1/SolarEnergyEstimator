@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native'
 
-export const styles = StyleSheet.create({
+export const customStyles = StyleSheet.create({
+  container: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: '#4160A1',
+  },
   outputText: {
     fontSize: 50,
     fontWeight: '500',
@@ -47,5 +51,8 @@ export const styles = StyleSheet.create({
     borderTopWidth: 4,
     borderTopColor: 'white',
     transform: [{ rotate: '90deg' }]
+  },
+  button: {
+    width: 100
   }
 })

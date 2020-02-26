@@ -58,8 +58,7 @@ class Orientation extends Component {
     }
   }
 
-  isSubmitted = () => {
-   
+  isSubmitted = () => {   
       this.setState({
         isSubmitted: true
       }, () => {

@@ -96,5 +96,23 @@ export const styles = StyleSheet.create({
     color: '#4CAF50',
     alignSelf: 'center',
     marginBottom: 10
-  }
+  },
+  cardStyle: {
+    marginTop: 80,
+    marginLeft: 25,
+    marginRight: 25,
+    marginBottom: 30
+  },
+  closeButtonStyle: {
+    fontSize: 25,
+    color: 'black',
+    marginLeft: 10,
+    color: 'navy'
+  },
+  cardTextStyle: {
+    flex: 1,
+    fontSize: 18,
+    fontFamily: 'josefinSans',
+    color: 'navy',
+  },
 })
