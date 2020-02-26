@@ -102,7 +102,8 @@ class MeasurementTool extends Component {
       polygons: [...polygons, editing],
       editing: null,
       creatingPolygon: false,
-      canEdit: true
+      canEdit: true,
+      isSecondArea: true
     });
   }
 
@@ -111,7 +112,8 @@ class MeasurementTool extends Component {
       polygons: [],
       areas: [],
       canEdit: true,
-      editing: null
+      editing: null,
+      isSecondArea: false
     })
   }
 
@@ -389,7 +391,7 @@ class MeasurementTool extends Component {
             <Ionicons name='md-arrow-round-back' size={40} color={'#4160A1'} />
           </TouchableOpacity>
           )}
-          {this.state.editing && this.state.canEdit && (
+          {this.state.editing && this.state.canEdit && !this.state.isSecondArea && (
             <TouchableOpacity
               onPress={() => this.markAnotherArea()}
               style={styles.button}
