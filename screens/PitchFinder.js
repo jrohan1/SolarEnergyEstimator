@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { withFirebaseHOC } from '../config/Firebase'
-import { AsyncStorage, Text, View, TouchableOpacity } from 'react-native';
+import { AsyncStorage, Text, View, TouchableOpacity, Button } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import { FontAwesome, Ionicons, AntDesign } from '@expo/vector-icons';
-import { Card, CardItem, Body, Right, Left } from 'native-base';
+import { Card, CardItem, Body, Right, Left, Icon } from 'native-base';
 import { customStyles } from '../stylesheets/PitchFinderStyles';
 import { styles } from '../stylesheets/MainStyles';
 import { Accelerometer } from "expo-sensors";
@@ -23,7 +23,8 @@ class PitchFinder extends Component {
       pitch: '',
       selected: false,
       area: [],
-      pitches: []
+      pitches: [],
+      showCard: true
     };
   }
 
@@ -106,7 +107,7 @@ class PitchFinder extends Component {
 
   repeatPitchValue = () => {
     const area = this.state.area.map(
-      (areas,index) => {
+      (areas, index) => {
         let pitches = this.state.pitches;
         pitches[index] = this.state.pitch;
         this.setState({ pitches })
@@ -116,11 +117,17 @@ class PitchFinder extends Component {
     this.goToOrientation();
   }
 
-  togglePostCard = () => {
+  toggleMultipleAreasPostCard = () => {
     this.setState({
       multipleAreas: false,
       selected: false
     })
+  }
+
+  toggleOpeningPostCard = () => {
+    this.setState({
+      showCard: false
+    });
   }
 
   render() {
@@ -130,7 +137,7 @@ class PitchFinder extends Component {
     pitch = pitch.toFixed(0);
     const { hasPermission } = this.state;
 
-    if(pitch > 90) {
+    if (pitch > 90) {
       pitch = Math.abs(90 - (Math.atan2((-xValue), Math.sqrt(yValue * yValue)) * 57.3) - 90);
       pitch = pitch.toFixed(0);
     }
@@ -142,26 +149,65 @@ class PitchFinder extends Component {
     } else {
       return (
         <View style={customStyles.container}>
-          <Camera style={{ flex: 1 }} type={this.state.cameraType} ref={ref => { this.camera = ref }}>
-            <View style={customStyles.outputTextBox}>
-              {this.state.selected ?
-                <Text style={customStyles.outputText}>{this.state.pitch}</Text>
-                :
-                <Text style={customStyles.outputText}>{pitch}</Text>
-              }
-            </View>
-            <View style={customStyles.iconContainer}>
+          {this.state.showCard ?
+            <Card style={styles.cardStyle}>
+              <View>
+                <CardItem>
+                  <Left></Left>
+                  <Body></Body>
+                  <Right>
+                    <TouchableOpacity success onPress={() => this.toggleOpeningPostCard()}>
+                      <Icon active type="FontAwesome" name="close" style={styles.closeButtonStyle} />
+                    </TouchableOpacity>
+                  </Right>
+                </CardItem>
+                <CardItem header>
+                  <Text style={styles.cardTextStyle}>To get the most accurate measurement, stand directly opposite the central apex of your roof.</Text>
+                </CardItem>
+                <CardItem>
+                  <Text style={styles.cardTextStyle}>Hold the phone as steady as possible.</Text>
+                </CardItem>
+                <CardItem>
+                  <Text style={styles.cardTextStyle}>Tilt phone horizontally to match the pitch.</Text>
+                </CardItem>
+                <CardItem>
+                  <Text style={styles.cardTextStyle}>Try not to tilt the phone backwards or forwards.</Text>
+                </CardItem>
+                <CardItem>
+                  <Text style={styles.cardTextStyle}>Click on the save button to save the angle on screen</Text>
+                </CardItem>
+                <CardItem>
+                <Left></Left>
+                <Body>
+                  <TouchableOpacity success onPress={() => this.toggleOpeningPostCard()}>
+                    <Text style={styles.startButton}>Get Started</Text>
+                  </TouchableOpacity>
+                </Body>
+                <Right></Right>
+              </CardItem>        
+              </View>
+            </Card>
+            :
+            <Camera style={{ flex: 1 }} type={this.state.cameraType} ref={ref => { this.camera = ref }}>
+              <View style={customStyles.outputTextBox}>
+                {this.state.selected ?
+                  <Text style={customStyles.outputText}>{this.state.pitch}</Text>
+                  :
+                  <Text style={customStyles.outputText}>{pitch}</Text>
+                }
+              </View>
+              <View style={customStyles.iconContainer}>
               <TouchableOpacity
-                style={customStyles.iconStyle}
-                onPress={() => this.checkForMultipleAreas()} >
-                <Ionicons
-                  name="ios-close"
-                  style={customStyles.closeIcon}
-                />
-              </TouchableOpacity>
-              <View style={customStyles.lineStyle} />
-              {this.state.selected ?
-                <TouchableOpacity
+                  style={customStyles.iconStyle}
+                  onPress={() => this.checkForMultipleAreas()} >
+                  <Ionicons
+                    name="ios-close"
+                    style={customStyles.closeIcon}
+                  />
+                </TouchableOpacity>
+                <View style={customStyles.lineStyle} />
+                {this.state.selected ?
+                  <TouchableOpacity
                   style={customStyles.iconStyle}
                   onPress={() => this.deletePitch()}>
                   <AntDesign
@@ -178,9 +224,10 @@ class PitchFinder extends Component {
                     style={customStyles.cameraIcon}
                   />
                 </TouchableOpacity>
-              }
-            </View>
-          </Camera>
+                }
+              </View>
+            </Camera>
+          }
           {this.state.multipleAreas && (
             <View style={customStyles.container}>
               <Card style={styles.cardStyle}>
@@ -198,7 +245,7 @@ class PitchFinder extends Component {
                       </TouchableOpacity>
                     </Left>
                     <Right>
-                      <TouchableOpacity success onPress={() => this.togglePostCard()}>
+                      <TouchableOpacity success onPress={() => this.toggleMutipleAreasPostCard()}>
                         <Text style={[styles.button, customStyles.button]}>No</Text>
                       </TouchableOpacity>
                     </Right>

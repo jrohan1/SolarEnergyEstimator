@@ -91,6 +91,21 @@ export const styles = StyleSheet.create({
     marginRight:30,
     marginBottom :30,
   },
+  startButton: {
+    backgroundColor: '#DEE48E',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 12,
+    color: '#4160A1',
+    fontSize: 20,
+    fontWeight: 'bold',
+    overflow: 'hidden',
+    padding: 10,
+    textAlign: 'center',
+    marginBottom: 20,
+    alignSelf: 'center',
+    width: 100
+  },
   checkMarkStyle: {
     fontSize: 50,
     color: '#4CAF50',
