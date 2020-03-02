@@ -52,7 +52,7 @@ const helperFunctions = {
     let orientationValue = helperFunctions.orientation(orientation);
     let E = [];
     const r = .18;
-    const panelArea = 1.7922;
+    const panelArea = 1.6;
 
     let H = radiation.map(
       (radiation, index) => {
@@ -112,6 +112,8 @@ const helperFunctions = {
           return value = 883.49
         } else if (tilt > 80 && tilt <= 90) {
           return value = 790.69
+        } else if (tilt === 90) {
+          return value = 636.66
         }
       }
     );

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { withFirebaseHOC } from '../config/Firebase';
-import { Icon } from 'native-base';
 import Header from '../components/Header';
 import ErrorMessage from '../components/ErrorMessage';
 import { styles } from '../stylesheets/MainStyles';
@@ -59,9 +58,18 @@ class InputMeasurements extends Component {
           returnKeyType='done'
           blurOnSubmit
           onChangeText={(pitch) => {
-            let pitches = this.state.pitches;
-            pitches[index] = pitch;
-            this.setState({ pitches })
+            if (pitch > 90) {
+              this.setState({
+                showPitchToLarge: true
+              });
+            } else {
+              let pitches = this.state.pitches;
+              pitches[index] = pitch;
+              this.setState({
+                pitches,
+                showPitchToLarge: false
+              })
+            }
           }}
           value={this.state.pitches[index] ? `${this.state.pitches[index]}` : null}
         />
@@ -102,7 +110,7 @@ class InputMeasurements extends Component {
       <View style={styles.container}>
         <ScrollView>
           <Header />
-          <View style={{marginTop: 30}}>
+          <View style={{ marginTop: 30 }}>
             <View style={styles.questionStyle}>
               <Text style={styles.textStyle}>Please enter area in m2</Text>
             </View>
@@ -121,6 +129,9 @@ class InputMeasurements extends Component {
           {this.state.showPitchError && !this.state.isSubmitted && (
             <ErrorMessage errorValue={'*Please input a pitch for every area'} />
           )}
+          {this.state.showPitchToLarge && !this.state.isSubmitted && (
+            <ErrorMessage errorValue={'*Pitch must be less than 90 degrees'} />
+          )}
           {this.state.textInputPitch.map((value, index) => {
             return value
           })}
@@ -131,10 +142,10 @@ class InputMeasurements extends Component {
             <TouchableOpacity onPress={() => { this.addAreaTextInput(this.state.textInputArea.length); this.addPitchTextInput(this.state.textInputPitch.length) }}>
               <Text style={styles.nextButton}>Add additional area and pitch</Text>
             </TouchableOpacity>
-          )}         
-            <TouchableOpacity onPress={() => this.submitInput()}>
-              <Text style={styles.nextButton}>Submit</Text>
-            </TouchableOpacity>
+          )}
+          <TouchableOpacity onPress={() => this.submitInput()}>
+            <Text style={styles.nextButton}>Submit</Text>
+          </TouchableOpacity>
         </ScrollView>
       </View>
     )
