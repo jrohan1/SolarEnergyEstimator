@@ -76,6 +76,7 @@ class ContactUs extends Component {
     AsyncStorage.getItem('useElectricCar').then(value => this.setState({ electricCar: value }));
     AsyncStorage.getItem('hotWater').then(value => this.setState({ hotWater: value }));
     AsyncStorage.getItem('shading').then(value => this.setState({ shading: value }));
+    AsyncStorage.getItem('timeOccupied').then(value => this.setState({ timeOccupied: value }));
     AsyncStorage.getItem('address').then(value => this.setState({ address: value }));
   }
 
@@ -98,7 +99,7 @@ class ContactUs extends Component {
           "name": name,
           "mobile": mobile,
           "email": email,
-          "date" : this.state.date
+          "date": this.state.date
         }),
       })
         .then((response) => response.json())
@@ -174,13 +175,13 @@ class ContactUs extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header/>
+        <Header />
         <HideWithKeyboard>
-          <ContactUsBanner />        
+          <ContactUsBanner />
+        </HideWithKeyboard>
         <View style={styles.questionStyle}>
           <Text style={styles.textStyle}>Please enter your contact details</Text>
         </View>
-        </HideWithKeyboard>
         {this.state.isSubmited ?
           <Card style={customStyles.cardStyle}>
             <View>
