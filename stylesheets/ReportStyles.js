@@ -30,6 +30,7 @@ export const customStyles = StyleSheet.create({
     color: '#DEE48E',  
     marginLeft :10,
     marginRight:10,
+    marginBottom: 20
   },
   answerStyle: {
     fontSize: 21,
@@ -38,11 +39,12 @@ export const customStyles = StyleSheet.create({
     alignSelf:'center',
     marginLeft :10,
     marginRight:10,
+    marginBottom: 20
   },
   rowStyle: {
-    height: 40
+    height: 60
   },
   gridStyle: {
-    marginBottom: 10
+    marginBottom: 20
   }
 })
