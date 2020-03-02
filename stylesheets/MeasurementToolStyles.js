@@ -44,6 +44,16 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 25
   },
+  zoomButtonContainer: {
+    marginTop: 100,
+    position: 'absolute',
+    right: 20,
+    width: 80
+  },
+  zoomButtons: {
+    color: '#4160A1',
+    padding: 5
+  },
   deleteButton: {
     marginVertical: 20,
     position: 'absolute',
@@ -54,8 +64,8 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
     fontFamily: 'josefinSans',
     color: '#4160A1',
-    textAlign:'center',
-    margin:10
+    textAlign: 'center',
+    margin: 10
   },
   areaTextStyle: {
     backgroundColor: 'white',
@@ -65,9 +75,9 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
     fontFamily: 'josefinSans',
     color: '#4160A1',
-    textAlign:'center',
-    marginTop:10,
-    marginLeft:10,
+    textAlign: 'center',
+    marginTop: 10,
+    marginLeft: 10,
     padding: 5,
     borderWidth: 0.5,
   },
@@ -79,11 +89,11 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
     fontFamily: 'josefinSans',
     color: '#4160A1',
-    textAlign:'center',
-    marginLeft:10,
+    textAlign: 'center',
+    marginLeft: 10,
     padding: 5,
     borderWidth: 0.5,
-  },  
+  },
   cardStyle: {
     marginTop: 80,
     marginLeft: 25,
@@ -101,5 +111,20 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'josefinSans',
     color: 'navy',
+  },
+  startButton: {
+    backgroundColor: '#DEE48E',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 12,
+    color: '#4160A1',
+    fontSize: 20,
+    fontWeight: 'bold',
+    overflow: 'hidden',
+    padding: 10,
+    textAlign: 'center',
+    marginBottom: 20,
+    alignSelf: 'center',
+    width: 100
   },
 })

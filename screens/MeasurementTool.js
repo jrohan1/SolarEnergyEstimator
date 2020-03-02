@@ -7,13 +7,13 @@ import { styles } from '../stylesheets/MeasurementToolStyles';
 import config from '../config';
 import _ from 'lodash';
 import axios from 'axios';
-import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { AntDesign, Ionicons, Feather } from '@expo/vector-icons';
 import helperFunctions from '../sharedFunctions';
 
 const { height, width } = Dimensions.get('window');
 const INITIAL_LATITUDE_DELTA = 5.5;
 const INITIAL_LONGITUDE_DELTA = INITIAL_LATITUDE_DELTA * (width / height);
-const LATITUDE_DELTA = 0.0005;
+const LATITUDE_DELTA = 0.002;
 const LONGITUDE_DELTA = LATITUDE_DELTA * (width / height);
 let id = 0;
 
@@ -64,7 +64,8 @@ class MeasurementTool extends Component {
     Keyboard.dismiss();
     this.setState({
       predictions: [],
-      destination: prediction.description
+      destination: prediction.description,
+      predictionSelected: true
     });
     Keyboard;
     this.handleSubmit(this.state.destination);
@@ -255,6 +256,40 @@ class MeasurementTool extends Component {
     });
   }
 
+  onPressZoomIn() {
+    this.region = {
+      latitude: this.state.latitude,
+      longitude: this.state.longitude,
+      latitudeDelta: this.state.latitudeDelta / 2,
+      longitudeDelta: this.state.longitudeDelta / 2
+    }
+
+    this.setState({
+      latitudeDelta: this.region.latitudeDelta,
+      longitudeDelta: this.region.longitudeDelta,
+      latitude: this.region.latitude,
+      longitude: this.region.longitude
+    })
+    this.map.animateToRegion(this.region, 100);
+  }
+
+  onPressZoomOut() {
+    this.region = {
+      latitude: this.state.latitude,
+      longitude: this.state.longitude,
+      latitudeDelta: this.state.latitudeDelta * 2,
+      longitudeDelta: this.state.longitudeDelta * 2
+    }
+
+    this.setState({
+      latitudeDelta: this.region.latitudeDelta,
+      longitudeDelta: this.region.longitudeDelta,
+      latitude: this.region.latitude,
+      longitude: this.region.longitude
+    })
+    this.map.animateToRegion(this.region, 100);
+  }
+
   render() {
     const predictions = this.state.predictions.map(
       prediction => (
@@ -320,6 +355,15 @@ class MeasurementTool extends Component {
               <CardItem>
                 <Text style={styles.cardTextStyle}>To measure for more than one set of panels click 'Mark another area'.</Text>
               </CardItem>
+              <CardItem>
+                <Left></Left>
+                <Body>
+                  <TouchableOpacity success onPress={() => this.togglePostCard()}>
+                    <Text style={styles.startButton}>Get Started</Text>
+                  </TouchableOpacity>
+                </Body>
+                <Right></Right>
+              </CardItem>
             </View>
           </Card>
           :
@@ -331,9 +375,11 @@ class MeasurementTool extends Component {
               latitudeDelta: this.state.latitudeDelta,
               longitudeDelta: this.state.longitudeDelta
             }}
+            zoomEnabled={true}
             mapType='satellite'
             onPress={e => this.onPress(e)}
             {...mapOptions}
+            ref={ref => this.map = ref}
           >
             {this.state.polygons.map(polygon => (
               <Polygon
@@ -382,14 +428,31 @@ class MeasurementTool extends Component {
           />
         )}
         {predictions}
+        {!this.state.showCard && this.state.predictionSelected && (
+        <View style={styles.zoomButtonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => { this.onPressZoomIn() }}
+          >
+            <Feather name="zoom-in" style={styles.zoomButtons} size={40}/>
+          </TouchableOpacity>
+          <View style={{height:10}}/>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => { this.onPressZoomOut() }}
+          >
+            <Feather name="zoom-out" style={styles.zoomButtons} size={40}/>
+          </TouchableOpacity>
+        </View>
+        )}
         <View style={styles.buttonContainer}>
           {!this.state.showCard && (
             <TouchableOpacity
-            onPress={this.goToGetStarted}
-            style={styles.button}
-          >
-            <Ionicons name='md-arrow-round-back' size={40} color={'#4160A1'} />
-          </TouchableOpacity>
+              onPress={this.goToGetStarted}
+              style={styles.button}
+            >
+              <Ionicons name='md-arrow-round-back' size={40} color={'#4160A1'} />
+            </TouchableOpacity>
           )}
           {this.state.editing && this.state.canEdit && !this.state.isSecondArea && (
             <TouchableOpacity
@@ -425,7 +488,7 @@ class MeasurementTool extends Component {
           )}
         </View>
         <View style={styles.deleteButton}>
-        {!this.state.areaTotal && !this.state.showCard && (
+          {!this.state.areaTotal && !this.state.showCard && (
             <TouchableOpacity
               onPress={() => this.deletePolygon()}
               style={styles.button}
