@@ -4,7 +4,7 @@ import { AsyncStorage, Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import { FontAwesome, Ionicons, AntDesign } from '@expo/vector-icons';
-import { Icon, Card, CardItem, Body, Right, Left } from 'native-base';
+import { Card, CardItem, Body, Right, Left } from 'native-base';
 import { customStyles } from '../stylesheets/PitchFinderStyles';
 import { styles } from '../stylesheets/MainStyles';
 import { Accelerometer } from "expo-sensors";
@@ -130,6 +130,11 @@ class PitchFinder extends Component {
     pitch = pitch.toFixed(0);
     const { hasPermission } = this.state;
 
+    if(pitch > 90) {
+      pitch = Math.abs(90 - (Math.atan2((-xValue), Math.sqrt(yValue * yValue)) * 57.3) - 90);
+      pitch = pitch.toFixed(0);
+    }
+
     if (hasPermission === null) {
       return <View />;
     } else if (hasPermission === false) {
@@ -180,15 +185,6 @@ class PitchFinder extends Component {
             <View style={customStyles.container}>
               <Card style={styles.cardStyle}>
                 <View>
-                  <CardItem>
-                    <Left></Left>
-                    <Body></Body>
-                    <Right>
-                      <TouchableOpacity success onPress={() => this.togglePostCard()}>
-                        <Icon active type="FontAwesome" name="close" style={styles.closeButtonStyle} />
-                      </TouchableOpacity>
-                    </Right>
-                  </CardItem>
                   <CardItem header>
                     <Text style={styles.cardTextStyle}>You have marked more than one area to fit solar panels.</Text>
                   </CardItem>
