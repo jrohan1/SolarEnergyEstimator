@@ -49,6 +49,8 @@ class ContactUs extends Component {
     };
   }
 
+  goToHome = () => this.props.navigation.navigate('Home')
+
   componentWillMount = () => {
     this.importData();
   }
@@ -170,6 +172,7 @@ class ContactUs extends Component {
       email: null,
       isSubmited: false
     })
+    this.goToHome();
   }
 
   render() {
