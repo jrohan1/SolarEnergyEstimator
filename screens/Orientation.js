@@ -60,11 +60,12 @@ class Orientation extends Component {
 
   isSubmitted = () => {   
       this.setState({
-        isSubmitted: true
+        isSubmitted: true,
+        orientations: []
       }, () => {
-        this.addOrientationToArray()
-      })
-  
+        this.addOrientationToArray(),
+        this.goToShading()
+      }) 
   }
 
   addOrientationToArray = () => {
@@ -104,11 +105,6 @@ class Orientation extends Component {
             {!this.state.isSubmitted && (
               allOrientations
             )}
-            {this.state.isSubmitted && (
-            <View>
-              <Icon active type="FontAwesome" name="check" style={styles.checkMarkStyle} />
-            </View>
-          )}
           </View>
           <View style={styles.buttonStyle}>
             <TouchableOpacity onPress={() => { this.saveState('South'); this.checkForMultipleAreas() }}>
@@ -137,13 +133,8 @@ class Orientation extends Component {
               <Text style={styles.nextButton}>Add orienatation</Text>
             </TouchableOpacity>
           )}
-          {this.state.showSubmit && !this.state.isSubmitted && (
+          {this.state.showSubmit && (
             <TouchableOpacity onPress={() => this.isSubmitted()}>
-              <Text style={styles.nextButton}>Submit</Text>
-            </TouchableOpacity>
-          )}
-          {this.state.isSubmitted && (
-            <TouchableOpacity onPress={this.goToShading}>
               <Text style={styles.nextButton}>Next Step</Text>
             </TouchableOpacity>
           )}
