@@ -91,6 +91,7 @@ class InputMeasurements extends Component {
       }, () => {
         helperFunctions.saveArrayData('areas', this.state.areas);
         helperFunctions.saveArrayData('pitch', this.state.pitches);
+        this.goToOrientation();
       }
       );
     }
@@ -123,11 +124,6 @@ class InputMeasurements extends Component {
           {this.state.textInputPitch.map((value, index) => {
             return value
           })}
-          {this.state.isSubmitted && (
-            <View>
-              <Icon active type="FontAwesome" name="check" style={styles.checkMarkStyle} />
-            </View>
-          )}
           {this.state.showError && !this.state.isSubmitted && (
             <ErrorMessage errorValue={'*Please input a value for area and pitch'} />
           )}
@@ -135,16 +131,10 @@ class InputMeasurements extends Component {
             <TouchableOpacity onPress={() => { this.addAreaTextInput(this.state.textInputArea.length); this.addPitchTextInput(this.state.textInputPitch.length) }}>
               <Text style={styles.nextButton}>Add additional area and pitch</Text>
             </TouchableOpacity>
-          )}
-          {!this.state.isSubmitted ?
+          )}         
             <TouchableOpacity onPress={() => this.submitInput()}>
               <Text style={styles.nextButton}>Submit</Text>
             </TouchableOpacity>
-            :
-            <TouchableOpacity onPress={this.goToOrientation}>
-              <Text style={styles.nextButton}>Next Step</Text>
-            </TouchableOpacity>
-          }
         </ScrollView>
       </View>
     )
