@@ -44,12 +44,12 @@ class EnergyUsage extends Component {
             <Lightbulb />
             <View style={styles.questionStyle}>
               <Text style={styles.textStyle}>What is your annual energy consumption ?</Text>
-              <Text style={styles.subTextStyle}>Ireland's national average 4200 kwh</Text>
+              <Text style={styles.subTextStyle}>Ireland's national average 4200 kWh</Text>
             </View>
             <View style={styles.textInput}>
               <TextInput
                 style={styles.inputStyle}
-                placeholder='kw/h'
+                placeholder='kW/h'
                 placeholderTextColor='#4160A1'
                 keyboardType='numeric'
                 returnKeyType='done'

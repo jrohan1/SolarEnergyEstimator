@@ -84,7 +84,7 @@ class Report extends Component {
 
       totalEnergy = (
         <Row>
-          <Text style={customStyles.answerStyle}>{calcTotalEnergy.toFixed(0)} kwh</Text>
+          <Text style={customStyles.answerStyle}>{calcTotalEnergy.toFixed(0)} kWh</Text>
         </Row>
       )
 
@@ -123,7 +123,7 @@ class Report extends Component {
       energyPerArea = energyEstimation.map(
         (energy, index) => (
           <Row key={index}>
-            <Text key={index} style={customStyles.answerStyle}>A({index + 1}) {energy.toFixed(0)} kwh</Text>
+            <Text key={index} style={customStyles.answerStyle}>A({index + 1}) {energy.toFixed(0)} kWh</Text>
           </Row>
         )
       );
@@ -175,13 +175,15 @@ class Report extends Component {
       energyPerArea = energyEstimation.map(
         (energy, index) => (
           <Row key={index}>
-            <Text key={index} style={customStyles.answerStyle}>{energy.toFixed(0)} kwh</Text>
+            <Text key={index} style={customStyles.answerStyle}>{energy.toFixed(0)} kWh</Text>
           </Row>
         )
       );
     }
 
     const percentageOfUsage = (calcTotalEnergy / this.state.energyUsage) * 100;
+
+    const carbonEmissions = (calcTotalEnergy * 0.291);
 
     return (
       <View style={styles.container}>
@@ -245,7 +247,7 @@ class Report extends Component {
                   <Text style={customStyles.answerStyle}>{this.state.hotWater}</Text>
                 </Row>
                 <Row style={{ height: 80 }}>
-                  <Text style={customStyles.answerStyle}>{this.state.energyUsage} kwh</Text>
+                  <Text style={customStyles.answerStyle}>{this.state.energyUsage} kWh</Text>
                 </Row>
                 <Row style={customStyles.rowStyle}>
                   <Text style={customStyles.answerStyle}>{this.state.electricCar}</Text>
@@ -282,11 +284,17 @@ class Report extends Component {
                 <Row>
                   <Text style={customStyles.textStyle}>% of annual energy consumption: </Text>
                 </Row>
+                <Row>
+                  <Text style={customStyles.textStyle}>CO2 emissions reduced by: </Text>
+                </Row>
               </Col>
               <Col>
                 {totalEnergy}
                 <Row>
                   <Text style={customStyles.answerStyle}>{percentageOfUsage.toFixed(0)} %</Text>
+                </Row>
+                <Row>
+                  <Text style={customStyles.answerStyle}>{carbonEmissions.toFixed(2)} Kg</Text>
                 </Row>
               </Col>
             </Grid>
