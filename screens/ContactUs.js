@@ -256,18 +256,19 @@ class ContactUs extends Component {
                     name='name'
                     value={this.state.name}
                     onChangeText={handleChange('name')}
-                    placeholder='Enter your full name'
+                    placeholder=' Enter your full name'
                     autoCompleteType='off'
                     iconName='md-person'
                     iconColor='#DEE48E'
                     onBlur={handleBlur('name')}
+                    selectionColor={'#4160A1'}
                   />
                   <ErrorMessage errorValue={touched.name && errors.name} />
                   <FormInput
                     name='mobile'
                     value={this.state.mobile}
                     onChangeText={handleChange('mobile')}
-                    placeholder='Enter phone number'
+                    placeholder=' Enter phone number'
                     keyboardType='phone-pad'
                     autoCompleteType='off'
                     iconName='ios-phone-portrait'
@@ -279,7 +280,7 @@ class ContactUs extends Component {
                     name='email'
                     value={this.state.email}
                     onChangeText={handleChange('email')}
-                    placeholder='Enter email'
+                    placeholder=' Enter email'
                     autoCapitalize='none'
                     autoCompleteType='off'
                     keyboardType='email-address'

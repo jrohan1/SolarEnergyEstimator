@@ -24,7 +24,7 @@ const FormInput = ({
       placeholder={placeholder}
       keyboardType={keyboardType}
       autoCompleteType={autoCompleteType}
-      style={styles.input}
+      selectionColor='#DEE48E'
     />
   </View>
 )
