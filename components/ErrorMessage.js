@@ -13,9 +13,9 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 17,
-    color: 'black',
-    textShadowColor:'white',
-    textShadowRadius: 80,
+    color: '#FF8C00',
+    //textShadowColor:'white',
+    //textShadowRadius: 80,
   }
 })
 
