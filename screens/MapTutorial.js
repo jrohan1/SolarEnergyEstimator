@@ -20,9 +20,8 @@ class MapTutorial extends Component {
             </TouchableOpacity>
           </View>
           <Video
-            source={require('../assets/videos/mapTutorial.webm')}
+            source={require('../assets/videos/comMapTutorial.mp4')}
             shouldPlay
-            isLooping
             useNativeControls
             resizeMode="contain"
             style={{ width, height: '90%' }}

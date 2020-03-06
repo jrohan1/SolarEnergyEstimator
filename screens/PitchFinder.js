@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withFirebaseHOC } from '../config/Firebase'
-import { AsyncStorage, Text, View, TouchableOpacity, Button } from 'react-native';
+import { AsyncStorage, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import { FontAwesome, Ionicons, AntDesign } from '@expo/vector-icons';
@@ -64,6 +64,7 @@ class PitchFinder extends Component {
   };
 
   goToOrientation = () => this.props.navigation.navigate('Orientation');
+  goToTutorial = () => this.props.navigation.navigate('PitchTutorial');
 
   setPitch = (newPitch) => {
     this.setState({
@@ -151,41 +152,52 @@ class PitchFinder extends Component {
         <View style={customStyles.container}>
           {this.state.showCard ?
             <Card style={styles.cardStyle}>
-              <View>
-                <CardItem>
-                  <Left></Left>
-                  <Body></Body>
-                  <Right>
-                    <TouchableOpacity success onPress={() => this.toggleOpeningPostCard()}>
-                      <Icon active type="FontAwesome" name="close" style={styles.closeButtonStyle} />
-                    </TouchableOpacity>
-                  </Right>
-                </CardItem>
-                <CardItem header>
-                  <Text style={styles.cardTextStyle}>To get the most accurate measurement, stand directly opposite the central apex of your roof.</Text>
-                </CardItem>
-                <CardItem>
-                  <Text style={styles.cardTextStyle}>Hold the phone as steady as possible.</Text>
-                </CardItem>
-                <CardItem>
-                  <Text style={styles.cardTextStyle}>Tilt phone horizontally to match the pitch.</Text>
-                </CardItem>
-                <CardItem>
-                  <Text style={styles.cardTextStyle}>Try not to tilt the phone backwards or forwards.</Text>
-                </CardItem>
-                <CardItem>
-                  <Text style={styles.cardTextStyle}>Click on the save button to save the angle on screen</Text>
-                </CardItem>
-                <CardItem>
-                <Left></Left>
-                <Body>
-                  <TouchableOpacity success onPress={() => this.toggleOpeningPostCard()}>
-                    <Text style={styles.startButton}>Get Started</Text>
+              <ScrollView>
+                <View>
+                  <CardItem>
+                    <Left></Left>
+                    <Body></Body>
+                    <Right>
+                      <TouchableOpacity success onPress={() => this.toggleOpeningPostCard()}>
+                        <Icon active type="FontAwesome" name="close" style={styles.closeButtonStyle} />
+                      </TouchableOpacity>
+                    </Right>
+                  </CardItem>
+                  <CardItem header>
+                    <Text style={styles.cardTextStyle}>To get the most accurate measurement, stand directly opposite the central apex of your roof.</Text>
+                  </CardItem>
+                  <CardItem>
+                    <Text style={styles.cardTextStyle}>Hold the phone as steady as possible.</Text>
+                  </CardItem>
+                  <CardItem>
+                    <Text style={styles.cardTextStyle}>Tilt phone horizontally to match the pitch.</Text>
+                  </CardItem>
+                  <CardItem>
+                    <Text style={styles.cardTextStyle}>Try not to tilt the phone backwards or forwards.</Text>
+                  </CardItem>
+                  <CardItem>
+                    <Text style={styles.cardTextStyle}>Click on the save button to save the angle on screen</Text>
+                  </CardItem>
+                  <CardItem>
+                    <Text style={styles.cardTextStyle}>You can view a tutorial ....</Text>
+                  </CardItem>
+                  <TouchableOpacity success onPress={this.goToTutorial}>
+                    <Text style={customStyles.tutorialButton}>Watch Tutorial</Text>
                   </TouchableOpacity>
-                </Body>
-                <Right></Right>
-              </CardItem>        
-              </View>
+                  <CardItem>
+                    <Text style={styles.cardTextStyle}>.... or just get started.</Text>
+                  </CardItem>
+                  <CardItem>
+                    <Left></Left>
+                    <Body>
+                      <TouchableOpacity success onPress={() => this.toggleOpeningPostCard()}>
+                        <Text style={styles.startButton}>Get Started</Text>
+                      </TouchableOpacity>
+                    </Body>
+                    <Right></Right>
+                  </CardItem>
+                </View>
+              </ScrollView>
             </Card>
             :
             <Camera style={{ flex: 1 }} type={this.state.cameraType} ref={ref => { this.camera = ref }}>
@@ -197,7 +209,7 @@ class PitchFinder extends Component {
                 }
               </View>
               <View style={customStyles.iconContainer}>
-              <TouchableOpacity
+                <TouchableOpacity
                   style={customStyles.iconStyle}
                   onPress={() => this.checkForMultipleAreas()} >
                   <Ionicons
@@ -208,22 +220,22 @@ class PitchFinder extends Component {
                 <View style={customStyles.lineStyle} />
                 {this.state.selected ?
                   <TouchableOpacity
-                  style={customStyles.iconStyle}
-                  onPress={() => this.deletePitch()}>
-                  <AntDesign
-                    name="delete"
-                    style={customStyles.deleteIcon}
-                  />
-                </TouchableOpacity>
-                :
-                <TouchableOpacity
-                  style={customStyles.iconStyle}
-                  onPress={() => this.setPitch(pitch)} >
-                  <FontAwesome
-                    name="save"
-                    style={customStyles.cameraIcon}
-                  />
-                </TouchableOpacity>
+                    style={customStyles.iconStyle}
+                    onPress={() => this.deletePitch()}>
+                    <AntDesign
+                      name="delete"
+                      style={customStyles.deleteIcon}
+                    />
+                  </TouchableOpacity>
+                  :
+                  <TouchableOpacity
+                    style={customStyles.iconStyle}
+                    onPress={() => this.setPitch(pitch)} >
+                    <FontAwesome
+                      name="save"
+                      style={customStyles.cameraIcon}
+                    />
+                  </TouchableOpacity>
                 }
               </View>
             </Camera>

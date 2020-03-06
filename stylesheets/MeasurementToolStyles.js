@@ -132,6 +132,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'josefinSans',
     color: 'navy',
     borderBottomWidth: 1,
-    borderColor: '#4160A1'
+    borderColor: '#4160A1',
+    alignSelf: 'center'
   }
 })

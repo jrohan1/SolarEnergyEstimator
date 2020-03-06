@@ -123,7 +123,7 @@ class MeasurementTool extends Component {
     const polygonArray = this.state.polygons.map(polygon => {
       return polygon.coordinates
     })
-console.log(polygonArray)
+    console.log(polygonArray)
     const newLat = polygonArray[0].latitude;
     const newLong = polygonArray[0].longitude;
 
@@ -348,59 +348,59 @@ console.log(polygonArray)
         {this.state.showCard ?
           <Card style={styles.cardStyle}>
             <ScrollView>
-            <View>
-              <CardItem>
-                <Left></Left>
-                <Body></Body>
-                <Right>
-                  <TouchableOpacity success onPress={() => this.togglePostCard()}>
-                    <Icon active type="FontAwesome" name="close" style={styles.closeButtonStyle} />
-                  </TouchableOpacity>
-                </Right>
-              </CardItem>
-              <CardItem header>
-                <Text style={styles.cardTextStyle}>Use Google Maps to find your house.</Text>
-              </CardItem>
-              <CardItem>
-                <Text style={styles.cardTextStyle}>By default the aspect facing you will be South.</Text>
-              </CardItem>
-              <CardItem>
-                <Text style={styles.cardTextStyle}>Tap on screen to place first marker.</Text>
-              </CardItem>
-              <CardItem>
-                <Text style={styles.cardTextStyle}>Move clockwise, tapping the screen to add next marker.</Text>
-              </CardItem>
-              <CardItem>
-                <Text style={styles.cardTextStyle}>Press and hold marker to move it.</Text>
-              </CardItem>
-              <CardItem>
-                <Text style={styles.cardTextStyle}>Do not mark area that contains obstacles (velux windows, chimney, vents).</Text>
-              </CardItem>
-              <CardItem>
-                <Text style={styles.cardTextStyle}>Delete will remove all markers.</Text>
-              </CardItem>
-              <CardItem>
-                <Text style={styles.cardTextStyle}>To measure for more than one set of panels click 'Mark another area'.</Text>
-              </CardItem>
-              <CardItem>
-               
-                <Body>
-                  <TouchableOpacity success onPress={this.goToTutorial}>
-                    <Text style={styles.tutorialButton}>Watch Tutorial</Text>
-                  </TouchableOpacity>
-                </Body>
-               
-              </CardItem>
-              <CardItem>
-                <Left></Left>
-                <Body>
-                  <TouchableOpacity success onPress={() => this.togglePostCard()}>
-                    <Text style={styles.startButton}>Get Started</Text>
-                  </TouchableOpacity>
-                </Body>
-                <Right></Right>
-              </CardItem>
-            </View>
+              <View>
+                <CardItem>
+                  <Left></Left>
+                  <Body></Body>
+                  <Right>
+                    <TouchableOpacity success onPress={() => this.togglePostCard()}>
+                      <Icon active type="FontAwesome" name="close" style={styles.closeButtonStyle} />
+                    </TouchableOpacity>
+                  </Right>
+                </CardItem>
+                <CardItem header>
+                  <Text style={styles.cardTextStyle}>Use Google Maps to find your house.</Text>
+                </CardItem>
+                <CardItem>
+                  <Text style={styles.cardTextStyle}>By default the aspect facing you will be South.</Text>
+                </CardItem>
+                <CardItem>
+                  <Text style={styles.cardTextStyle}>Tap on screen to place first marker.</Text>
+                </CardItem>
+                <CardItem>
+                  <Text style={styles.cardTextStyle}>Move clockwise, tapping the screen to add next marker.</Text>
+                </CardItem>
+                <CardItem>
+                  <Text style={styles.cardTextStyle}>Press and hold marker to move it.</Text>
+                </CardItem>
+                <CardItem>
+                  <Text style={styles.cardTextStyle}>Do not mark area that contains obstacles (velux windows, chimney, vents).</Text>
+                </CardItem>
+                <CardItem>
+                  <Text style={styles.cardTextStyle}>Delete will remove all markers.</Text>
+                </CardItem>
+                <CardItem>
+                  <Text style={styles.cardTextStyle}>To measure for more than one set of panels click 'Mark another area'.</Text>
+                </CardItem>
+                <CardItem>
+                  <Text style={styles.cardTextStyle}>You can view a tutorial ....</Text>
+                </CardItem>
+                <TouchableOpacity success onPress={this.goToTutorial}>
+                  <Text style={styles.tutorialButton}>Watch Tutorial</Text>
+                </TouchableOpacity>
+                <CardItem>
+                  <Text style={styles.cardTextStyle}>.... or just get started.</Text>
+                </CardItem>
+                <CardItem>
+                  <Left></Left>
+                  <Body>
+                    <TouchableOpacity success onPress={() => this.togglePostCard()}>
+                      <Text style={styles.startButton}>Get Started</Text>
+                    </TouchableOpacity>
+                  </Body>
+                  <Right></Right>
+                </CardItem>
+              </View>
             </ScrollView>
           </Card>
           :

@@ -15,6 +15,7 @@ import Report from '../screens/Report';
 import ContactUs from '../screens/ContactUs';
 import InfoPage from '../screens/InfoPage';
 import MapTutorial from '../screens/MapTutorial';
+import PitchTutorial from '../screens/PitchTutorial';
 
 const DrawerNavigator =  createDrawerNavigator(
 	{
@@ -26,7 +27,8 @@ const DrawerNavigator =  createDrawerNavigator(
     'Report': Report,
     'Contact Us': ContactUs,
     "FAQ's": InfoPage,
-    'Tutorial': MapTutorial
+    'Tutorial for Measurement Tool': MapTutorial,
+    'Tutorial for Pitch Finder': PitchTutorial
 	}
 );
 

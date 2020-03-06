@@ -54,5 +54,13 @@ export const customStyles = StyleSheet.create({
   },
   button: {
     width: 100
+  },
+  tutorialButton: {
+    fontSize: 20,
+    fontFamily: 'josefinSans',
+    color: 'navy',
+    borderBottomWidth: 1,
+    borderColor: '#4160A1',
+    alignSelf: 'center'
   }
 })

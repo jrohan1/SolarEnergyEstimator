@@ -16,6 +16,7 @@ import Report from '../screens/Report';
 import ContactUs from '../screens/ContactUs';
 import InfoPage from '../screens/InfoPage';
 import MapTutorial from '../screens/MapTutorial';
+import PitchTutorial from '../screens/PitchTutorial';
 
 const AuthNavigation = createStackNavigator(
   {
@@ -35,7 +36,8 @@ const AuthNavigation = createStackNavigator(
     Report: { screen: Report },
     ContactUs: { screen: ContactUs },
     InfoPage: { screen: InfoPage },
-    MapTutorial: { screen: MapTutorial}
+    MapTutorial: { screen: MapTutorial },
+    PitchTutorial: { screen: PitchTutorial }
   },
   {
     initialRouteName: 'Home',
