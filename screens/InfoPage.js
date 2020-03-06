@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as WebBrowser from 'expo-web-browser';
-import { Text, View, TouchableOpacity, ScrollView, Linking } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/InfoStyles';
 import Header from '../components/Header';

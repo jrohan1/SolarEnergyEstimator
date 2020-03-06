@@ -15,6 +15,7 @@ import TimeOccupied from '../screens/TimeOccupied';
 import Report from '../screens/Report';
 import ContactUs from '../screens/ContactUs';
 import InfoPage from '../screens/InfoPage';
+import MapTutorial from '../screens/MapTutorial';
 
 const AuthNavigation = createStackNavigator(
   {
@@ -33,7 +34,8 @@ const AuthNavigation = createStackNavigator(
     TimeOccupied: { screen: TimeOccupied },
     Report: { screen: Report },
     ContactUs: { screen: ContactUs },
-    InfoPage: { screen: InfoPage }
+    InfoPage: { screen: InfoPage },
+    MapTutorial: { screen: MapTutorial}
   },
   {
     initialRouteName: 'Home',

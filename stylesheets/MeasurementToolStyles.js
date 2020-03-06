@@ -127,4 +127,11 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     width: 100
   },
+  tutorialButton: {
+    fontSize: 20,
+    fontFamily: 'josefinSans',
+    color: 'navy',
+    borderBottomWidth: 1,
+    borderColor: '#4160A1'
+  }
 })

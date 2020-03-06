@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withFirebaseHOC } from '../config/Firebase'
-import { Text, View, TextInput, Dimensions, Keyboard, TouchableHighlight, TouchableOpacity } from "react-native";
+import { Text, View, TextInput, Dimensions, Keyboard, TouchableHighlight, TouchableOpacity, ScrollView } from "react-native";
 import { Icon, Card, CardItem, Body, Right, Left } from 'native-base';
 import MapView, { Marker, Polygon, ProviderPropType } from 'react-native-maps';
 import { styles } from '../stylesheets/MeasurementToolStyles';
@@ -45,6 +45,7 @@ class MeasurementTool extends Component {
 
   goToGetStarted = () => this.props.navigation.navigate('GetStarted');
   goToPitchMenu = () => this.props.navigation.navigate('PitchMenu');
+  goToTutorial = () => this.props.navigation.navigate('MapTutorial');
 
   onChangeDestination = async (destination) => {
     this.setState({ destination });
@@ -116,6 +117,31 @@ class MeasurementTool extends Component {
       editing: null,
       isSecondArea: false
     })
+  }
+
+  newLoc = () => {
+    const polygonArray = this.state.polygons.map(polygon => {
+      return polygon.coordinates
+    })
+console.log(polygonArray)
+    const newLat = polygonArray[0].latitude;
+    const newLong = polygonArray[0].longitude;
+
+    this.region = {
+      latitude: newLat,
+      longitude: newLong,
+      latitudeDelta: this.state.latitudeDelta,
+      longitudeDelta: this.state.longitudeDelta
+    }
+
+    this.setState({
+      latitudeDelta: this.region.latitudeDelta,
+      longitudeDelta: this.region.longitudeDelta,
+      latitude: this.region.latitude,
+      longitude: this.region.longitude
+    })
+    this.map.animateToRegion(this.region, 100);
+
   }
 
   calculateArea = async () => {
@@ -321,6 +347,7 @@ class MeasurementTool extends Component {
       <View style={styles.container}>
         {this.state.showCard ?
           <Card style={styles.cardStyle}>
+            <ScrollView>
             <View>
               <CardItem>
                 <Left></Left>
@@ -356,6 +383,15 @@ class MeasurementTool extends Component {
                 <Text style={styles.cardTextStyle}>To measure for more than one set of panels click 'Mark another area'.</Text>
               </CardItem>
               <CardItem>
+               
+                <Body>
+                  <TouchableOpacity success onPress={this.goToTutorial}>
+                    <Text style={styles.tutorialButton}>Watch Tutorial</Text>
+                  </TouchableOpacity>
+                </Body>
+               
+              </CardItem>
+              <CardItem>
                 <Left></Left>
                 <Body>
                   <TouchableOpacity success onPress={() => this.togglePostCard()}>
@@ -365,6 +401,7 @@ class MeasurementTool extends Component {
                 <Right></Right>
               </CardItem>
             </View>
+            </ScrollView>
           </Card>
           :
           <MapView
@@ -429,21 +466,21 @@ class MeasurementTool extends Component {
         )}
         {predictions}
         {!this.state.showCard && this.state.predictionSelected && (
-        <View style={styles.zoomButtonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => { this.onPressZoomIn() }}
-          >
-            <Feather name="zoom-in" style={styles.zoomButtons} size={40}/>
-          </TouchableOpacity>
-          <View style={{height:10}}/>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => { this.onPressZoomOut() }}
-          >
-            <Feather name="zoom-out" style={styles.zoomButtons} size={40}/>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.zoomButtonContainer}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => { this.onPressZoomIn() }}
+            >
+              <Feather name="zoom-in" style={styles.zoomButtons} size={40} />
+            </TouchableOpacity>
+            <View style={{ height: 10 }} />
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => { this.onPressZoomOut() }}
+            >
+              <Feather name="zoom-out" style={styles.zoomButtons} size={40} />
+            </TouchableOpacity>
+          </View>
         )}
         <View style={styles.buttonContainer}>
           {!this.state.showCard && (

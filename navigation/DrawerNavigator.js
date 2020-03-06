@@ -14,6 +14,7 @@ import TimeOccupied from '../screens/TimeOccupied';
 import Report from '../screens/Report';
 import ContactUs from '../screens/ContactUs';
 import InfoPage from '../screens/InfoPage';
+import MapTutorial from '../screens/MapTutorial';
 
 const DrawerNavigator =  createDrawerNavigator(
 	{
@@ -24,7 +25,8 @@ const DrawerNavigator =  createDrawerNavigator(
     'Input Pitch': ManualPitchEntry,
     'Report': Report,
     'Contact Us': ContactUs,
-    "FAQ's": InfoPage
+    "FAQ's": InfoPage,
+    'Tutorial': MapTutorial
 	}
 );
 

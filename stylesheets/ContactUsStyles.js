@@ -21,7 +21,6 @@ export const customStyles = StyleSheet.create({
   },
   closeButtonStyle: {
     fontSize: 25,
-    color: 'black',
     marginLeft: 10,
     color: 'navy'
   },
