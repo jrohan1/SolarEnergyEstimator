@@ -5,13 +5,14 @@ import { homeStyles } from '../stylesheets/HomeStyles';
 import { styles } from '../stylesheets/MainStyles';
 import AppLogo from '../components/AppLogo';
 import DrawerTrigger from '../components/DrawerTrigger';
+import { Entypo } from '@expo/vector-icons';
+
 
 class Home extends Component {
 
-  goToSignup = () => this.props.navigation.navigate('Signup')
-  goToLogin = () => this.props.navigation.navigate('Login')
-  goToInputMeasurements = () => this.props.navigation.navigate('InputMeasurements')
-  goToGetStarted = () => this.props.navigation.navigate('GetStarted')
+  goToInputMeasurements = () => this.props.navigation.navigate('InputMeasurements');
+  goToGetStarted = () => this.props.navigation.navigate('GetStarted');
+  goToInfoPage = () => this.props.navigation.navigate('InfoPage');
 
   handleSignout = async () => {
     try {
@@ -24,12 +25,18 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{flexDirection: 'row-reverse'}}>
-        <DrawerTrigger/>
-        </View>        
+        <View style={{ flexDirection: 'row-reverse' }}>
+          <DrawerTrigger />
+        </View>
         <AppLogo />
         <View>
           <Text style={[styles.textStyle, homeStyles.headerStyle]}>Calculate your homes solar enegry potential</Text>
+        </View>
+        <View style={homeStyles.infoGroup}>
+          <Entypo name="info-with-circle" style={homeStyles.infoIconStyle} />
+          <TouchableOpacity onPress={this.goToInfoPage}>
+            <Text style={homeStyles.infoButtonStyle}>Information on Solar PV</Text>
+          </TouchableOpacity>
         </View>
         <View>
           <Text style={styles.subTextStyle}>Do you know the size of the area where you wish to install solar panels ?</Text>

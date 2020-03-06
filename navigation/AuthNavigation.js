@@ -1,7 +1,5 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import Home from '../screens/Home';
-import Login from '../screens/Login';
-import Signup from '../screens/Signup';
 import InputMeasurements from '../screens/InputMeasurements';
 import PitchFinder from '../screens/PitchFinder';
 import PitchMenu from '../screens/PitchMenu';
@@ -16,12 +14,11 @@ import HotWater from '../screens/HotWater';
 import TimeOccupied from '../screens/TimeOccupied';
 import Report from '../screens/Report';
 import ContactUs from '../screens/ContactUs';
+import InfoPage from '../screens/InfoPage';
 
 const AuthNavigation = createStackNavigator(
   {
     Home: { screen: Home },
-    Login: { screen: Login},
-    Signup: { screen: Signup },
     InputMeasurements: { screen: InputMeasurements},
     PitchFinder: { screen: PitchFinder },
     PitchMenu: {screen: PitchMenu },
@@ -35,7 +32,8 @@ const AuthNavigation = createStackNavigator(
     HotWater: { screen: HotWater },
     TimeOccupied: { screen: TimeOccupied },
     Report: { screen: Report },
-    ContactUs: { screen: ContactUs }
+    ContactUs: { screen: ContactUs },
+    InfoPage: { screen: InfoPage }
   },
   {
     initialRouteName: 'Home',

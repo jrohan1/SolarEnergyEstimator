@@ -120,7 +120,6 @@ export const styles = StyleSheet.create({
   },
   closeButtonStyle: {
     fontSize: 25,
-    color: 'black',
     marginLeft: 10,
     color: 'navy'
   },

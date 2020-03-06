@@ -13,22 +13,18 @@ import HotWater from '../screens/HotWater';
 import TimeOccupied from '../screens/TimeOccupied';
 import Report from '../screens/Report';
 import ContactUs from '../screens/ContactUs';
+import InfoPage from '../screens/InfoPage';
 
 const DrawerNavigator =  createDrawerNavigator(
 	{
     'Home': Home,
-    'Input Measurements': InputMeasurements,
     'Area Measurement Tool': MeasurementTool,
     'Pitch Finder': PitchFinder,
+    'Input Measurements': InputMeasurements,
     'Input Pitch': ManualPitchEntry,
-    'Orientation': Orientation,
-    'Shading': Shading,
-    'Electric Car': ElectricCar,
-    'Energy Usage': EnergyUsage,
-    'Hot Water': HotWater,
-    'Time Occupied': TimeOccupied,
     'Report': Report,
-    'Contact Us': ContactUs
+    'Contact Us': ContactUs,
+    "FAQ's": InfoPage
 	}
 );
 
