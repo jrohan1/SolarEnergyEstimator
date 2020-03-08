@@ -128,5 +128,6 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'josefinSans',
     color: 'navy',
+    lineHeight: 25
   },
 })

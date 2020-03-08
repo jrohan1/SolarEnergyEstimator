@@ -4,7 +4,9 @@ import { Image } from 'react-native-elements'
 const Compass = () => (
   <Image
     source={require('../assets/compass.png')}
-    style={{ alignSelf: 'center',
+    style={{ 
+      marginTop: 20,
+      alignSelf: 'center',
       width: 200,
       height: 200
     }}
