@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import ErrorMessage from '../components/ErrorMessage';
 import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/MainStyles';
-import { customStyles } from '../stylesheets/ElecricCarStyles';
+import { customStyles } from '../stylesheets/ElectricCarStyles';
 import Header from '../components/Header';
 import ElectricCarPic from '../components/ElectricCar';
 import helperFunctions from '../sharedFunctions';
@@ -42,7 +42,7 @@ class ElectricCar extends Component {
         <Header/>
         <ElectricCarPic />
         <View style={styles.questionStyle}>
-          <Text style={styles.textStyle}>Do you have / plan to have an electric car ?</Text>
+          <Text style={styles.textStyle}>Do you have / plan to have an electric car?</Text>
           <Text style={styles.answerTextStyle}>{this.state.useElectricCar}</Text>
         </View>
         <View style={styles.buttonStyle}>

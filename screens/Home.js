@@ -39,7 +39,7 @@ class Home extends Component {
           </TouchableOpacity>
         </View>
         <View>
-          <Text style={styles.subTextStyle}>Do you know the size of the area where you wish to install solar panels ?</Text>
+          <Text style={styles.subTextStyle}>Do you know the size of the area where you wish to install solar panels?</Text>
         </View>
         <View style={styles.buttonStyle}>
           <TouchableOpacity onPress={this.goToInputMeasurements}>

@@ -42,7 +42,7 @@ class Shading extends Component {
         <ScrollView>
           <CastingShade />
           <View style={styles.questionStyle}>
-            <Text style={styles.textStyle}>Is the selected area under any shade ?</Text>
+            <Text style={styles.textStyle}>Is the selected area under any shade?</Text>
             <Text style={styles.answerTextStyle}>{this.state.shading}</Text>
           </View>
           <View style={styles.buttonStyle}>

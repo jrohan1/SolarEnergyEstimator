@@ -43,7 +43,7 @@ class EnergyUsage extends Component {
             <Header/>
             <Lightbulb />
             <View style={styles.questionStyle}>
-              <Text style={styles.textStyle}>What is your annual energy consumption ?</Text>
+              <Text style={styles.textStyle}>What is your annual energy consumption?</Text>
               <Text style={styles.subTextStyle}>Ireland's national average 4200 kWh</Text>
             </View>
             <View style={styles.textInput}>
@@ -55,7 +55,7 @@ class EnergyUsage extends Component {
                 returnKeyType='done'
                 blurOnSubmit
                 onChangeText={(energyConsumption) => this.saveState(energyConsumption)}
-                value={this.state.energyConsumption ? `${this.state.energyConsumption}` : null}
+                value={this.state.energyConsumption? `${this.state.energyConsumption}` : null}
               />
             </View>
             {this.state.showError && (

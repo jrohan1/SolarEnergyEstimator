@@ -4,7 +4,7 @@ export const customStyles = StyleSheet.create({
   infoMessageStyle: {
     justifyContent: 'center',
     marginTop: 80,
-    marginBottom: 50,
+    marginBottom: 30,
     marginLeft: 10,
     marginRight: 10,
   },
