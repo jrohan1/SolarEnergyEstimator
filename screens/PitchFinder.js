@@ -44,14 +44,27 @@ class PitchFinder extends Component {
 
   componentDidMount = async () => {
     this._isMounted = true;
+    this.askPermissionAsync();
     this.getPermissionAsync();
     this.subscribeToAccelerometer();
   }
 
-  getPermissionAsync = async () => {
+  askPermissionAsync = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasPermission: status === 'granted' });
+    if(status !== 'granted'){
+      alert('Hey! You can not use this tool without granting access to your camera. Please go to Settings and change access permissions');
+    this.goToHome();
+    }
   }
+
+  getPermissionAsync = async () => {
+    const { status } = await Permissions.getAsync(Permissions.CAMERA);
+    if(status !== 'granted'){
+      alert('Hey! You can not use this tool without granting access to your camera. Please go to Settings and change access permissions');
+    }
+  }
+
 
   subscribeToAccelerometer = async () => {
     this.accelerometerSubscription = Accelerometer.addListener(accelerometerData => this.setState({ accelerometerData })
@@ -65,6 +78,7 @@ class PitchFinder extends Component {
 
   goToOrientation = () => this.props.navigation.navigate('Orientation');
   goToTutorial = () => this.props.navigation.navigate('PitchTutorial');
+  goToHome = () => this.props.navigation.navigate('Home');
 
   setPitch = (newPitch) => {
     this.setState({
@@ -211,30 +225,30 @@ class PitchFinder extends Component {
               <View style={customStyles.iconContainer}>
                 <TouchableOpacity
                   style={customStyles.iconStyle}
-                  onPress={() => this.checkForMultipleAreas()} >
-                  <Ionicons
-                    name="ios-close"
-                    style={customStyles.closeIcon}
-                  />
+                  onPress={() => this.checkForMultipleAreas()} >                 
+                    <Ionicons
+                      name="ios-close"
+                      style={customStyles.closeIcon}
+                    />       
                 </TouchableOpacity>
                 <View style={customStyles.lineStyle} />
                 {this.state.selected ?
                   <TouchableOpacity
                     style={customStyles.iconStyle}
                     onPress={() => this.deletePitch()}>
-                    <AntDesign
-                      name="delete"
-                      style={customStyles.deleteIcon}
-                    />
+                      <AntDesign
+                        name="delete"
+                        style={customStyles.deleteIcon}
+                      />
                   </TouchableOpacity>
                   :
                   <TouchableOpacity
                     style={customStyles.iconStyle}
                     onPress={() => this.setPitch(pitch)} >
-                    <FontAwesome
-                      name="save"
-                      style={customStyles.cameraIcon}
-                    />
+                      <FontAwesome
+                        name="save"
+                        style={customStyles.cameraIcon}
+                      />
                   </TouchableOpacity>
                 }
               </View>
