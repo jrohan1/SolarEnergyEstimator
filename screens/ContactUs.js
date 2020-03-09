@@ -202,7 +202,7 @@ class ContactUs extends Component {
                 <Text style={customStyles.textStyle}>Thank you. We will get in touch with you as soon as possible</Text>
               </CardItem>
               <CardItem>
-                <Text style={{ flex: 1 }}>To help our agents to understand your solar pv needs please share the information you have used in your calculations with us by clicking the button below.</Text>
+                <Text style={customStyles.textStyle}>To help our agents to understand your solar pv needs please share the information you have used in your calculations with us by clicking the button below.</Text>
               </CardItem>
               <CardItem>
                 <Left></Left>
