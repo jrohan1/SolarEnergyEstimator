@@ -59,6 +59,8 @@ which isn’t being used, and then discharge when you need it next (normally tha
             <TouchableOpacity onPress={this.openSeaiWebBrowser}>
               <Text style={[styles.answerStyle, styles.link]}> www.seai.ie</Text>
             </TouchableOpacity>
+            <Text style={styles.questionStyle}>Where can I find out my annual energy consumption?</Text>
+            <Text style={styles.answerStyle}>Your energy provider will provide details of annual and monthly usage in your online account.</Text>
             <Text style={styles.questionStyle}>Other useful links:</Text>
             <Text style={styles.answerStyle}>PVGIS is an online free solar photovoltaic energy calculator. Use it to check solar pv performance and solar radiation levels, for each month, in any location around the world.</Text>
             <TouchableOpacity onPress={this.openPvgisWebBrowser}>
