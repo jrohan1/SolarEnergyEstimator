@@ -39,6 +39,64 @@ class Orientation extends Component {
     });
   }
 
+  saveState = (value) => {
+    if (value === 'South') {
+      this.setState({
+        orientation: value,
+        isSelectedSouth: true,
+        isSelectedSouthWest: false,
+        isSelectedSouthEast: false,
+        isSelectedEast: false
+      }, () => {
+        helperFunctions.saveData('orientation', value);
+      });
+    } else if (value === 'SouthWest') {
+      this.setState({
+        orientation: value,
+        isSelectedSouth: false,
+        isSelectedSouthWest: true,
+        isSelectedSouthEast: false,
+        isSelectedEast: false,
+        isSelectedWest: false
+      }, () => {
+        helperFunctions.saveData('orientation', value);
+      });
+    } else if (value === 'SouthEast') {
+      this.setState({
+        orientation: value,
+        isSelectedSouth: false,
+        isSelectedSouthWest: false,
+        isSelectedSouthEast: true,
+        isSelectedEast: false,
+        isSelectedWest: false
+      }, () => {
+        helperFunctions.saveData('orientation', value);
+      });
+    } else if (value === 'East') {
+      this.setState({
+        orientation: value,
+        isSelectedSouth: false,
+        isSelectedSouthWest: false,
+        isSelectedSouthEast: false,
+        isSelectedEast: true,
+        isSelectedWest: false
+      }, () => {
+        helperFunctions.saveData('orientation', value);
+      });
+    } else if (value === 'West') {
+      this.setState({
+        orientation: value,
+        isSelectedSouth: false,
+        isSelectedSouthWest: false,
+        isSelectedSouthEast: false,
+        isSelectedEast: false,
+        isSelectedWest: true
+      }, () => {
+        helperFunctions.saveData('orientation', value);
+      });
+    }
+  }
+
   checkForMultipleAreas = () => {
     if (this.state.area.length > 1) {
       this.setState({
@@ -182,26 +240,57 @@ class Orientation extends Component {
               </View>
 
               <View style={styles.buttonStyle}>
-                <TouchableOpacity onPress={() => { this.saveState('South'); this.checkForMultipleAreas() }}>
-                  <Text style={[styles.button, customStyles.button]}>S</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { this.saveState('SouthWest'); this.checkForMultipleAreas() }}>
-                  <Text style={[styles.button, customStyles.button]}>S/W</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { this.saveState('SouthEast'); this.checkForMultipleAreas() }}>
-                  <Text style={[styles.button, customStyles.button]}>S/E</Text>
-                </TouchableOpacity>
+                {!this.state.isSelectedSouth ?
+                  <TouchableOpacity onPress={() => { this.saveState('South'); this.checkForMultipleAreas() }}>
+                    <Text style={[styles.button, customStyles.button]}>S</Text>
+                  </TouchableOpacity>
+                  :
+                  <TouchableOpacity onPress={() => { this.saveState('South'); this.checkForMultipleAreas() }}>
+                    <Text style={[styles.selectedButton, customStyles.button]}>S</Text>
+                  </TouchableOpacity>
+                }
+                {!this.state.isSelectedSouthWest ?
+                  <TouchableOpacity onPress={() => { this.saveState('SouthWest'); this.checkForMultipleAreas() }}>
+                    <Text style={[styles.button, customStyles.button]}>S/W</Text>
+                  </TouchableOpacity>
+                  :
+                  <TouchableOpacity onPress={() => { this.saveState('SouthWest'); this.checkForMultipleAreas() }}>
+                    <Text style={[styles.selectedButton, customStyles.button]}>S/W</Text>
+                  </TouchableOpacity>
+                }
+                {!this.state.isSelectedSouthEast ?
+                  <TouchableOpacity onPress={() => { this.saveState('SouthEast'); this.checkForMultipleAreas() }}>
+                    <Text style={[styles.button, customStyles.button]}>S/E</Text>
+                  </TouchableOpacity>
+                  :
+                  <TouchableOpacity onPress={() => { this.saveState('SouthEast'); this.checkForMultipleAreas() }}>
+                    <Text style={[styles.selectedButton, customStyles.button]}>S/E</Text>
+                  </TouchableOpacity>
+                }
               </View>
               <View style={styles.buttonStyle}>
-                <TouchableOpacity onPress={() => { this.saveState('East'); this.checkForMultipleAreas() }}>
-                  <Text style={[styles.button, customStyles.button]}>E</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { this.saveState('West'); this.checkForMultipleAreas() }}>
-                  <Text style={[styles.button, customStyles.button]}>W</Text>
-                </TouchableOpacity>
+                {!this.state.isSelectedEast ?
+                  <TouchableOpacity onPress={() => { this.saveState('East'); this.checkForMultipleAreas() }}>
+                    <Text style={[styles.button, customStyles.button]}>E</Text>
+                  </TouchableOpacity>
+                  :
+                  <TouchableOpacity onPress={() => { this.saveState('East'); this.checkForMultipleAreas() }}>
+                    <Text style={[styles.selectedButton, customStyles.button]}>E</Text>
+                  </TouchableOpacity>
+                }
+                {!this.state.isSelectedWest ?
+                  <TouchableOpacity onPress={() => { this.saveState('West'); this.checkForMultipleAreas() }}>
+                    <Text style={[styles.button, customStyles.button]}>W</Text>
+                  </TouchableOpacity>
+                  :
+
+                  <TouchableOpacity onPress={() => { this.saveState('West'); this.checkForMultipleAreas() }}>
+                    <Text style={[styles.selectedButton, customStyles.button]}>W</Text>
+                  </TouchableOpacity>
+                }
               </View>
               {this.state.showError && !this.state.showSubmit && (
-                <ErrorMessage errorValue={'*Please add orientation for each area measured'} />
+                <ErrorMessage errorValue={'*Please select orientation for second area and click below.'} />
               )}
               {this.state.multipleAreas && this.state.addOrientation && (
                 <TouchableOpacity onPress={() => this.addOrientationToArray()}>
