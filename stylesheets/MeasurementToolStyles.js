@@ -102,12 +102,15 @@ export const styles = StyleSheet.create({
   },
   closeButtonStyle: {
     fontSize: 25,
-    color: 'black',
     marginLeft: 10,
     color: 'navy'
   },
+  videoButtonStyle: {
+    fontSize: 45,
+    color: 'navy',
+    marginLeft: 20
+  },
   cardTextStyle: {
-    flex: 1,
     fontSize: 18,
     fontFamily: 'josefinSans',
     color: 'navy',
