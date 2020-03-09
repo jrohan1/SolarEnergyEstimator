@@ -28,7 +28,6 @@ export const customStyles = StyleSheet.create({
   },
   iconStyle: {
     alignSelf: 'flex-end',
-    backgroundColor: 'transparent',
     transform: [{ rotate: '90deg' }]
   },
   closeIcon: {
@@ -37,11 +36,15 @@ export const customStyles = StyleSheet.create({
   },
   cameraIcon: {
     color: '#fff',
-    fontSize: 60
+    fontSize: 60,
+    height: 70,
+    width: 70, 
   },
   deleteIcon: {  
     fontSize: 60,
-    backgroundColor: 'red'
+    backgroundColor: 'red',
+    height: 70,
+    width: 70, 
   },
   lineStyle: {
     alignSelf: 'center',

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-export const styles = StyleSheet.create({
+export const customStyles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: '#4160A1',
@@ -93,28 +93,7 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     padding: 5,
     borderWidth: 0.5,
-  },
-  cardStyle: {
-    marginTop: 80,
-    marginLeft: 25,
-    marginRight: 25,
-    marginBottom: 30
-  },
-  closeButtonStyle: {
-    fontSize: 25,
-    marginLeft: 10,
-    color: 'navy'
-  },
-  videoButtonStyle: {
-    fontSize: 45,
-    color: 'navy',
-    marginLeft: 20
-  },
-  cardTextStyle: {
-    fontSize: 18,
-    fontFamily: 'josefinSans',
-    color: 'navy',
-  },
+  },  
   startButton: {
     backgroundColor: '#DEE48E',
     borderColor: 'white',
@@ -129,13 +108,5 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     alignSelf: 'center',
     width: 100
-  },
-  tutorialButton: {
-    fontSize: 20,
-    fontFamily: 'josefinSans',
-    color: 'navy',
-    borderBottomWidth: 1,
-    borderColor: '#4160A1',
-    alignSelf: 'center'
   }
 })

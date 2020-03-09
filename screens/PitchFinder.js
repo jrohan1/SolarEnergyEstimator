@@ -52,15 +52,15 @@ class PitchFinder extends Component {
   askPermissionAsync = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasPermission: status === 'granted' });
-    if(status !== 'granted'){
+    if (status !== 'granted') {
       alert('Hey! You can not use this tool without granting access to your camera. Please go to Settings and change access permissions');
-    this.goToHome();
+      this.goToHome();
     }
   }
 
   getPermissionAsync = async () => {
     const { status } = await Permissions.getAsync(Permissions.CAMERA);
-    if(status !== 'granted'){
+    if (status !== 'granted') {
       alert('Hey! You can not use this tool without granting access to your camera. Please go to Settings and change access permissions');
     }
   }
@@ -173,11 +173,17 @@ class PitchFinder extends Component {
                     <Body></Body>
                     <Right>
                       <TouchableOpacity success onPress={() => this.toggleOpeningPostCard()}>
-                        <Icon active type="FontAwesome" name="close" style={styles.closeButtonStyle} />
+                        <Text style={styles.closeButtonStyle}>Skip</Text>
                       </TouchableOpacity>
                     </Right>
                   </CardItem>
-                  <CardItem header>
+                  <CardItem>
+                    <Text style={styles.cardTextStyle}>Watch tutorial video:</Text>
+                    <TouchableOpacity success onPress={this.goToTutorial}>
+                      <Icon active type="Entypo" name="video" style={styles.videoButtonStyle} />
+                    </TouchableOpacity>
+                  </CardItem>
+                  <CardItem>
                     <Text style={styles.cardTextStyle}>To get the most accurate measurement, stand directly opposite the central apex of your roof.</Text>
                   </CardItem>
                   <CardItem>
@@ -190,25 +196,7 @@ class PitchFinder extends Component {
                     <Text style={styles.cardTextStyle}>Try not to tilt the phone backwards or forwards.</Text>
                   </CardItem>
                   <CardItem>
-                    <Text style={styles.cardTextStyle}>Click on the save button to save the angle on screen</Text>
-                  </CardItem>
-                  <CardItem>
-                    <Text style={styles.cardTextStyle}>You can view a tutorial ....</Text>
-                  </CardItem>
-                  <TouchableOpacity success onPress={this.goToTutorial}>
-                    <Text style={customStyles.tutorialButton}>Watch Tutorial</Text>
-                  </TouchableOpacity>
-                  <CardItem>
-                    <Text style={styles.cardTextStyle}>.... or just get started.</Text>
-                  </CardItem>
-                  <CardItem>
-                    <Left></Left>
-                    <Body>
-                      <TouchableOpacity success onPress={() => this.toggleOpeningPostCard()}>
-                        <Text style={styles.startButton}>Get Started</Text>
-                      </TouchableOpacity>
-                    </Body>
-                    <Right></Right>
+                    <Text style={styles.cardTextStyle}>Click on the save button to save the angle on screen.</Text>
                   </CardItem>
                 </View>
               </ScrollView>
@@ -225,30 +213,33 @@ class PitchFinder extends Component {
               <View style={customStyles.iconContainer}>
                 <TouchableOpacity
                   style={customStyles.iconStyle}
-                  onPress={() => this.checkForMultipleAreas()} >                 
-                    <Ionicons
-                      name="ios-close"
-                      style={customStyles.closeIcon}
-                    />       
+                  onPress={() => this.checkForMultipleAreas()} >
+                  <Ionicons
+                    name="ios-close"
+                    size={50}
+                    style={customStyles.closeIcon}
+                  />
                 </TouchableOpacity>
                 <View style={customStyles.lineStyle} />
                 {this.state.selected ?
                   <TouchableOpacity
                     style={customStyles.iconStyle}
                     onPress={() => this.deletePitch()}>
-                      <AntDesign
-                        name="delete"
-                        style={customStyles.deleteIcon}
-                      />
+                    <AntDesign
+                      name="delete"
+                      size={50}
+                      style={customStyles.deleteIcon}
+                    />
                   </TouchableOpacity>
                   :
                   <TouchableOpacity
                     style={customStyles.iconStyle}
                     onPress={() => this.setPitch(pitch)} >
-                      <FontAwesome
-                        name="save"
-                        style={customStyles.cameraIcon}
-                      />
+                    <FontAwesome
+                      name="save"
+                      size={50}
+                      style={customStyles.cameraIcon}
+                    />
                   </TouchableOpacity>
                 }
               </View>

@@ -3,7 +3,8 @@ import { withFirebaseHOC } from '../config/Firebase'
 import { Text, View, TextInput, Dimensions, Keyboard, TouchableHighlight, TouchableOpacity, ScrollView } from "react-native";
 import { Icon, Card, CardItem, Body, Right, Left } from 'native-base';
 import MapView, { Marker, Polygon, ProviderPropType } from 'react-native-maps';
-import { styles } from '../stylesheets/MeasurementToolStyles';
+import { customStyles } from '../stylesheets/MeasurementToolStyles';
+import { styles } from '../stylesheets/MainStyles';
 import config from '../config';
 import _ from 'lodash';
 import axios from 'axios';
@@ -325,7 +326,7 @@ class MeasurementTool extends Component {
           key={prediction.id}
           onPress={() => this.selectedPrediction(prediction)}
         >
-          <Text style={styles.suggestions}>
+          <Text style={customStyles.suggestions}>
             {prediction.description}
           </Text>
         </TouchableHighlight>
@@ -333,7 +334,7 @@ class MeasurementTool extends Component {
 
     const allAreas = this.state.areas.map(
       areas => (
-        <Text key={areas} style={styles.dropdownAreaStyle}>{areas} m2</Text>
+        <Text key={areas} style={customStyles.dropdownAreaStyle}>{areas} m2</Text>
       )
     );
 
@@ -346,7 +347,7 @@ class MeasurementTool extends Component {
     }
 
     return (
-      <View style={styles.container}>
+      <View style={customStyles.container}>
         {this.state.showCard && (
           <Card style={styles.cardStyle}>
             <CardItem>
@@ -354,17 +355,15 @@ class MeasurementTool extends Component {
               <Body></Body>
               <Right>
                 <TouchableOpacity success onPress={() => this.togglePostCard()}>
-                  <Icon active type="FontAwesome" name="close" style={styles.closeButtonStyle} />
+                  <Text style={styles.closeButtonStyle}>Skip</Text>
                 </TouchableOpacity>
               </Right>
             </CardItem>
             <CardItem>
-              <View style={{ flexDirection: 'row' }}>
-                <Text style={styles.cardTextStyle}>Skip and watch tutorial video:</Text>
-                <TouchableOpacity success onPress={this.goToTutorial}>
-                  <Icon active type="Entypo" name="video" style={styles.videoButtonStyle} />
-                </TouchableOpacity>
-              </View>
+              <Text style={styles.cardTextStyle}>Watch tutorial video:</Text>
+              <TouchableOpacity success onPress={this.goToTutorial}>
+                <Icon active type="Entypo" name="video" style={styles.videoButtonStyle} />
+              </TouchableOpacity>
             </CardItem>
             <CardItem header>
               <Text style={styles.cardTextStyle}>SEE will use Google Maps to find your house.</Text>
@@ -393,17 +392,15 @@ class MeasurementTool extends Component {
               <Body></Body>
               <Right>
                 <TouchableOpacity success onPress={() => this.togglePostCard()}>
-                  <Icon active type="FontAwesome" name="close" style={styles.closeButtonStyle} />
+                  <Text style={styles.closeButtonStyle}>Skip</Text>
                 </TouchableOpacity>
               </Right>
             </CardItem>
             <CardItem>
-              <View style={{ flexDirection: 'row' }}>
-                <Text style={styles.cardTextStyle}>Skip and watch tutorial video:</Text>
-                <TouchableOpacity success onPress={this.goToTutorial}>
-                  <Icon active type="Entypo" name="video" style={styles.videoButtonStyle} />
-                </TouchableOpacity>
-              </View>
+              <Text style={styles.cardTextStyle}>Watch tutorial video:</Text>
+              <TouchableOpacity success onPress={this.goToTutorial}>
+                <Icon active type="Entypo" name="video" style={styles.videoButtonStyle} />
+              </TouchableOpacity>
             </CardItem>
             <CardItem>
               <Text style={styles.cardTextStyle}>Tap on screen to place first marker.</Text>
@@ -435,53 +432,51 @@ class MeasurementTool extends Component {
         )}
         {this.state.showCardThree && (
           <Card style={styles.cardStyle}>
-          <CardItem>
-            <Left></Left>
-            <Body></Body>
-            <Right>
-              <TouchableOpacity success onPress={() => this.togglePostCard()}>
-                <Icon active type="FontAwesome" name="close" style={styles.closeButtonStyle} />
-              </TouchableOpacity>
-            </Right>
-          </CardItem>
-          <CardItem>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.cardTextStyle}>Skip and watch tutorial video:</Text>
+            <CardItem>
+              <Left></Left>
+              <Body></Body>
+              <Right>
+                <TouchableOpacity success onPress={() => this.togglePostCard()}>
+                  <Text style={styles.closeButtonStyle}>Skip</Text>
+                </TouchableOpacity>
+              </Right>
+            </CardItem>
+            <CardItem>
+              <Text style={styles.cardTextStyle}>Watch tutorial video:</Text>
               <TouchableOpacity success onPress={this.goToTutorial}>
                 <Icon active type="Entypo" name="video" style={styles.videoButtonStyle} />
               </TouchableOpacity>
-            </View>
-          </CardItem>
-          <CardItem>
-            <Text style={styles.cardTextStyle}>Do not mark area that contains obstacles (velux windows, chimney, vents).</Text>
-          </CardItem>
-          <CardItem>
-            <Text style={styles.cardTextStyle}>Delete will remove all markers.</Text>
-          </CardItem>
-          <CardItem>
-            <Text style={styles.cardTextStyle}>To measure for more than one set of panels click 'Mark another area'.</Text>
-          </CardItem>
-          <CardItem>
-            <Left><TouchableOpacity success onPress={() => this.setState({
-              showCardTwo: true,
-              showCardThree: false
-            })}>
-              <Icon active type="AntDesign" name="arrowleft" style={styles.closeButtonStyle} />
-            </TouchableOpacity></Left>
-            <Body></Body>
-            <Right>
-              <TouchableOpacity success onPress={() => this.setState({
+            </CardItem>
+            <CardItem>
+              <Text style={styles.cardTextStyle}>Do not mark area that contains obstacles (velux windows, chimney, vents).</Text>
+            </CardItem>
+            <CardItem>
+              <Text style={styles.cardTextStyle}>Delete will remove all markers.</Text>
+            </CardItem>
+            <CardItem>
+              <Text style={styles.cardTextStyle}>To measure for more than one set of panels click 'Mark another area'.</Text>
+            </CardItem>
+            <CardItem>
+              <Left><TouchableOpacity success onPress={() => this.setState({
+                showCardTwo: true,
                 showCardThree: false
               })}>
-                <Icon active type="AntDesign" name="arrowright" style={styles.closeButtonStyle} />
-              </TouchableOpacity>
-            </Right>
-          </CardItem>
-        </Card>
+                <Icon active type="AntDesign" name="arrowleft" style={styles.closeButtonStyle} />
+              </TouchableOpacity></Left>
+              <Body></Body>
+              <Right>
+                <TouchableOpacity success onPress={() => this.setState({
+                  showCardThree: false
+                })}>
+                  <Icon active type="AntDesign" name="arrowright" style={styles.closeButtonStyle} />
+                </TouchableOpacity>
+              </Right>
+            </CardItem>
+          </Card>
         )}
         {!this.state.showCard && !this.state.showCardTwo && !this.state.showCardThree && (
           <MapView
-            style={styles.map}
+            style={customStyles.map}
             region={{
               latitude: this.state.latitude,
               longitude: this.state.longitude,
@@ -530,7 +525,7 @@ class MeasurementTool extends Component {
         {!this.state.showCard && !this.state.showCardTwo && !this.state.showCardThree && (
           <TextInput
             placeholder="Please enter Eircode here"
-            style={styles.textInput}
+            style={customStyles.textInput}
             placeholderTextColor='#4160A1'
             value={this.state.destination}
             onChangeText={destination => {
@@ -542,27 +537,27 @@ class MeasurementTool extends Component {
         )}
         {predictions}
         {!this.state.showCard && !this.state.showCardTwo && !this.state.showCardThree && this.state.predictionSelected && (
-          <View style={styles.zoomButtonContainer}>
+          <View style={customStyles.zoomButtonContainer}>
             <TouchableOpacity
-              style={styles.button}
+              style={customStyles.button}
               onPress={() => { this.onPressZoomIn() }}
             >
-              <Feather name="zoom-in" style={styles.zoomButtons} size={40} />
+              <Feather name="zoom-in" style={customStyles.zoomButtons} size={40} />
             </TouchableOpacity>
             <View style={{ height: 10 }} />
             <TouchableOpacity
-              style={styles.button}
+              style={customStyles.button}
               onPress={() => { this.onPressZoomOut() }}
             >
-              <Feather name="zoom-out" style={styles.zoomButtons} size={40} />
+              <Feather name="zoom-out" style={customStyles.zoomButtons} size={40} />
             </TouchableOpacity>
           </View>
         )}
-        <View style={styles.buttonContainer}>
+        <View style={customStyles.buttonContainer}>
           {!this.state.showCard && !this.state.showCardTwo && !this.state.showCardThree && (
             <TouchableOpacity
               onPress={this.goToGetStarted}
-              style={styles.button}
+              style={customStyles.button}
             >
               <Ionicons name='md-arrow-round-back' size={40} color={'#4160A1'} />
             </TouchableOpacity>
@@ -570,48 +565,48 @@ class MeasurementTool extends Component {
           {this.state.editing && this.state.canEdit && !this.state.isSecondArea && (
             <TouchableOpacity
               onPress={() => this.markAnotherArea()}
-              style={styles.button}
+              style={customStyles.button}
             >
-              <Text style={styles.textStyle}>Mark another area</Text>
+              <Text style={customStyles.textStyle}>Mark another area</Text>
             </TouchableOpacity>
           )}
           {this.state.editing && this.state.canEdit && (
             <TouchableOpacity
               onPress={() => this.finishEditingPolygon()}
-              style={styles.button}
+              style={customStyles.button}
             >
-              <Text style={styles.textStyle}>Finished</Text>
+              <Text style={customStyles.textStyle}>Finished</Text>
             </TouchableOpacity>
           )}
           {this.state.editing === null && !this.state.canEdit && !this.state.areaTotal && !this.state.showCard && !this.state.showCardTwo && !this.state.showCardThree && (
             <TouchableOpacity
               onPress={() => this.calculateArea()}
-              style={styles.button}
+              style={customStyles.button}
             >
-              <Text style={styles.textStyle}>Calculate Area</Text>
+              <Text style={customStyles.textStyle}>Calculate Area</Text>
             </TouchableOpacity>
           )}
           {this.state.areaTotal && (
             <TouchableOpacity
               onPress={this.goToPitchMenu}
-              style={styles.button}
+              style={customStyles.button}
             >
-              <Text style={styles.textStyle}>Next Step</Text>
+              <Text style={customStyles.textStyle}>Next Step</Text>
             </TouchableOpacity>
           )}
         </View>
-        <View style={styles.deleteButton}>
+        <View style={customStyles.deleteButton}>
           {!this.state.areaTotal && !this.state.showCard && !this.state.showCardTwo && !this.state.showCardThree && this.state.editing && this.state.canEdit && (
             <TouchableOpacity
               onPress={() => this.deletePolygon()}
-              style={styles.button}
+              style={customStyles.button}
             >
               <AntDesign name='delete' size={40} color={'red'} />
             </TouchableOpacity>
           )}
         </View>
         {this.state.areaTotal && (
-          <Text style={styles.areaTextStyle}>Total Area:</Text>
+          <Text style={customStyles.areaTextStyle}>Total Area:</Text>
         )}
         {allAreas}
       </View>

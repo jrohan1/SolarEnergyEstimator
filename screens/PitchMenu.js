@@ -48,13 +48,11 @@ class PitchMenu extends Component {
             <View style={styles.questionStyle}>
               <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>This will be determined by the pitch of your roof.</Text>
               <Text style={[styles.subTextStyle, pitchMenuStyles.textStyle]}>*Typically between 30 to 40 degrees</Text>
-              <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>If you know the pitch please click </Text>
               <TouchableOpacity onPress={this.goToManualPitchEntry}>
-                <Text style={styles.nextButton}>Enter Pitch</Text>
+                <Text style={styles.nextButton}>I know the pitch</Text>
               </TouchableOpacity>
-              <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>Otherwise click</Text>
               <TouchableOpacity onPress={this.goToPitchFinder}>
-              <Text style={styles.nextButton}>Find Pitch</Text>
+              <Text style={styles.nextButton}>I don't know the pitch</Text>
             </TouchableOpacity>
             </View>
           </Card>
