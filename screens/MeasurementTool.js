@@ -421,6 +421,7 @@ class MeasurementTool extends Component {
               <Body></Body>
               <Right>
                 <TouchableOpacity success onPress={() => this.setState({
+                  showCard: false,
                   showCardTwo: false,
                   showCardThree: true
                 })}>
@@ -458,6 +459,7 @@ class MeasurementTool extends Component {
             </CardItem>
             <CardItem>
               <Left><TouchableOpacity success onPress={() => this.setState({
+                showCard: false,
                 showCardTwo: true,
                 showCardThree: false
               })}>
@@ -465,9 +467,7 @@ class MeasurementTool extends Component {
               </TouchableOpacity></Left>
               <Body></Body>
               <Right>
-                <TouchableOpacity success onPress={() => this.setState({
-                  showCardThree: false
-                })}>
+                <TouchableOpacity success onPress={() => this.togglePostCard()}>
                   <Icon active type="AntDesign" name="arrowright" style={styles.closeButtonStyle} />
                 </TouchableOpacity>
               </Right>

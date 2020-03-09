@@ -9,7 +9,7 @@ export const customStyles = StyleSheet.create({
     fontFamily: 'josefinSans',
     color: 'navy',
     textAlign: 'center',
-    marginTop: 60,
+    marginTop: 20,
     marginBottom: 20,
     marginLeft: 10,
     marginRight: 10,
