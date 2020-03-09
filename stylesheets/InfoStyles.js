@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#4160A1',
   },
   blockStyle: {
-    marginTop: 40,
+    marginTop: 20,
     marginBottom: 20
   },
   questionStyle: {
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'left',
     marginTop: 5,
-    marginLeft: 15,
+    marginLeft: 10,
     marginRight: 10,
     lineHeight: 30,
   },

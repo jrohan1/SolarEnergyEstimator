@@ -55,7 +55,6 @@ class HotWater extends Component {
         <BathPic />
         <View style={customStyles.questionStyle}>
           <Text style={styles.textStyle}>Do you want to heat domestic hot water?</Text>
-          <Text style={styles.answerTextStyle}>{this.state.hotWater}</Text>
         </View>
         <View style={styles.buttonStyle}>
           {!this.state.isSelected ?

@@ -55,7 +55,6 @@ class ElectricCar extends Component {
         <ElectricCarPic />
         <View style={styles.questionStyle}>
           <Text style={styles.textStyle}>Do you have / plan to have an electric car?</Text>
-          <Text style={styles.answerTextStyle}>{this.state.useElectricCar}</Text>
         </View>
         <View style={styles.buttonStyle}>
           {!this.state.isSelected ?

@@ -69,7 +69,6 @@ class TimeOccupied extends Component {
           <EnergyUse />
           <View style={customStyles.questionStyle}>
             <Text style={styles.textStyle}>Select time of day when most energy is consumed</Text>
-            <Text style={styles.answerTextStyle}>{this.state.time}</Text>
           </View>
           <View style={styles.buttonStyle}>
             {!this.state.isSelectedMorning ?
