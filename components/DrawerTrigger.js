@@ -5,28 +5,29 @@ import { withNavigation } from 'react-navigation';
 import { DrawerActions } from 'react-navigation-drawer';
 
 class DrawerTrigger extends Component {
-	render() {
-		return(
-      <TouchableOpacity style={{height: 70}}
-        onPress={() => {
-          this.props.navigation.dispatch(DrawerActions.openDrawer())
-        }}>
-				<Ionicons
-        name="md-menu"
-        color="#DEE48E"
-        size={32}
-        style={styles.menuIcon}
-      />
-			</TouchableOpacity>
-		)
-	}
+  render() {
+    return (
+      <TouchableOpacity onPress={() => {
+        this.props.navigation.dispatch(DrawerActions.openDrawer())
+      }}>
+        <Ionicons
+          name="md-menu"
+          color="#DEE48E"
+          size={40}
+          style={styles.menuIcon}
+        />
+      </TouchableOpacity>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
   menuIcon: {
-		zIndex: 9,
-		top: 40,
-		right: 20,
+    zIndex: 9,
+    top: 40,
+    right: 20,
+    height: 90,
+    width: 40,
   }
 });
 
