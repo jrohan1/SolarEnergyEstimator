@@ -17,13 +17,25 @@ class ElectricCar extends Component {
   }
 
   goToHotWater = () => this.props.navigation.navigate('HotWater')
-  
+
   saveState = (value) => {
-    this.setState({
-      useElectricCar: value
-    }, () => {
-      helperFunctions.saveData('useElectricCar', value);
-    });    
+    if (value === 'Yes') {
+      this.setState({
+        useElectricCar: value,
+        isSelected: true,
+        isSelectedNo: false
+      }, () => {
+        helperFunctions.saveData('useElectricCar', value);
+      });
+    } else if (value === 'No') {
+      this.setState({
+        useElectricCar: value,
+        isSelectedNo: true,
+        isSelected: false
+      }, () => {
+        helperFunctions.saveData('useElectricCar', value);
+      });
+    }
   }
 
   checkForEntry = () => {
@@ -39,23 +51,35 @@ class ElectricCar extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header/>
+        <Header />
         <ElectricCarPic />
         <View style={styles.questionStyle}>
           <Text style={styles.textStyle}>Do you have / plan to have an electric car?</Text>
           <Text style={styles.answerTextStyle}>{this.state.useElectricCar}</Text>
         </View>
         <View style={styles.buttonStyle}>
-          <TouchableOpacity onPress={()=> this.saveState('Yes')}>
-            <Text style={[styles.button, customStyles.button]}>Yes</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={()=> this.saveState('No')}>
-            <Text style={[styles.button, customStyles.button]}>No</Text>
-          </TouchableOpacity>
+          {!this.state.isSelected ?
+            <TouchableOpacity onPress={() => this.saveState('Yes')}>
+              <Text style={[styles.button, customStyles.button]}>Yes</Text>
+            </TouchableOpacity>
+            :
+            <TouchableOpacity onPress={() => this.saveState('Yes')}>
+              <Text style={[styles.selectedButton, customStyles.button]}>Yes</Text>
+            </TouchableOpacity>
+          }
+          {!this.state.isSelectedNo ?
+            <TouchableOpacity onPress={() => this.saveState('No')}>
+              <Text style={[styles.button, customStyles.button]}>No</Text>
+            </TouchableOpacity>
+            :
+            <TouchableOpacity onPress={() => this.saveState('No')}>
+              <Text style={[styles.selectedButton, customStyles.button]}>No</Text>
+            </TouchableOpacity>
+          }
         </View>
         {this.state.showError && (
-            <ErrorMessage errorValue={'*Please select an option'} />
-          )}
+          <ErrorMessage errorValue={'*Please select an option'} />
+        )}
         <TouchableOpacity onPress={() => this.checkForEntry()}>
           <Text style={styles.nextButton}>Next Step</Text>
         </TouchableOpacity>

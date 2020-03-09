@@ -22,8 +22,53 @@ class Shading extends Component {
       shading: value
     }, () => {
       helperFunctions.saveData('shading', value);
-    });    
+    });
   };
+
+  saveState = (value) => {
+    if (value === 'None') {
+      this.setState({
+        shading: value,
+        isSelectedNone: true,
+        isSelectedLittle: false,
+        isSelectedSome: false,
+        isSelectedAlot: false
+      }, () => {
+        helperFunctions.saveData('shading', value);
+      });
+    } else if (value === 'A little') {
+      this.setState({
+        shading: value,
+        isSelectedNone: false,
+        isSelectedLittle: true,
+        isSelectedSome: false,
+        isSelectedAlot: false
+      }, () => {
+        helperFunctions.saveData('shading', value);
+      });
+    } else if (value === 'Some') {
+      this.setState({
+        shading: value,
+        isSelectedNone: false,
+        isSelectedLittle: false,
+        isSelectedSome: true,
+        isSelectedAlot: false
+      }, () => {
+        helperFunctions.saveData('shading', value);
+      });
+    } else if (value === 'A lot') {
+      this.setState({
+        shading: value,
+        isSelectedNone: false,
+        isSelectedLittle: false,
+        isSelectedSome: false,
+        isSelectedAlot: true
+      }, () => {
+        helperFunctions.saveData('shading', value);
+      });
+    }
+
+  }
 
   checkForEntry = () => {
     if (this.state.shading === '') {
@@ -38,7 +83,7 @@ class Shading extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header/>
+        <Header />
         <ScrollView>
           <CastingShade />
           <View style={styles.questionStyle}>
@@ -46,18 +91,41 @@ class Shading extends Component {
             <Text style={styles.answerTextStyle}>{this.state.shading}</Text>
           </View>
           <View style={styles.buttonStyle}>
-            <TouchableOpacity onPress={() => this.saveState('None')}>
-              <Text style={styles.button}>None</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.saveState('A little')}>
-              <Text style={styles.button}>A little</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.saveState('Some')}>
-              <Text style={styles.button}>Some</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.saveState('A lot')}>
-              <Text style={styles.button}>A lot</Text>
-            </TouchableOpacity>
+            {!this.state.isSelectedNone ?
+              <TouchableOpacity onPress={() => this.saveState('None')}>
+                <Text style={styles.button}>None</Text>
+              </TouchableOpacity>
+              : <TouchableOpacity onPress={() => this.saveState('None')}>
+                <Text style={styles.selectedButton}>None</Text>
+              </TouchableOpacity>
+            }
+            {!this.state.isSelectedLittle ?
+              <TouchableOpacity onPress={() => this.saveState('A little')}>
+                <Text style={styles.button}>A little</Text>
+              </TouchableOpacity>
+              :
+              <TouchableOpacity onPress={() => this.saveState('A little')}>
+                <Text style={styles.selectedButton}>A little</Text>
+              </TouchableOpacity>
+            }
+            {!this.state.isSelectedSome ?
+              <TouchableOpacity onPress={() => this.saveState('Some')}>
+                <Text style={styles.button}>Some</Text>
+              </TouchableOpacity>
+              :
+              <TouchableOpacity onPress={() => this.saveState('Some')}>
+                <Text style={styles.selectedButton}>Some</Text>
+              </TouchableOpacity>
+            }
+            {!this.state.isSelectedAlot ?
+              <TouchableOpacity onPress={() => this.saveState('A lot')}>
+                <Text style={styles.button}>A lot</Text>
+              </TouchableOpacity>
+              :
+              <TouchableOpacity onPress={() => this.saveState('A lot')}>
+                <Text style={styles.selectedButton}>A lot</Text>
+              </TouchableOpacity>
+            }
           </View>
           {this.state.showError && (
             <ErrorMessage errorValue={'*Please select an option'} />

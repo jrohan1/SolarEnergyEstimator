@@ -18,17 +18,53 @@ class TimeOccupied extends Component {
   goToReport = () => this.props.navigation.navigate('Report')
 
   saveState = (value) => {
-    this.setState({
-      time: value
-    }, () => {
-      helperFunctions.saveData('timeOccupied', value);
-    });    
+    if (value === 'Morning') {
+      this.setState({
+        time: value,
+        isSelectedMorning: true,
+        isSelectedAfternoon: false,
+        isSelectedEvening: false,
+        isSelectedAll: false
+      }, () => {
+        helperFunctions.saveData('timeOccupied', value);
+      });
+    } else if (value === 'Afternoon') {
+      this.setState({
+        time: value,
+        isSelectedMorning: false,
+        isSelectedAfternoon: true,
+        isSelectedEvening: false,
+        isSelectedAll: false
+      }, () => {
+        helperFunctions.saveData('timeOccupied', value);
+      });
+    } else if (value === 'Evening') {
+      this.setState({
+        time: value,
+        isSelectedMorning: false,
+        isSelectedAfternoon: false,
+        isSelectedEvening: true,
+        isSelectedAll: false
+      }, () => {
+        helperFunctions.saveData('timeOccupied', value);
+      });
+    } else if (value === 'All Day') {
+      this.setState({
+        time: value,
+        isSelectedMorning: false,
+        isSelectedAfternoon: false,
+        isSelectedEvening: false,
+        isSelectedAll: true
+      }, () => {
+        helperFunctions.saveData('timeOccupied', value);
+      });
+    }
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Header/>
+        <Header />
         <ScrollView>
           <EnergyUse />
           <View style={customStyles.questionStyle}>
@@ -36,20 +72,45 @@ class TimeOccupied extends Component {
             <Text style={styles.answerTextStyle}>{this.state.time}</Text>
           </View>
           <View style={styles.buttonStyle}>
-            <TouchableOpacity onPress={() => this.saveState('Morning')}>
-              <Text style={[styles.button, customStyles.button]}>Morning</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.saveState('Afternoon')}>
-              <Text style={[styles.button, customStyles.button]}>Afternoon</Text>
-            </TouchableOpacity>
+            {!this.state.isSelectedMorning ?
+              <TouchableOpacity onPress={() => this.saveState('Morning')}>
+                <Text style={[styles.button, customStyles.button]}>Morning</Text>
+              </TouchableOpacity>
+              :
+              <TouchableOpacity onPress={() => this.saveState('Morning')}>
+                <Text style={[styles.selectedButton, customStyles.button]}>Morning</Text>
+              </TouchableOpacity>
+            }
+            {!this.state.isSelectedAfternoon ?
+              <TouchableOpacity onPress={() => this.saveState('Afternoon')}>
+                <Text style={[styles.button, customStyles.button]}>Afternoon</Text>
+              </TouchableOpacity>
+              :
+              <TouchableOpacity onPress={() => this.saveState('Afternoon')}>
+                <Text style={[styles.selectedButton, customStyles.button]}>Afternoon</Text>
+              </TouchableOpacity>
+            }
+
           </View>
           <View style={styles.buttonStyle}>
-            <TouchableOpacity onPress={() => this.saveState('Evening')}>
-              <Text style={[styles.button, customStyles.button]}>Evening</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.saveState('All Day')}>
-              <Text style={[styles.button, customStyles.button]}>All Day</Text>
-            </TouchableOpacity>
+            {!this.state.isSelectedEvening ?
+              <TouchableOpacity onPress={() => this.saveState('Evening')}>
+                <Text style={[styles.button, customStyles.button]}>Evening</Text>
+              </TouchableOpacity>
+              :
+              <TouchableOpacity onPress={() => this.saveState('Evening')}>
+                <Text style={[styles.selectedButton, customStyles.button]}>Evening</Text>
+              </TouchableOpacity>
+            }
+            {!this.state.isSelectedAll ?
+              <TouchableOpacity onPress={() => this.saveState('All Day')}>
+                <Text style={[styles.button, customStyles.button]}>All Day</Text>
+              </TouchableOpacity>
+              :
+              <TouchableOpacity onPress={() => this.saveState('All Day')}>
+                <Text style={[styles.selectedButton, customStyles.button]}>All Day</Text>
+              </TouchableOpacity>
+            }
           </View>
           <TouchableOpacity onPress={this.goToReport}>
             <Text style={styles.nextButton}>Next Step</Text>

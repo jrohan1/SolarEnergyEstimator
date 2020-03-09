@@ -75,6 +75,22 @@ export const styles = StyleSheet.create({
     marginBottom :20,
     alignSelf: 'center'
   },
+  selectedButton: {
+    backgroundColor: 'grey',
+    borderColor: 'white',
+    borderWidth: 1,
+    borderRadius: 12,
+    color: '#4160A1',
+    fontSize: 20,
+    fontWeight: 'bold',
+    overflow: 'hidden',
+    padding: 10,
+    textAlign:'center',
+    marginLeft :10,
+    marginRight:10,
+    marginBottom :20,
+    alignSelf: 'center'
+  },
   nextButton: {
     backgroundColor: '#DEE48E',
     borderColor: 'white',
@@ -122,6 +138,11 @@ export const styles = StyleSheet.create({
     fontSize: 25,
     marginLeft: 10,
     color: 'navy'
+  },
+  videoButtonStyle: {
+    fontSize: 42,
+    color: 'navy',
+    marginLeft: 10
   },
   cardTextStyle: {
     flex: 1,
