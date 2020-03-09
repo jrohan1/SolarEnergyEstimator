@@ -7,6 +7,7 @@ import { styles } from '../stylesheets/MainStyles';
 import { customStyles } from '../stylesheets/OrientationStyle';
 import Header from '../components/Header';
 import Compass from '../components/Compass';
+import CompassAid from '../components/CompassAid';
 import helperFunctions from '../sharedFunctions';
 import Emoji from 'react-native-emoji';
 
@@ -97,7 +98,7 @@ class Orientation extends Component {
       <View style={styles.container}>
         <Header />
         <ScrollView>
-          {this.state.showCard ?
+          {this.state.showCard && (
             <Card style={[styles.cardStyle, customStyles.card]}>
               <CardItem>
                 <Left></Left>
@@ -109,37 +110,66 @@ class Orientation extends Component {
                 </Right>
               </CardItem>
               <CardItem>
+                <Text style={styles.cardTextStyle}>If you used our Measurement Tool to mark the area where you would like to install the system. South will be directly facing you as you look at the map.</Text>
+              </CardItem>
+              <CardItem>
+                <Text style={styles.cardTextStyle}>For Example, imagine it like this ...</Text>
+              </CardItem>
+              <CompassAid />
+              <CardItem>
+                <Left></Left>
+                <Body></Body>
+                <Right>
+                  <TouchableOpacity success onPress={() => this.setState({
+                    showCard: false,
+                    showNextCard: true
+                  })}>
+                    <Icon active type="AntDesign" name="arrowright" style={styles.closeButtonStyle} />
+                  </TouchableOpacity>
+                </Right>
+              </CardItem>
+            </Card>
+          )}
+          {this.state.showNextCard && (
+            <Card style={[styles.cardStyle, customStyles.card]}>
+              <CardItem>
+                <Left></Left>
+                <Body></Body>
+                <Right>
+                  <TouchableOpacity success onPress={() => this.setState({ showNextCard: false })}>
+                    <Icon active type="FontAwesome" name="close" style={styles.closeButtonStyle} />
+                  </TouchableOpacity>
+                </Right>
+              </CardItem>
+              <CardItem>
                 <Text style={styles.cardTextStyle}>The sun rises in the East and sets in the West.</Text>
               </CardItem>
               <CardItem>
-                <Text style={styles.cardTextStyle}>Which side of your house get's the sun in the morning ?</Text>
+                <Text style={styles.cardTextStyle}>Which side of your house get's the sun in the morning?</Text>
               </CardItem>
               <CardItem>
-                <Text style={styles.cardTextStyle}>Which side of your house get's the sun in the evening ?</Text>
+                <Text style={styles.cardTextStyle}>Which side of your house get's the sun in the evening?</Text>
               </CardItem>
               <CardItem>
                 <Text style={styles.cardTextStyle}>The sun will move from East to West passing South.</Text>
               </CardItem>
               <CardItem>
-                <Text style={styles.cardTextStyle}>Solar panels that face South are the most efficient.</Text>
-              </CardItem>
-              <CardItem>
-                <Text style={styles.cardTextStyle}>SouthEast or SouthWest is slightly less efficient, roughly 5% less.</Text>
-              </CardItem>
-              <CardItem>
               </CardItem>
             </Card>
-            :
+          )}
+          {!this.state.showCard && !this.state.showNextCard && (
             <View>
               <Compass />
-
               <View style={styles.questionStyle}>
-                <Text style={styles.textStyle}>Which direction will the solar panels face ?</Text>
+                <Text style={styles.textStyle}>Which direction will the solar panels face?</Text>
                 <View style={customStyles.group}>
                   <TouchableOpacity onPress={() => this.setState({ showCard: true })}>
-                    <Text style={[styles.subTextStyle, customStyles.infoStyle]}>How do I know ?</Text>
+                    <Text style={[styles.subTextStyle, customStyles.infoStyle]}>How do I know?</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={() => this.setState({ showCard: true })}>
+                  <TouchableOpacity onPress={() => this.setState({
+                    showCard: true,
+                    showFirstCard: true
+                  })}>
                     <Emoji name="confused" style={customStyles.emoji} />
                   </TouchableOpacity>
                 </View>
@@ -184,7 +214,7 @@ class Orientation extends Component {
                 </TouchableOpacity>
               )}
             </View>
-          }
+          )}
         </ScrollView>
       </View>
     )
