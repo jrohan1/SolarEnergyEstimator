@@ -12,7 +12,7 @@ export const customStyles = StyleSheet.create({
     fontSize: 30,
     fontFamily: 'josefinSans',
     color: '#DEE48E',
-    textAlign:'justify',
+    textAlign:'center',
     marginTop: 50,
     marginLeft :10,
     marginRight:10,
