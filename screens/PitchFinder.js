@@ -54,7 +54,7 @@ class PitchFinder extends Component {
     this.setState({ hasPermission: status === 'granted' });
     if (status !== 'granted') {
       alert('Hey! You can not use this tool without granting access to your camera. Please go to Settings and change access permissions');
-      this.goToHome();
+      this.goToManualPitchEntry();
     }
   }
 
@@ -78,7 +78,7 @@ class PitchFinder extends Component {
 
   goToOrientation = () => this.props.navigation.navigate('Orientation');
   goToTutorial = () => this.props.navigation.navigate('PitchTutorial');
-  goToHome = () => this.props.navigation.navigate('Home');
+  goToManualPitchEntry = () => this.props.navigation.navigate('ManualPitchEntry');
 
   setPitch = (newPitch) => {
     this.setState({
@@ -158,9 +158,11 @@ class PitchFinder extends Component {
     }
 
     if (hasPermission === null) {
-      return <View />;
+      return <View style={styles.container}>
+      </View>;
     } else if (hasPermission === false) {
-      return <Text>No access to camera</Text>;
+      return <View style={styles.container}>
+      </View>;
     } else {
       return (
         <View style={customStyles.container}>
