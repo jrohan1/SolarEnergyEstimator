@@ -6,10 +6,10 @@ import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/MainStyles';
 import { customStyles } from '../stylesheets/OrientationStyle';
 import Header from '../components/Header';
-import Compass from '../components/Compass';
 import CompassAid from '../components/CompassAid';
 import helperFunctions from '../sharedFunctions';
 import Emoji from 'react-native-emoji';
+import MovingCompass from '../components/MovingCompass';
 
 class Orientation extends Component {
   constructor(props) {
@@ -168,7 +168,7 @@ class Orientation extends Component {
                 </Right>
               </CardItem>
               <CardItem>
-                <Text style={styles.cardTextStyle}>If you used our Measurement Tool to mark the area where you would like to install the system. South will be directly facing you as you look at the map.</Text>
+                <Text style={styles.cardTextStyle}>If you used our Measurement Tool to mark the area where you would like to install the system, South will be directly facing you as you look at the map.</Text>
               </CardItem>
               <CardItem>
                 <Text style={styles.cardTextStyle}>For Example, imagine it like this ...</Text>
@@ -217,7 +217,7 @@ class Orientation extends Component {
           )}
           {!this.state.showCard && !this.state.showNextCard && (
             <View>
-              <Compass />
+              <MovingCompass />
               <View style={styles.questionStyle}>
                 <Text style={styles.textStyle}>Which direction will the solar panels face?</Text>
                 <View style={customStyles.group}>
