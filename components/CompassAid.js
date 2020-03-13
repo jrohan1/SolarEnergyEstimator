@@ -3,7 +3,7 @@ import { Image } from 'react-native-elements'
 
 const CompassAid = () => (
   <Image
-    source={require('../assets/compassMap.png')}
+    source={require('../assets/images/compassMap.png')}
     style={{ 
       alignSelf: 'center',
       width: 150,

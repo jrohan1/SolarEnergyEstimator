@@ -109,7 +109,7 @@ export default class MovingCompass extends Component {
         </Row>
         <Row style={{ alignItems: 'center' }} size={2}>
           <Col style={{ alignItems: 'center' }}>
-            <Image source={require("../assets/rotatedCompass.png")} style={{
+            <Image source={require("../assets/images/rotatedCompass.png")} style={{
               height: 225,
               width: 225,
               justifyContent: 'center',

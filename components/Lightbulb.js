@@ -3,7 +3,7 @@ import { Image } from 'react-native-elements'
 
 const Lightbulb = () => (
   <Image
-    source={require('../assets/lightbulb.png')}
+    source={require('../assets/images/lightbulb.png')}
     style={{ alignSelf: 'center',
       width: 300,
       height: 250

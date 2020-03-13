@@ -3,7 +3,7 @@ import { Image } from 'react-native-elements'
 
 const ContactUsBanner = () => (
   <Image
-    source={require('../assets/placeHolder.png')}
+    source={require('../assets/images/placeHolder.png')}
     style={{ alignSelf: 'center',
     height: 125,
     width: 125   

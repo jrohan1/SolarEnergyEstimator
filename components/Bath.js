@@ -3,7 +3,7 @@ import { Image } from 'react-native-elements'
 
 const BathPic = () => (
   <Image
-    source={require('../assets/bath.png')}
+    source={require('../assets/images/bath.png')}
     style={{ 
       alignSelf: 'center',
       marginTop: 20

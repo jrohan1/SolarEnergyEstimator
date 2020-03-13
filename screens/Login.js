@@ -144,7 +144,7 @@ class Login extends Component {
                 disabled={!isValid || isSubmitting}
                 onPress={this.signInWithGoogleAsync}>
                 <Image
-                  source={require('../assets/googleSignIn.png')}
+                  source={require('../assets/images/googleSignIn.png')}
                   style={styles.googleLogInStyle}
                 />
               </TouchableOpacity> 

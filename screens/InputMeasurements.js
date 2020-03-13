@@ -144,7 +144,7 @@ class InputMeasurements extends Component {
             </TouchableOpacity>
           )}
           <TouchableOpacity onPress={() => this.submitInput()}>
-            <Text style={styles.nextButton}>Submit</Text>
+            <Text style={styles.nextButton}>Next Step</Text>
           </TouchableOpacity>
         </ScrollView>
       </View>

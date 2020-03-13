@@ -203,10 +203,10 @@ class Orientation extends Component {
                 <Text style={styles.cardTextStyle}>The sun rises in the East and sets in the West.</Text>
               </CardItem>
               <CardItem>
-                <Text style={styles.cardTextStyle}>Which side of your house get's the sun in the morning?</Text>
+                <Text style={styles.cardTextStyle}>Which side of your house gets the sun in the morning?</Text>
               </CardItem>
               <CardItem>
-                <Text style={styles.cardTextStyle}>Which side of your house get's the sun in the evening?</Text>
+                <Text style={styles.cardTextStyle}>Which side of your house gets the sun in the evening?</Text>
               </CardItem>
               <CardItem>
                 <Text style={styles.cardTextStyle}>The sun will move from East to West passing South.</Text>

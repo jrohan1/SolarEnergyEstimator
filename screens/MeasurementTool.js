@@ -516,7 +516,7 @@ class MeasurementTool extends Component {
                   coordinate={coordinate}
                   anchor={{ x: 0.5, y: 0.5 }}
                   onDragEnd={(e) => this.changeCoordinate(e, index)}
-                  image={require('../assets/mapPointer.png')}
+                  image={require('../assets/images/mapPointer.png')}
                   draggable
                 />
               )))}

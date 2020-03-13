@@ -10,7 +10,7 @@ class SmallLogo extends React.Component {
     return (
       <TouchableOpacity onPress={this.goToHome}>
         <Image
-          source={require('../assets/textLessLogo.jpg')}
+          source={require('../assets/images/textLessLogo.jpg')}
           style={styles.logoStyle}
         />
       </TouchableOpacity>

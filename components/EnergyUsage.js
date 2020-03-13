@@ -3,7 +3,7 @@ import { Image } from 'react-native-elements'
 
 const EnergyUsage = () => (
   <Image
-    source={require('../assets/houseWork.png')}
+    source={require('../assets/images/houseWork.png')}
     style={{ 
       alignSelf: 'center'
     }}
