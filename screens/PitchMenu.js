@@ -6,6 +6,7 @@ import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/MainStyles';
 import { pitchMenuStyles } from '../stylesheets/PitchMenuStyles';
 import helperFunctions from '../sharedFunctions';
+import { customStyles } from '../stylesheets/ReportStyles';
 
 class PitchMenu extends Component {
   goToPitchFinder = () => this.props.navigation.navigate('PitchFinder');
@@ -41,21 +42,18 @@ class PitchMenu extends Component {
             <Card style={pitchMenuStyles.cardStyle}>
               <View style={styles.questionStyle}>
                 <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>To accurately calculate the potential energy output of your solar panels we need to know the tilt of the panels.</Text>
+                <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>This will be determined by the pitch of your roof.</Text>
+                <Text style={[styles.subTextStyle, pitchMenuStyles.textStyle]}>*Typically between 30 to 40 degrees</Text>
+                <TouchableOpacity onPress={this.goToManualPitchEntry}>
+                  <Text style={[styles.nextButton, pitchMenuStyles.button]}>I know the pitch</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.goToPitchFinder}>
+                  <Text style={[styles.nextButton, pitchMenuStyles.button]}>I don't know the pitch</Text>
+                </TouchableOpacity>
               </View>
             </Card>
           </View>
-          <Card style={pitchMenuStyles.cardStyle}>
-            <View style={styles.questionStyle}>
-              <Text style={[styles.textStyle, pitchMenuStyles.textStyle]}>This will be determined by the pitch of your roof.</Text>
-              <Text style={[styles.subTextStyle, pitchMenuStyles.textStyle]}>*Typically between 30 to 40 degrees</Text>
-              <TouchableOpacity onPress={this.goToManualPitchEntry}>
-                <Text style={styles.nextButton}>I know the pitch</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={this.goToPitchFinder}>
-              <Text style={styles.nextButton}>I don't know the pitch</Text>
-            </TouchableOpacity>
-            </View>
-          </Card>
+
         </ScrollView>
       </View>
     )
