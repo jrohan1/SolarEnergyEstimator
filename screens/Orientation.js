@@ -10,6 +10,7 @@ import CompassAid from '../components/CompassAid';
 import helperFunctions from '../sharedFunctions';
 import Emoji from 'react-native-emoji';
 import MovingCompass from '../components/MovingCompass';
+import Dots from 'react-native-dots-pagination';
 
 class Orientation extends Component {
   constructor(props) {
@@ -304,6 +305,7 @@ class Orientation extends Component {
               )}
             </View>
           )}
+          <Dots length={7} active={1} width={150} activeColor={'navy'} />
         </ScrollView>
       </View>
     )

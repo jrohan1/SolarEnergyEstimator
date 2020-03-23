@@ -61,6 +61,9 @@ class Report extends Component {
     let allOrientations;
     let numPanels;
     let energyPerArea;
+    let requiresHotWater;
+    let requiresElectricCar;
+    let requiresBattery;
 
     if (this.state.area.length > 1) {
 
@@ -181,9 +184,21 @@ class Report extends Component {
       );
     }
 
-    const percentageOfUsage = (calcTotalEnergy / this.state.energyUsage) * 100;
+    if (this.state.hotWater === 'Yes') {
+      requiresHotWater = <Text style={[customStyles.answerStyle, customStyles.addedText]}>*To heat domestic hot water you will need to install a Hot Water Power Diverter.</Text>
+    };
 
+    if (this.state.electricCar === 'Yes') {
+      requiresElectricCar = <Text style={[customStyles.answerStyle, customStyles.addedText]}>*You may be interested in an eco charging station for your electric car that can be powered by solar PV.</Text>
+    }
+
+    if (this.state.timeOccupied === 'Morning' || this.state.timeOccupied === 'Evening') {
+      requiresBattery = <Text style={[customStyles.answerStyle, customStyles.addedText]}>*You should consider installing a battery to store energy.</Text>
+    }
+
+    const percentageOfUsage = (calcTotalEnergy / this.state.energyUsage) * 100;
     const carbonEmissions = (calcTotalEnergy * 0.291);
+    const savings = calcTotalEnergy * 0.162;
 
     return (
       <View style={styles.container}>
@@ -281,22 +296,36 @@ class Report extends Component {
             <Grid style={customStyles.gridStyle}>
               <Col>
                 {totalText}
-                <Row>
+                <Row style={{ height: 100 }}>
                   <Text style={customStyles.textStyle}>% of annual energy consumption: </Text>
                 </Row>
-                <Row>
+                <Row style={{ height: 80 }}>
+                  <Text style={customStyles.textStyle}>Potential annual savings: </Text>
+                </Row>
+                <Row style={{ height: 80 }}>
                   <Text style={customStyles.textStyle}>CO2 emissions reduced by: </Text>
                 </Row>
               </Col>
               <Col>
                 {totalEnergy}
-                <Row>
+                <Row style={{ height: 100 }}>
                   <Text style={customStyles.answerStyle}>{percentageOfUsage.toFixed(0)} %</Text>
+                </Row>
+                <Row >
+                  <Text style={customStyles.answerStyle}>€{savings.toFixed(0)}</Text>
                 </Row>
                 <Row>
                   <Text style={customStyles.answerStyle}>{carbonEmissions.toFixed(2)} Kg</Text>
                 </Row>
               </Col>
+            </Grid>
+            <Grid style={customStyles.gridStyle}>
+              <Row>
+                <Text style={[customStyles.answerStyle, customStyles.addedText]}>*Potential savings based on a cost of 16.2c per kWh and the use of battery storage.</Text>
+              </Row>
+              <Row>{requiresBattery}</Row>
+              <Row>{requiresHotWater}</Row>
+              <Row>{requiresElectricCar}</Row>
             </Grid>
           </View>
           <TouchableOpacity onPress={this.goToContactUs}>

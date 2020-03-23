@@ -6,6 +6,7 @@ import { withFirebaseHOC } from '../config/Firebase';
 import { styles } from '../stylesheets/MainStyles';
 import Lightbulb from '../components/Lightbulb';
 import helperFunctions from '../sharedFunctions';
+import Dots from 'react-native-dots-pagination';
 
 class EnergyUsage extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class EnergyUsage extends Component {
       <View style={styles.container}>
         <KeyboardAvoidingView style={styles.container} behavior="padding">
           <ScrollView>
-            <Header/>
+            <Header />
             <Lightbulb />
             <View style={styles.questionStyle}>
               <Text style={styles.textStyle}>What is your annual energy consumption?</Text>
@@ -55,7 +56,7 @@ class EnergyUsage extends Component {
                 returnKeyType='done'
                 blurOnSubmit
                 onChangeText={(energyConsumption) => this.saveState(energyConsumption)}
-                value={this.state.energyConsumption? `${this.state.energyConsumption}` : null}
+                value={this.state.energyConsumption ? `${this.state.energyConsumption}` : null}
               />
             </View>
             {this.state.showError && (
@@ -64,6 +65,7 @@ class EnergyUsage extends Component {
             <TouchableOpacity onPress={() => this.checkForEntry()}>
               <Text style={styles.nextButton}>Next Step</Text>
             </TouchableOpacity>
+            <Dots length={7} active={3} width={150} activeColor={'navy'} />
           </ScrollView>
         </KeyboardAvoidingView>
       </View>

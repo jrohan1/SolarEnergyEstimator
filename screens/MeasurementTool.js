@@ -10,6 +10,7 @@ import _ from 'lodash';
 import axios from 'axios';
 import { AntDesign, Ionicons, Feather } from '@expo/vector-icons';
 import helperFunctions from '../sharedFunctions';
+import Dots from 'react-native-dots-pagination';
 
 const { height, width } = Dimensions.get('window');
 const INITIAL_LATITUDE_DELTA = 5.5;
@@ -373,7 +374,7 @@ class MeasurementTool extends Component {
             </CardItem>
             <CardItem>
               <Left></Left>
-              <Body></Body>
+              <Dots length={3} active={0} width={60} paddingHorizontal={0} activeColor={'#4160A1'} />
               <Right>
                 <TouchableOpacity success onPress={() => this.setState({
                   showCard: false,
@@ -418,7 +419,7 @@ class MeasurementTool extends Component {
               })}>
                 <Icon active type="AntDesign" name="arrowleft" style={styles.closeButtonStyle} />
               </TouchableOpacity></Left>
-              <Body></Body>
+              <Dots length={3} active={1} width={60} paddingHorizontal={0} activeColor={'#4160A1'} />
               <Right>
                 <TouchableOpacity success onPress={() => this.setState({
                   showCard: false,
@@ -465,10 +466,10 @@ class MeasurementTool extends Component {
               })}>
                 <Icon active type="AntDesign" name="arrowleft" style={styles.closeButtonStyle} />
               </TouchableOpacity></Left>
-              <Body></Body>
+              <Dots length={3} active={2} width={60} paddingHorizontal={0} activeColor={'#4160A1'} />
               <Right>
                 <TouchableOpacity success onPress={() => this.togglePostCard()}>
-                  <Icon active type="AntDesign" name="arrowright" style={styles.closeButtonStyle} />
+                  <Text style={styles.closeButtonStyle}>Start</Text>
                 </TouchableOpacity>
               </Right>
             </CardItem>
@@ -516,7 +517,7 @@ class MeasurementTool extends Component {
                   coordinate={coordinate}
                   anchor={{ x: 0.5, y: 0.5 }}
                   onDragEnd={(e) => this.changeCoordinate(e, index)}
-                  image={require('../assets/images/mapPointer.png')}
+                  image={require('../assets/mapPointer.png')}
                   draggable
                 />
               )))}

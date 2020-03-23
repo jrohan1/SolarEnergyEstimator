@@ -40,7 +40,7 @@ const helperFunctions = {
                             DC cables losses (1 to 3 %)
                             AC cables losses (1 to 3 %)
                             Shadings  0 % to 40% (depends of site)
-                            Losses weak irradiation 3% yo 7%
+                            Losses weak irradiation 3% to 7%
                             Losses due to dust, snow... (2%)
   
   */
@@ -71,12 +71,6 @@ const helperFunctions = {
   },
 
   performanceRatio: (state) => {
-    const inverterLosses = .92;
-    const temperatureLosses = .92;
-    const dcCableLosses = .98;
-    const acCableLosses = .98;
-    const weakIrradiation = .97;
-    const dustSnowLosses = .98;
     const shading = state;
     let value = 1;
 
@@ -85,7 +79,7 @@ const helperFunctions = {
     else if (shading === 'A little') value = .9;
     else value = 1;
 
-    const performanceRatio = inverterLosses * temperatureLosses * dcCableLosses * acCableLosses * weakIrradiation * dustSnowLosses * value;
+    const performanceRatio = value;
 
     return performanceRatio;
   },

@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import ErrorMessage from '../components/ErrorMessage';
 import { styles } from '../stylesheets/MainStyles';
 import helperFunctions from '../sharedFunctions';
+import Dots from 'react-native-dots-pagination';
 
 class InputMeasurements extends Component {
   goToOrientation = () => this.props.navigation.navigate('Orientation');
@@ -146,6 +147,7 @@ class InputMeasurements extends Component {
           <TouchableOpacity onPress={() => this.submitInput()}>
             <Text style={styles.nextButton}>Next Step</Text>
           </TouchableOpacity>
+          <Dots length={7} active={0} paddingHorizontal={15} activeColor={'navy'} />
         </ScrollView>
       </View>
     )

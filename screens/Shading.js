@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import { styles } from '../stylesheets/MainStyles';
 import CastingShade from '../components/CastingShade';
 import helperFunctions from '../sharedFunctions';
+import Dots from 'react-native-dots-pagination';
 
 class Shading extends Component {
   constructor(props) {
@@ -131,6 +132,7 @@ class Shading extends Component {
           <TouchableOpacity onPress={() => this.checkForEntry()}>
             <Text style={styles.nextButton}>Next Step</Text>
           </TouchableOpacity>
+          <Dots length={7} active={2} width={150} activeColor={'navy'} />
         </ScrollView>
       </View>
     )

@@ -6,6 +6,7 @@ import { customStyles } from '../stylesheets/TimeOccupiedStyles';
 import Header from '../components/Header';
 import EnergyUse from '../components/EnergyUsage';
 import helperFunctions from '../sharedFunctions';
+import Dots from 'react-native-dots-pagination';
 
 class TimeOccupied extends Component {
   constructor(props) {
@@ -114,6 +115,7 @@ class TimeOccupied extends Component {
           <TouchableOpacity onPress={this.goToReport}>
             <Text style={styles.nextButton}>Next Step</Text>
           </TouchableOpacity>
+          <Dots length={7} active={6} width={150} activeColor={'navy'} />
         </ScrollView>
       </View>
     )

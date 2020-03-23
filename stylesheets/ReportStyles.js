@@ -41,6 +41,9 @@ export const customStyles = StyleSheet.create({
     marginRight:10,
     marginBottom: 20
   },
+  addedText: {
+    lineHeight: 35
+  },
   rowStyle: {
     height: 60
   },

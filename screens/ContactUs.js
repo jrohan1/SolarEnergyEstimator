@@ -82,7 +82,7 @@ class ContactUs extends Component {
     AsyncStorage.getItem('address').then(value => this.setState({ address: value }));
   }
 
-  postMsg = (values, actions) => {
+  postContactdetails = (values, actions) => {
     const { name, mobile, email } = values;
     this.setState({
       name: name,
@@ -239,7 +239,7 @@ class ContactUs extends Component {
               mobile: ''
             }}
             onSubmit={(values, actions) => {
-              this.postMsg(values, actions)
+              this.postContactDetails(values, actions)
             }}
             validationSchema={validationSchema}>
             {({

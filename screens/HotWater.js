@@ -7,6 +7,7 @@ import { customStyles } from '../stylesheets/HotWaterStyles';
 import Header from '../components/Header';
 import BathPic from '../components/Bath';
 import helperFunctions from '../sharedFunctions';
+import Dots from 'react-native-dots-pagination';
 
 class HotWater extends Component {
   constructor(props) {
@@ -82,6 +83,7 @@ class HotWater extends Component {
         <TouchableOpacity onPress={() => this.checkForEntry()}>
           <Text style={styles.nextButton}>Next Step</Text>
         </TouchableOpacity>
+        <Dots length={7} active={5} width={150} activeColor={'navy'} />
       </View>
     )
   }
