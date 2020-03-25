@@ -1,15 +1,18 @@
 import React, { Component, Fragment } from 'react'
-import { StyleSheet, SafeAreaView, View, TouchableOpacity } from 'react-native'
-import { Button } from 'react-native-elements'
+import { SafeAreaView, View, TouchableOpacity, Text } from 'react-native'
+import { Button, Image } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { HideWithKeyboard } from 'react-native-hide-with-keyboard'
 import FormInput from '../components/FormInput'
-import FormButton from '../components/FormButton'
 import ErrorMessage from '../components/ErrorMessage'
-import AppLogo from '../components/AppLogo'
 import { withFirebaseHOC } from '../config/Firebase'
+import Expo from 'expo'
+import MenuButton from '../components/MenuButton'
+import SmallLogo from '../components/SmallLogo'
+import { styles } from '../stylesheets/LoginStyles'
+import config from '../config'
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -29,6 +32,7 @@ class Login extends Component {
   }
 
   goToSignup = () => this.props.navigation.navigate('Signup')
+  goToHome = () => this.props.navigation.navigate('Home')
 
   handlePasswordVisibility = () => {
     this.setState(prevState => ({
@@ -52,12 +56,34 @@ class Login extends Component {
     }
   }
 
+  signInWithGoogleAsync = async () => {
+    try {
+      const result = await Expo.Google.logInAsync({
+        androidClientId: config.ANDROID_OAUTH_CREDENTIALS,
+        iosClientId: config.IOS_OAUTH_CREDENTIALS,
+        scopes: ['profile', 'email'],
+      });
+  
+      if (result.type === 'success') {
+        return result.accessToken;
+      } else {
+        return { cancelled: true };
+      }
+    } catch (e) {
+      return { error: true };
+    }
+  }
+
   render() {
     const { passwordVisibility, rightIcon } = this.state
     return (
       <SafeAreaView style={styles.container}>
+        <TouchableOpacity onPress={this.goToHome}>
+          <SmallLogo/>
+        </TouchableOpacity>        
+        <MenuButton navigation={this.props.navigation} />
         <HideWithKeyboard style={styles.logoContainer}>
-          <AppLogo />
+        <Ionicons name='md-contact' size={80} color='#DEE48E' />
         </HideWithKeyboard>
         <Formik
           initialValues={{ email: '', password: '' }}
@@ -83,7 +109,7 @@ class Login extends Component {
                 placeholder='Enter email'
                 autoCapitalize='none'
                 iconName='ios-mail'
-                iconColor='#2C384A'
+                iconColor='#DEE48E'
                 onBlur={handleBlur('email')}
               />
               <ErrorMessage errorValue={touched.email && errors.email} />
@@ -94,25 +120,34 @@ class Login extends Component {
                 placeholder='Enter password'
                 secureTextEntry={passwordVisibility}
                 iconName='ios-lock'
-                iconColor='#2C384A'
+                iconColor='#DEE48E'
                 onBlur={handleBlur('password')}
                 rightIcon={
                   <TouchableOpacity onPress={this.handlePasswordVisibility}>
-                    <Ionicons name={rightIcon} size={28} color='grey' />
+                    <Ionicons name={rightIcon} size={28} color='#DEE48E' />
                   </TouchableOpacity>
                 }
               />
               <ErrorMessage errorValue={touched.password && errors.password} />
-              <View style={styles.buttonContainer}>
-                <FormButton
-                  buttonType='outline'
-                  onPress={handleSubmit}
-                  title='LOGIN'
-                  buttonColor='#039BE5'
+              <View>
+                <TouchableOpacity 
                   disabled={!isValid || isSubmitting}
                   loading={isSubmitting}
-                />
+                  onPress={handleSubmit}>
+                  <Text style={styles.button}>Login</Text>
+                </TouchableOpacity>
               </View>
+              <Text style={styles.subTextStyle}>or</Text>
+              <TouchableOpacity
+                //activeOpacity={0.5}
+                loading={isSubmitting}
+                disabled={!isValid || isSubmitting}
+                onPress={this.signInWithGoogleAsync}>
+                <Image
+                  source={require('../assets/images/googleSignIn.png')}
+                  style={styles.googleLogInStyle}
+                />
+              </TouchableOpacity> 
               <ErrorMessage errorValue={errors.general} />
             </Fragment>
           )}
@@ -121,28 +156,14 @@ class Login extends Component {
           title="Don't have an account? Sign Up"
           onPress={this.goToSignup}
           titleStyle={{
-            color: '#F57C00'
+            color: '#DEE48E',
+            fontSize: 18
           }}
           type='clear'
         />
       </SafeAreaView>
-    )
+    );    
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    marginTop: 50
-  },
-  logoContainer: {
-    marginBottom: 15,
-    alignItems: 'center'
-  },
-  buttonContainer: {
-    margin: 25
-  }
-})
 
 export default withFirebaseHOC(Login)

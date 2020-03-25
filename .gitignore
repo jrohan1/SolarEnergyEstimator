@@ -9,6 +9,7 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
+.env
 
 # General
 .DS_Store
@@ -40,3 +41,5 @@ Temporary Items
 
 firebaseConfig.js
 README.md
+yarn.lock
+package-lock.json

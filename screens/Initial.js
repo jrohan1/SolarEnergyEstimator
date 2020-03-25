@@ -32,11 +32,13 @@ class Initial extends Component {
   loadLocalAsync = async () => {
     return await Promise.all([
       Asset.loadAsync([
-        require('../assets/flame.png'),
-        require('../assets/icon.png')
+        require('../assets/images/logo.jpg')
       ]),
-      Font.loadAsync({
-        ...Icon.Ionicons.font
+      await Font.loadAsync({
+        ...Icon.Ionicons.font,
+        'josefinSans': require('../assets/fonts/JosefinSans-Regular.ttf'),
+        'josefinSans-Bold': require('../assets/fonts/JosefinSans-Bold.ttf'),
+        'Roboto_medium': require('../assets/fonts/Roboto-Medium.ttf'),
       })
     ])
   }
