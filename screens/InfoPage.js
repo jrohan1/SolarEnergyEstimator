@@ -38,9 +38,15 @@ overcast days in Ireland.</Text>
             <Text style={styles.answerStyle}>Yes, water can be heated by adding a Hot Water Divert to heat your cylinder with excess electricity.</Text>
             <Text style={styles.questionStyle}>How much do solar panels cost?</Text>
             <Text style={styles.answerStyle}>The cost of a solar PV system depends on a range of factors including the hardware chosen, size of
-system, accessibility of the roof or site, and the installer used. Broadly speaking home PV systems
-should range from around €1,500 - €2,000 per kW installed (ex-VAT), but prices will vary depending
+            system, accessibility of the roof or site, and the installer used. Broadly speaking home PV systems
+            should range from around €1,500 - €2,000 per kW installed (ex-VAT), but prices will vary depending
 on the factors mentioned above.</Text>
+            <Text style={styles.questionStyle}>How long will it take to get a return on my investment?</Text>
+            <Text style={styles.answerStyle}>It is estimated that a solar PV system will pay for itself in 7 years</Text>
+            <Text style={styles.questionStyle}>Does the system come with a guarantee? </Text>
+            <Text style={styles.answerStyle}>Installers generally offer a 25 year guarantee on panels.</Text>
+            <Text style={styles.questionStyle}>Will the solar PV system require maintenance?</Text>
+            <Text style={styles.answerStyle}>PV systems are low-maintenance, but not zero maintenance. The most important aspect is to monitor the performance of your system regularly. The invertor will provide monitoring for the system. </Text>
             <Text style={styles.questionStyle}>Does the age of the house matter?</Text>
             <Text style={styles.answerStyle}>For the purposes of availing of the government grant the house needs to be built and occupied before Janruary 2011.</Text>
             <Text style={styles.questionStyle}>Will it matter if I have tiles or slates on my roof?</Text>

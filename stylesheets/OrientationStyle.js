@@ -19,5 +19,8 @@ export const customStyles = StyleSheet.create({
   emoji: {
     fontSize: 22,
     marginTop: 10
+  },
+  margin: {
+    marginTop: 5
   }
 })

@@ -213,13 +213,21 @@ class Orientation extends Component {
                 <Text style={styles.cardTextStyle}>The sun will move from East to West passing South.</Text>
               </CardItem>
               <CardItem>
+              <Left><TouchableOpacity success onPress={() => this.setState({
+                showCard: true,
+                showNextCard: false
+              })}>
+                <Icon active type="AntDesign" name="arrowleft" style={styles.closeButtonStyle} />
+              </TouchableOpacity></Left>
+                <Body></Body>
+                <Right></Right>
               </CardItem>
             </Card>
           )}
           {!this.state.showCard && !this.state.showNextCard && (
             <View>
               <MovingCompass />
-              <View style={styles.questionStyle}>
+              <View style={[styles.questionStyle, customStyles.margin]}>
                 <Text style={styles.textStyle}>Which direction will the solar panels face?</Text>
                 <View style={customStyles.group}>
                   <TouchableOpacity onPress={() => this.setState({ showCard: true })}>
@@ -303,9 +311,9 @@ class Orientation extends Component {
                   <Text style={styles.nextButton}>Next Step</Text>
                 </TouchableOpacity>
               )}
+              <Dots length={7} active={1} width={150} activeColor={'navy'} />
             </View>
           )}
-          <Dots length={7} active={1} width={150} activeColor={'navy'} />
         </ScrollView>
       </View>
     )

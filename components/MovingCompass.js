@@ -95,7 +95,7 @@ export default class MovingCompass extends Component {
 
   render() {
     return (
-      <Grid >
+      <Grid style={{marginTop: -10}}>
         <Row style={{ alignItems: 'center' }} size={.9}>
           <Col style={{ alignItems: 'center' }}>
             <Text
